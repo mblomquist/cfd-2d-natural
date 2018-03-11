@@ -1,0 +1,226 @@
+Node:    1     1  Pressure:     -0.1180E+01  U-Velocity:     0.0000E+00  V-Velocity:      0.0000E+00  Temperature:      0.9822E+02
+Node:    2     1  Pressure:     -0.3366E+01  U-Velocity:     0.1107E-02  V-Velocity:      0.0000E+00  Temperature:      0.9822E+02
+Node:    3     1  Pressure:     -0.5388E+01  U-Velocity:     0.1008E-02  V-Velocity:      0.0000E+00  Temperature:      0.9822E+02
+Node:    4     1  Pressure:     -0.7040E+01  U-Velocity:     0.8217E-03  V-Velocity:      0.0000E+00  Temperature:      0.9822E+02
+Node:    5     1  Pressure:     -0.8334E+01  U-Velocity:     0.5712E-03  V-Velocity:      0.0000E+00  Temperature:      0.9822E+02
+Node:    6     1  Pressure:     -0.9274E+01  U-Velocity:     0.2719E-03  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:    7     1  Pressure:     -0.9850E+01  U-Velocity:    -0.6537E-04  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:    8     1  Pressure:     -0.1004E+02  U-Velocity:    -0.4324E-03  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:    9     1  Pressure:     -0.9825E+01  U-Velocity:    -0.8215E-03  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:   10     1  Pressure:     -0.9150E+01  U-Velocity:    -0.1224E-02  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:   11     1  Pressure:     -0.7949E+01  U-Velocity:    -0.1629E-02  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:   12     1  Pressure:     -0.6124E+01  U-Velocity:    -0.2018E-02  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:   13     1  Pressure:     -0.3537E+01  U-Velocity:    -0.2363E-02  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:   14     1  Pressure:     -0.2794E-12  U-Velocity:    -0.2617E-02  V-Velocity:      0.0000E+00  Temperature:      0.9823E+02
+Node:    1     2  Pressure:     -0.1179E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.1290E-03  Temperature:      0.9467E+02
+Node:    2     2  Pressure:     -0.3123E+01  U-Velocity:     0.1023E-02  V-Velocity:      0.3646E-03  Temperature:      0.9467E+02
+Node:    3     2  Pressure:     -0.4944E+01  U-Velocity:     0.9279E-03  V-Velocity:      0.6420E-03  Temperature:      0.9467E+02
+Node:    4     2  Pressure:     -0.6434E+01  U-Velocity:     0.7451E-03  V-Velocity:      0.8617E-03  Temperature:      0.9467E+02
+Node:    5     2  Pressure:     -0.7607E+01  U-Velocity:     0.4972E-03  V-Velocity:      0.1036E-02  Temperature:      0.9467E+02
+Node:    6     2  Pressure:     -0.8462E+01  U-Velocity:     0.1994E-03  V-Velocity:      0.1170E-02  Temperature:      0.9468E+02
+Node:    7     2  Pressure:     -0.8986E+01  U-Velocity:    -0.1373E-03  V-Velocity:      0.1268E-02  Temperature:      0.9468E+02
+Node:    8     2  Pressure:     -0.9163E+01  U-Velocity:    -0.5041E-03  V-Velocity:      0.1332E-02  Temperature:      0.9468E+02
+Node:    9     2  Pressure:     -0.8962E+01  U-Velocity:    -0.8927E-03  V-Velocity:      0.1365E-02  Temperature:      0.9468E+02
+Node:   10     2  Pressure:     -0.8345E+01  U-Velocity:    -0.1294E-02  V-Velocity:      0.1369E-02  Temperature:      0.9468E+02
+Node:   11     2  Pressure:     -0.7248E+01  U-Velocity:    -0.1694E-02  V-Velocity:      0.1350E-02  Temperature:      0.9468E+02
+Node:   12     2  Pressure:     -0.5583E+01  U-Velocity:    -0.2076E-02  V-Velocity:      0.1315E-02  Temperature:      0.9468E+02
+Node:   13     2  Pressure:     -0.3223E+01  U-Velocity:    -0.2409E-02  V-Velocity:      0.1274E-02  Temperature:      0.9468E+02
+Node:   14     2  Pressure:     -0.2794E-12  U-Velocity:    -0.2645E-02  V-Velocity:      0.1246E-02  Temperature:      0.9468E+02
+Node:    1     3  Pressure:     -0.1177E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.2192E-03  Temperature:      0.9111E+02
+Node:    2     3  Pressure:     -0.2721E+01  U-Velocity:     0.8131E-03  V-Velocity:      0.6214E-03  Temperature:      0.9111E+02
+Node:    3     3  Pressure:     -0.4200E+01  U-Velocity:     0.7302E-03  V-Velocity:      0.1125E-02  Temperature:      0.9111E+02
+Node:    4     3  Pressure:     -0.5412E+01  U-Velocity:     0.5668E-03  V-Velocity:      0.1534E-02  Temperature:      0.9112E+02
+Node:    5     3  Pressure:     -0.6369E+01  U-Velocity:     0.3428E-03  V-Velocity:      0.1862E-02  Temperature:      0.9112E+02
+Node:    6     3  Pressure:     -0.7067E+01  U-Velocity:     0.7176E-04  V-Velocity:      0.2117E-02  Temperature:      0.9112E+02
+Node:    7     3  Pressure:     -0.7495E+01  U-Velocity:    -0.2361E-03  V-Velocity:      0.2304E-02  Temperature:      0.9113E+02
+Node:    8     3  Pressure:     -0.7632E+01  U-Velocity:    -0.5722E-03  V-Velocity:      0.2427E-02  Temperature:      0.9113E+02
+Node:    9     3  Pressure:     -0.7454E+01  U-Velocity:    -0.9283E-03  V-Velocity:      0.2492E-02  Temperature:      0.9113E+02
+Node:   10     3  Pressure:     -0.6926E+01  U-Velocity:    -0.1295E-02  V-Velocity:      0.2503E-02  Temperature:      0.9113E+02
+Node:   11     3  Pressure:     -0.5998E+01  U-Velocity:    -0.1659E-02  V-Velocity:      0.2469E-02  Temperature:      0.9114E+02
+Node:   12     3  Pressure:     -0.4598E+01  U-Velocity:    -0.2003E-02  V-Velocity:      0.2404E-02  Temperature:      0.9114E+02
+Node:   13     3  Pressure:     -0.2633E+01  U-Velocity:    -0.2298E-02  V-Velocity:      0.2328E-02  Temperature:      0.9114E+02
+Node:   14     3  Pressure:     -0.2794E-12  U-Velocity:    -0.2502E-02  V-Velocity:      0.2278E-02  Temperature:      0.9114E+02
+Node:    1     4  Pressure:     -0.1174E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.2921E-03  Temperature:      0.8755E+02
+Node:    2     4  Pressure:     -0.2248E+01  U-Velocity:     0.4915E-03  V-Velocity:      0.7949E-03  Temperature:      0.8755E+02
+Node:    3     4  Pressure:     -0.3311E+01  U-Velocity:     0.4268E-03  V-Velocity:      0.1463E-02  Temperature:      0.8756E+02
+Node:    4     4  Pressure:     -0.4177E+01  U-Velocity:     0.2955E-03  V-Velocity:      0.2017E-02  Temperature:      0.8756E+02
+Node:    5     4  Pressure:     -0.4860E+01  U-Velocity:     0.1134E-03  V-Velocity:      0.2467E-02  Temperature:      0.8756E+02
+Node:    6     4  Pressure:     -0.5357E+01  U-Velocity:    -0.1085E-03  V-Velocity:      0.2820E-02  Temperature:      0.8757E+02
+Node:    7     4  Pressure:     -0.5655E+01  U-Velocity:    -0.3620E-03  V-Velocity:      0.3081E-02  Temperature:      0.8757E+02
+Node:    8     4  Pressure:     -0.5738E+01  U-Velocity:    -0.6394E-03  V-Velocity:      0.3255E-02  Temperature:      0.8758E+02
+Node:    9     4  Pressure:     -0.5584E+01  U-Velocity:    -0.9331E-03  V-Velocity:      0.3348E-02  Temperature:      0.8758E+02
+Node:   10     4  Pressure:     -0.5168E+01  U-Velocity:    -0.1234E-02  V-Velocity:      0.3367E-02  Temperature:      0.8758E+02
+Node:   11     4  Pressure:     -0.4453E+01  U-Velocity:    -0.1532E-02  V-Velocity:      0.3326E-02  Temperature:      0.8758E+02
+Node:   12     4  Pressure:     -0.3388E+01  U-Velocity:    -0.1809E-02  V-Velocity:      0.3241E-02  Temperature:      0.8759E+02
+Node:   13     4  Pressure:     -0.1915E+01  U-Velocity:    -0.2043E-02  V-Velocity:      0.3142E-02  Temperature:      0.8759E+02
+Node:   14     4  Pressure:     -0.2794E-12  U-Velocity:    -0.2200E-02  V-Velocity:      0.3077E-02  Temperature:      0.8759E+02
+Node:    1     5  Pressure:     -0.1171E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3442E-03  Temperature:      0.8399E+02
+Node:    2     5  Pressure:     -0.1760E+01  U-Velocity:     0.1009E-03  V-Velocity:      0.8977E-03  Temperature:      0.8399E+02
+Node:    3     5  Pressure:     -0.2382E+01  U-Velocity:     0.5772E-04  V-Velocity:      0.1670E-02  Temperature:      0.8399E+02
+Node:    4     5  Pressure:     -0.2877E+01  U-Velocity:    -0.3371E-04  V-Velocity:      0.2320E-02  Temperature:      0.8400E+02
+Node:    5     5  Pressure:     -0.3263E+01  U-Velocity:    -0.1623E-03  V-Velocity:      0.2855E-02  Temperature:      0.8400E+02
+Node:    6     5  Pressure:     -0.3538E+01  U-Velocity:    -0.3206E-03  V-Velocity:      0.3277E-02  Temperature:      0.8401E+02
+Node:    7     5  Pressure:     -0.3691E+01  U-Velocity:    -0.5024E-03  V-Velocity:      0.3592E-02  Temperature:      0.8402E+02
+Node:    8     5  Pressure:     -0.3711E+01  U-Velocity:    -0.7019E-03  V-Velocity:      0.3804E-02  Temperature:      0.8402E+02
+Node:    9     5  Pressure:     -0.3583E+01  U-Velocity:    -0.9129E-03  V-Velocity:      0.3921E-02  Temperature:      0.8402E+02
+Node:   10     5  Pressure:     -0.3289E+01  U-Velocity:    -0.1128E-02  V-Velocity:      0.3951E-02  Temperature:      0.8403E+02
+Node:   11     5  Pressure:     -0.2806E+01  U-Velocity:    -0.1339E-02  V-Velocity:      0.3908E-02  Temperature:      0.8403E+02
+Node:   12     5  Pressure:     -0.2106E+01  U-Velocity:    -0.1532E-02  V-Velocity:      0.3815E-02  Temperature:      0.8403E+02
+Node:   13     5  Pressure:     -0.1166E+01  U-Velocity:    -0.1690E-02  V-Velocity:      0.3705E-02  Temperature:      0.8403E+02
+Node:   14     5  Pressure:     -0.2794E-12  U-Velocity:    -0.1792E-02  V-Velocity:      0.3633E-02  Temperature:      0.8403E+02
+Node:    1     6  Pressure:     -0.1168E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3749E-03  Temperature:      0.8043E+02
+Node:    2     6  Pressure:     -0.1294E+01  U-Velocity:    -0.3184E-03  V-Velocity:      0.9394E-03  Temperature:      0.8043E+02
+Node:    3     6  Pressure:     -0.1485E+01  U-Velocity:    -0.3388E-03  V-Velocity:      0.1760E-02  Temperature:      0.8043E+02
+Node:    4     6  Pressure:     -0.1620E+01  U-Velocity:    -0.3869E-03  V-Velocity:      0.2459E-02  Temperature:      0.8043E+02
+Node:    5     6  Pressure:     -0.1714E+01  U-Velocity:    -0.4566E-03  V-Velocity:      0.3039E-02  Temperature:      0.8044E+02
+Node:    6     6  Pressure:     -0.1767E+01  U-Velocity:    -0.5438E-03  V-Velocity:      0.3501E-02  Temperature:      0.8045E+02
+Node:    7     6  Pressure:     -0.1776E+01  U-Velocity:    -0.6450E-03  V-Velocity:      0.3848E-02  Temperature:      0.8045E+02
+Node:    8     6  Pressure:     -0.1732E+01  U-Velocity:    -0.7564E-03  V-Velocity:      0.4086E-02  Temperature:      0.8046E+02
+Node:    9     6  Pressure:     -0.1627E+01  U-Velocity:    -0.8738E-03  V-Velocity:      0.4220E-02  Temperature:      0.8046E+02
+Node:   10     6  Pressure:     -0.1453E+01  U-Velocity:    -0.9923E-03  V-Velocity:      0.4261E-02  Temperature:      0.8046E+02
+Node:   11     6  Pressure:     -0.1201E+01  U-Velocity:    -0.1106E-02  V-Velocity:      0.4224E-02  Temperature:      0.8047E+02
+Node:   12     6  Pressure:     -0.8628E+00  U-Velocity:    -0.1206E-02  V-Velocity:      0.4132E-02  Temperature:      0.8047E+02
+Node:   13     6  Pressure:     -0.4453E+00  U-Velocity:    -0.1284E-02  V-Velocity:      0.4023E-02  Temperature:      0.8047E+02
+Node:   14     6  Pressure:     -0.2794E-12  U-Velocity:    -0.1329E-02  V-Velocity:      0.3951E-02  Temperature:      0.8047E+02
+Node:    1     7  Pressure:     -0.1165E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3848E-03  Temperature:      0.7686E+02
+Node:    2     7  Pressure:     -0.8785E+00  U-Velocity:    -0.7306E-03  V-Velocity:      0.9290E-03  Temperature:      0.7686E+02
+Node:    3     7  Pressure:     -0.6754E+00  U-Velocity:    -0.7290E-03  V-Velocity:      0.1749E-02  Temperature:      0.7686E+02
+Node:    4     7  Pressure:     -0.4820E+00  U-Velocity:    -0.7339E-03  V-Velocity:      0.2455E-02  Temperature:      0.7687E+02
+Node:    5     7  Pressure:     -0.3094E+00  U-Velocity:    -0.7443E-03  V-Velocity:      0.3044E-02  Temperature:      0.7687E+02
+Node:    6     7  Pressure:     -0.1606E+00  U-Velocity:    -0.7594E-03  V-Velocity:      0.3517E-02  Temperature:      0.7688E+02
+Node:    7     7  Pressure:     -0.3481E-01  U-Velocity:    -0.7784E-03  V-Velocity:      0.3875E-02  Temperature:      0.7688E+02
+Node:    8     7  Pressure:      0.6991E-01  U-Velocity:    -0.7997E-03  V-Velocity:      0.4124E-02  Temperature:      0.7689E+02
+Node:    9     7  Pressure:      0.1547E+00  U-Velocity:    -0.8216E-03  V-Velocity:      0.4269E-02  Temperature:      0.7689E+02
+Node:   10     7  Pressure:      0.2192E+00  U-Velocity:    -0.8414E-03  V-Velocity:      0.4320E-02  Temperature:      0.7690E+02
+Node:   11     7  Pressure:      0.2593E+00  U-Velocity:    -0.8565E-03  V-Velocity:      0.4293E-02  Temperature:      0.7690E+02
+Node:   12     7  Pressure:      0.2637E+00  U-Velocity:    -0.8641E-03  V-Velocity:      0.4211E-02  Temperature:      0.7690E+02
+Node:   13     7  Pressure:      0.2027E+00  U-Velocity:    -0.8625E-03  V-Velocity:      0.4111E-02  Temperature:      0.7690E+02
+Node:   14     7  Pressure:     -0.2794E-12  U-Velocity:    -0.8529E-03  V-Velocity:      0.4045E-02  Temperature:      0.7690E+02
+Node:    1     8  Pressure:     -0.1162E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3760E-03  Temperature:      0.7329E+02
+Node:    2     8  Pressure:     -0.5324E+00  U-Velocity:    -0.1106E-02  V-Velocity:      0.8755E-03  Temperature:      0.7329E+02
+Node:    3     8  Pressure:      0.1096E-01  U-Velocity:    -0.1084E-02  V-Velocity:      0.1655E-02  Temperature:      0.7329E+02
+Node:    4     8  Pressure:      0.4840E+00  U-Velocity:    -0.1049E-02  V-Velocity:      0.2330E-02  Temperature:      0.7329E+02
+Node:    5     8  Pressure:      0.8825E+00  U-Velocity:    -0.1004E-02  V-Velocity:      0.2896E-02  Temperature:      0.7330E+02
+Node:    6     8  Pressure:      0.1204E+01  U-Velocity:    -0.9517E-03  V-Velocity:      0.3354E-02  Temperature:      0.7331E+02
+Node:    7     8  Pressure:      0.1445E+01  U-Velocity:    -0.8933E-03  V-Velocity:      0.3705E-02  Temperature:      0.7331E+02
+Node:    8     8  Pressure:      0.1603E+01  U-Velocity:    -0.8298E-03  V-Velocity:      0.3951E-02  Temperature:      0.7332E+02
+Node:    9     8  Pressure:      0.1673E+01  U-Velocity:    -0.7613E-03  V-Velocity:      0.4099E-02  Temperature:      0.7332E+02
+Node:   10     8  Pressure:      0.1645E+01  U-Velocity:    -0.6882E-03  V-Velocity:      0.4159E-02  Temperature:      0.7332E+02
+Node:   11     8  Pressure:      0.1504E+01  U-Velocity:    -0.6112E-03  V-Velocity:      0.4144E-02  Temperature:      0.7333E+02
+Node:   12     8  Pressure:      0.1222E+01  U-Velocity:    -0.5327E-03  V-Velocity:      0.4078E-02  Temperature:      0.7333E+02
+Node:   13     8  Pressure:      0.7503E+00  U-Velocity:    -0.4581E-03  V-Velocity:      0.3993E-02  Temperature:      0.7333E+02
+Node:   14     8  Pressure:     -0.2794E-12  U-Velocity:    -0.3995E-03  V-Velocity:      0.3937E-02  Temperature:      0.7333E+02
+Node:    1     9  Pressure:     -0.1160E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3510E-03  Temperature:      0.6971E+02
+Node:    2     9  Pressure:     -0.2664E+00  U-Velocity:    -0.1421E-02  V-Velocity:      0.7880E-03  Temperature:      0.6971E+02
+Node:    3     9  Pressure:      0.5519E+00  U-Velocity:    -0.1383E-02  V-Velocity:      0.1494E-02  Temperature:      0.6971E+02
+Node:    4     9  Pressure:      0.1246E+01  U-Velocity:    -0.1313E-02  V-Velocity:      0.2108E-02  Temperature:      0.6972E+02
+Node:    5     9  Pressure:      0.1823E+01  U-Velocity:    -0.1220E-02  V-Velocity:      0.2627E-02  Temperature:      0.6972E+02
+Node:    6     9  Pressure:      0.2280E+01  U-Velocity:    -0.1109E-02  V-Velocity:      0.3049E-02  Temperature:      0.6973E+02
+Node:    7     9  Pressure:      0.2614E+01  U-Velocity:    -0.9826E-03  V-Velocity:      0.3375E-02  Temperature:      0.6973E+02
+Node:    8     9  Pressure:      0.2816E+01  U-Velocity:    -0.8448E-03  V-Velocity:      0.3607E-02  Temperature:      0.6974E+02
+Node:    9     9  Pressure:      0.2876E+01  U-Velocity:    -0.6973E-03  V-Velocity:      0.3751E-02  Temperature:      0.6974E+02
+Node:   10     9  Pressure:      0.2777E+01  U-Velocity:    -0.5429E-03  V-Velocity:      0.3816E-02  Temperature:      0.6974E+02
+Node:   11     9  Pressure:      0.2493E+01  U-Velocity:    -0.3857E-03  V-Velocity:      0.3814E-02  Temperature:      0.6975E+02
+Node:   12     9  Pressure:      0.1982E+01  U-Velocity:    -0.2324E-03  V-Velocity:      0.3765E-02  Temperature:      0.6975E+02
+Node:   13     9  Pressure:      0.1182E+01  U-Velocity:    -0.9546E-04  V-Velocity:      0.3699E-02  Temperature:      0.6975E+02
+Node:   14     9  Pressure:     -0.2794E-12  U-Velocity:     0.4413E-05  V-Velocity:      0.3655E-02  Temperature:      0.6975E+02
+Node:    1    10  Pressure:     -0.1158E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.3127E-03  Temperature:      0.6613E+02
+Node:    2    10  Pressure:     -0.8269E-01  U-Velocity:    -0.1660E-02  V-Velocity:      0.6756E-03  Temperature:      0.6613E+02
+Node:    3    10  Pressure:      0.9402E+00  U-Velocity:    -0.1610E-02  V-Velocity:      0.1284E-02  Temperature:      0.6613E+02
+Node:    4    10  Pressure:      0.1796E+01  U-Velocity:    -0.1512E-02  V-Velocity:      0.1816E-02  Temperature:      0.6614E+02
+Node:    5    10  Pressure:      0.2499E+01  U-Velocity:    -0.1380E-02  V-Velocity:      0.2267E-02  Temperature:      0.6614E+02
+Node:    6    10  Pressure:      0.3054E+01  U-Velocity:    -0.1222E-02  V-Velocity:      0.2636E-02  Temperature:      0.6615E+02
+Node:    7    10  Pressure:      0.3455E+01  U-Velocity:    -0.1041E-02  V-Velocity:      0.2924E-02  Temperature:      0.6615E+02
+Node:    8    10  Pressure:      0.3691E+01  U-Velocity:    -0.8437E-03  V-Velocity:      0.3132E-02  Temperature:      0.6616E+02
+Node:    9    10  Pressure:      0.3747E+01  U-Velocity:    -0.6326E-03  V-Velocity:      0.3265E-02  Temperature:      0.6616E+02
+Node:   10    10  Pressure:      0.3600E+01  U-Velocity:    -0.4129E-03  V-Velocity:      0.3330E-02  Temperature:      0.6616E+02
+Node:   11    10  Pressure:      0.3213E+01  U-Velocity:    -0.1911E-03  V-Velocity:      0.3339E-02  Temperature:      0.6616E+02
+Node:   12    10  Pressure:      0.2535E+01  U-Velocity:     0.2178E-04  V-Velocity:      0.3308E-02  Temperature:      0.6616E+02
+Node:   13    10  Pressure:      0.1494E+01  U-Velocity:     0.2082E-03  V-Velocity:      0.3261E-02  Temperature:      0.6616E+02
+Node:   14    10  Pressure:     -0.2794E-12  U-Velocity:     0.3402E-03  V-Velocity:      0.3230E-02  Temperature:      0.6616E+02
+Node:    1    11  Pressure:     -0.1156E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.2642E-03  Temperature:      0.6255E+02
+Node:    2    11  Pressure:      0.2488E-01  U-Velocity:    -0.1812E-02  V-Velocity:      0.5469E-03  Temperature:      0.6255E+02
+Node:    3    11  Pressure:      0.1184E+01  U-Velocity:    -0.1754E-02  V-Velocity:      0.1042E-02  Temperature:      0.6255E+02
+Node:    4    11  Pressure:      0.2142E+01  U-Velocity:    -0.1638E-02  V-Velocity:      0.1476E-02  Temperature:      0.6255E+02
+Node:    5    11  Pressure:      0.2927E+01  U-Velocity:    -0.1478E-02  V-Velocity:      0.1846E-02  Temperature:      0.6256E+02
+Node:    6    11  Pressure:      0.3544E+01  U-Velocity:    -0.1285E-02  V-Velocity:      0.2151E-02  Temperature:      0.6256E+02
+Node:    7    11  Pressure:      0.3989E+01  U-Velocity:    -0.1066E-02  V-Velocity:      0.2390E-02  Temperature:      0.6257E+02
+Node:    8    11  Pressure:      0.4249E+01  U-Velocity:    -0.8259E-03  V-Velocity:      0.2565E-02  Temperature:      0.6257E+02
+Node:    9    11  Pressure:      0.4305E+01  U-Velocity:    -0.5692E-03  V-Velocity:      0.2680E-02  Temperature:      0.6257E+02
+Node:   10    11  Pressure:      0.4128E+01  U-Velocity:    -0.3025E-03  V-Velocity:      0.2741E-02  Temperature:      0.6257E+02
+Node:   11    11  Pressure:      0.3678E+01  U-Velocity:    -0.3464E-04  V-Velocity:      0.2757E-02  Temperature:      0.6258E+02
+Node:   12    11  Pressure:      0.2891E+01  U-Velocity:     0.2208E-03  V-Velocity:      0.2742E-02  Temperature:      0.6258E+02
+Node:   13    11  Pressure:      0.1691E+01  U-Velocity:     0.4420E-03  V-Velocity:      0.2712E-02  Temperature:      0.6258E+02
+Node:   14    11  Pressure:     -0.2794E-12  U-Velocity:     0.5963E-03  V-Velocity:      0.2694E-02  Temperature:      0.6258E+02
+Node:    1    12  Pressure:     -0.1155E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.2081E-03  Temperature:      0.5897E+02
+Node:    2    12  Pressure:      0.6979E-01  U-Velocity:    -0.1873E-02  V-Velocity:      0.4094E-03  Temperature:      0.5897E+02
+Node:    3    12  Pressure:      0.1304E+01  U-Velocity:    -0.1811E-02  V-Velocity:      0.7815E-03  Temperature:      0.5897E+02
+Node:    4    12  Pressure:      0.2318E+01  U-Velocity:    -0.1684E-02  V-Velocity:      0.1110E-02  Temperature:      0.5897E+02
+Node:    5    12  Pressure:      0.3145E+01  U-Velocity:    -0.1509E-02  V-Velocity:      0.1391E-02  Temperature:      0.5897E+02
+Node:    6    12  Pressure:      0.3795E+01  U-Velocity:    -0.1297E-02  V-Velocity:      0.1623E-02  Temperature:      0.5897E+02
+Node:    7    12  Pressure:      0.4264E+01  U-Velocity:    -0.1056E-02  V-Velocity:      0.1806E-02  Temperature:      0.5898E+02
+Node:    8    12  Pressure:      0.4539E+01  U-Velocity:    -0.7910E-03  V-Velocity:      0.1943E-02  Temperature:      0.5898E+02
+Node:    9    12  Pressure:      0.4597E+01  U-Velocity:    -0.5081E-03  V-Velocity:      0.2034E-02  Temperature:      0.5898E+02
+Node:   10    12  Pressure:      0.4407E+01  U-Velocity:    -0.2143E-03  V-Velocity:      0.2086E-02  Temperature:      0.5898E+02
+Node:   11    12  Pressure:      0.3921E+01  U-Velocity:     0.8013E-04  V-Velocity:      0.2105E-02  Temperature:      0.5898E+02
+Node:   12    12  Pressure:      0.3075E+01  U-Velocity:     0.3598E-03  V-Velocity:      0.2100E-02  Temperature:      0.5899E+02
+Node:   13    12  Pressure:      0.1790E+01  U-Velocity:     0.6005E-03  V-Velocity:      0.2085E-02  Temperature:      0.5899E+02
+Node:   14    12  Pressure:     -0.2794E-12  U-Velocity:     0.7668E-03  V-Velocity:      0.2076E-02  Temperature:      0.5899E+02
+Node:    1    13  Pressure:     -0.1155E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.1469E-03  Temperature:      0.5538E+02
+Node:    2    13  Pressure:      0.6941E-01  U-Velocity:    -0.1840E-02  V-Velocity:      0.2694E-03  Temperature:      0.5538E+02
+Node:    3    13  Pressure:      0.1332E+01  U-Velocity:    -0.1780E-02  V-Velocity:      0.5159E-03  Temperature:      0.5538E+02
+Node:    4    13  Pressure:      0.2366E+01  U-Velocity:    -0.1651E-02  V-Velocity:      0.7345E-03  Temperature:      0.5538E+02
+Node:    5    13  Pressure:      0.3210E+01  U-Velocity:    -0.1472E-02  V-Velocity:      0.9225E-03  Temperature:      0.5538E+02
+Node:    6    13  Pressure:      0.3874E+01  U-Velocity:    -0.1256E-02  V-Velocity:      0.1079E-02  Temperature:      0.5539E+02
+Node:    7    13  Pressure:      0.4353E+01  U-Velocity:    -0.1010E-02  V-Velocity:      0.1203E-02  Temperature:      0.5539E+02
+Node:    8    13  Pressure:      0.4634E+01  U-Velocity:    -0.7388E-03  V-Velocity:      0.1296E-02  Temperature:      0.5539E+02
+Node:    9    13  Pressure:      0.4693E+01  U-Velocity:    -0.4494E-03  V-Velocity:      0.1359E-02  Temperature:      0.5539E+02
+Node:   10    13  Pressure:      0.4497E+01  U-Velocity:    -0.1490E-03  V-Velocity:      0.1397E-02  Temperature:      0.5539E+02
+Node:   11    13  Pressure:      0.3996E+01  U-Velocity:     0.1519E-03  V-Velocity:      0.1413E-02  Temperature:      0.5539E+02
+Node:   12    13  Pressure:      0.3125E+01  U-Velocity:     0.4370E-03  V-Velocity:      0.1414E-02  Temperature:      0.5539E+02
+Node:   13    13  Pressure:      0.1809E+01  U-Velocity:     0.6815E-03  V-Velocity:      0.1409E-02  Temperature:      0.5539E+02
+Node:   14    13  Pressure:     -0.2794E-12  U-Velocity:     0.8493E-03  V-Velocity:      0.1406E-02  Temperature:      0.5539E+02
+Node:    1    14  Pressure:     -0.1154E+01  U-Velocity:     0.0000E+00  V-Velocity:     -0.8289E-04  Temperature:      0.5179E+02
+Node:    2    14  Pressure:      0.3779E-01  U-Velocity:    -0.1732E-02  V-Velocity:      0.1319E-03  Temperature:      0.5179E+02
+Node:    3    14  Pressure:      0.1300E+01  U-Velocity:    -0.1675E-02  V-Velocity:      0.2539E-03  Temperature:      0.5179E+02
+Node:    4    14  Pressure:      0.2341E+01  U-Velocity:    -0.1552E-02  V-Velocity:      0.3629E-03  Temperature:      0.5179E+02
+Node:    5    14  Pressure:      0.3190E+01  U-Velocity:    -0.1380E-02  V-Velocity:      0.4571E-03  Temperature:      0.5179E+02
+Node:    6    14  Pressure:      0.3856E+01  U-Velocity:    -0.1171E-02  V-Velocity:      0.5355E-03  Temperature:      0.5180E+02
+Node:    7    14  Pressure:      0.4337E+01  U-Velocity:    -0.9331E-03  V-Velocity:      0.5980E-03  Temperature:      0.5180E+02
+Node:    8    14  Pressure:      0.4617E+01  U-Velocity:    -0.6711E-03  V-Velocity:      0.6451E-03  Temperature:      0.5180E+02
+Node:    9    14  Pressure:      0.4673E+01  U-Velocity:    -0.3909E-03  V-Velocity:      0.6777E-03  Temperature:      0.5180E+02
+Node:   10    14  Pressure:      0.4470E+01  U-Velocity:    -0.9971E-04  V-Velocity:      0.6974E-03  Temperature:      0.5180E+02
+Node:   11    14  Pressure:      0.3958E+01  U-Velocity:     0.1925E-03  V-Velocity:      0.7068E-03  Temperature:      0.5180E+02
+Node:   12    14  Pressure:      0.3076E+01  U-Velocity:     0.4702E-03  V-Velocity:      0.7091E-03  Temperature:      0.5180E+02
+Node:   13    14  Pressure:      0.1761E+01  U-Velocity:     0.7094E-03  V-Velocity:      0.7084E-03  Temperature:      0.5180E+02
+Node:   14    14  Pressure:     -0.2794E-12  U-Velocity:     0.8750E-03  V-Velocity:      0.7069E-03  Temperature:      0.5180E+02
+Node:   15     1  Pressure:     -0.1179E+01  U-Velocity:    -0.2617E-02  V-Velocity:      0.0000E+00  Temperature: 
+Node:   15     2  Pressure:     -0.1177E+01  U-Velocity:    -0.2645E-02  V-Velocity:      0.1246E-02  Temperature: 
+Node:   15     3  Pressure:     -0.1174E+01  U-Velocity:    -0.2502E-02  V-Velocity:      0.2278E-02  Temperature: 
+Node:   15     4  Pressure:     -0.1171E+01  U-Velocity:    -0.2200E-02  V-Velocity:      0.3077E-02  Temperature: 
+Node:   15     5  Pressure:     -0.1168E+01  U-Velocity:    -0.1792E-02  V-Velocity:      0.3633E-02  Temperature: 
+Node:   15     6  Pressure:     -0.1165E+01  U-Velocity:    -0.1329E-02  V-Velocity:      0.3951E-02  Temperature: 
+Node:   15     7  Pressure:     -0.1162E+01  U-Velocity:    -0.8529E-03  V-Velocity:      0.4045E-02  Temperature: 
+Node:   15     8  Pressure:     -0.1160E+01  U-Velocity:    -0.3995E-03  V-Velocity:      0.3937E-02  Temperature: 
+Node:   15     9  Pressure:     -0.1158E+01  U-Velocity:     0.4413E-05  V-Velocity:      0.3655E-02  Temperature: 
+Node:   15    10  Pressure:     -0.1156E+01  U-Velocity:     0.3402E-03  V-Velocity:      0.3230E-02  Temperature: 
+Node:   15    11  Pressure:     -0.1155E+01  U-Velocity:     0.5963E-03  V-Velocity:      0.2694E-02  Temperature: 
+Node:   15    12  Pressure:     -0.1155E+01  U-Velocity:     0.7668E-03  V-Velocity:      0.2076E-02  Temperature: 
+Node:   15    13  Pressure:     -0.1154E+01  U-Velocity:     0.8493E-03  V-Velocity:      0.1406E-02  Temperature: 
+Node:   15    14  Pressure:     -0.1180E+01  U-Velocity:     0.8750E-03  V-Velocity:      0.7069E-03  Temperature: 
+Node:    1    15  Pressure:                  U-Velocity:     0.0000E+00  V-Velocity:      0.0000E+00  Temperature: 
+Node:    2    15  Pressure:                  U-Velocity:    -0.6239E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    3    15  Pressure:                  U-Velocity:    -0.4675E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    4    15  Pressure:                  U-Velocity:     0.1654E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    5    15  Pressure:                  U-Velocity:     0.4939E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    6    15  Pressure:                  U-Velocity:     0.6553E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    7    15  Pressure:                  U-Velocity:     0.7284E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    8    15  Pressure:                  U-Velocity:     0.7489E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:    9    15  Pressure:                  U-Velocity:     0.7298E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   10    15  Pressure:                  U-Velocity:     0.6812E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   11    15  Pressure:                  U-Velocity:     0.6237E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   12    15  Pressure:                  U-Velocity:     0.5843E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   13    15  Pressure:                  U-Velocity:     0.5601E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   14    15  Pressure:                  U-Velocity:     0.5734E-04  V-Velocity:      0.0000E+00  Temperature: 
+Node:   15    15  Pressure:                  U-Velocity:     0.5734E-04  V-Velocity:      0.0000E+00  Temperature: 
+

@@ -1,13 +1,12 @@
 ! temperature_source2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-02-26 (YYYY-MM-DD)
+! Last Update: 2018-03-09 (YYYY-MM-DD)
 !
 ! This subourtine calculates the coefficients used in the solution for
 ! temperature in the SIMPLER method.
 !
-! These definitions are defined for a 2D natural convection problem that 
-! simulates a vertical plate at i = 0.
+
 
 subroutine temperature_source2d
 
@@ -19,60 +18,48 @@ subroutine temperature_source2d
   real(8) :: Fw, Fe, Fs, Fn, Dw, De, Dn, Ds
 
   ! Update west boundary
-  do j = 2, n
-    
-	! Set i
-	i = 1
+  ! Set i
+  i = 1
 
-	! Update convective terms
-    Fw = 0
-    Fe = rho*A_x*(u(i+1,j)+u(i,j))/2
-    Fs = rho*A_y*(v(i,j)+v(i-1,j))/2
-    Fn = rho*A_y*(v(i,j+1)+v(i-1,j+1))/2
-
-    ! Update diffusion terms
-    Dw = (k_const/Cp)*dy/dx
-    De = (k_const/Cp)*dy/dx
-    Ds = (k_const/Cp)*dx/dy
-    Dn = (k_const/Cp)*dx/dy
+  do j = 1,n-1
 
     ! Update energy equation coefficients :: hybrid
-	Aw_T(i,j) = 0
-	Ae_T(i,j) = max(-Fe,(De-Fe/2),0.0)
-	As_T(i,j) = max(Fs,(Ds+Fs/2),0.0)
-	An_T(i,j) = max(-Fn,(Dn-Fn/2),0.0)
+    Aw_T(i,j) = 0
+    Ae_T(i,j) = 1
+    As_T(i,j) = 0
+    An_T(i,j) = 0
 
     ! Update Ap coefficient
-	Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)+(Fe-Fw)+(Fn-Fs)-Sp_t(i,j)
+    Ap_T(i,j) = 1
 
-	! Update b values
-	b_T(i,j) = Su_t(i,j)
+    ! Update b values
+    b_T(i,j) = 0
 
   end do
 
-  ! Update south boundary :: fixed temperature
-  do i = 2, m
-    
-	! Set j
-	j = 1
+  ! Update east boundary
+  ! Set i
+  i = m-1
 
-	! Update energy equation coefficients :: hybrid
-	Aw_T(i,j) = 0
-	Ae_T(i,j) = 0
-	As_T(i,j) = 0
-	An_T(i,j) = 0
+  do j = 1,n-1
+
+    ! Update energy equation coefficients :: hybrid
+    Aw_T(i,j) = 1
+    Ae_T(i,j) = 0
+    As_T(i,j) = 0
+    An_T(i,j) = 0
 
     ! Update Ap coefficient
-	Ap_T(i,j) = -Sp_t(i,j)
+    Ap_T(i,j) = 1
 
-	! Update b values
-	b_T(i,j) = Su_t(i,j)
+    ! Update b values
+    b_T(i,j) = 0
 
   end do
 
   ! Solve for interior coefficients
-  do i = 2,m-1
-    do j = 2,n-1
+  do i = 2,m-2
+    do j = 1,n-1
 
       ! Update convective terms
       Fw = rho*A_x*(u(i,j)+u(i-1,j))/2
@@ -86,17 +73,28 @@ subroutine temperature_source2d
       Ds = (k_const/Cp)*dx/dy
       Dn = (k_const/Cp)*dx/dy
 
-      ! Update energy equation coefficients :: hybrid
-	  Aw_T(i,j) = max(Fw,(Dw+Fw/2),0.0)
-	  Ae_T(i,j) = max(-Fe,(De-Fe/2),0.0)
-	  As_T(i,j) = max(Fs,(Ds+Fs/2),0.0)
-	  An_T(i,j) = max(-Fn,(Dn-Fn/2),0.0)
+      ! Compute Coefficients - Power Law Differening Scheme
+  		Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+  		Ae_T(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+  		As_T(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+  		An_T(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-      ! Update Ap coefficient
-	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)+(Fe-Fw)+(Fn-Fs)-Sp_t(i,j)
+  		! Check South / North Nodes
+  		if (j .eq. 1) then
+  		  As_T(i,j) = 0
+  		elseif (j .eq. n-1) then
+  		  An_T(i,j) = 0
+      elseif (i .eq. 1) then
+        Aw_T(i,j) = 0
+      elseif (i .eq. m-1) then
+        Ae_T(i,j) = 0
+  		end if
 
-	  ! Update b values
-	  b_T(i,j) = Su_t(i,j)
+  		! Update Ap coefficient
+  		Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
+
+  		! Update b values
+  		b_T(i,j) = Su_T(i,j)
 
     end do
   end do

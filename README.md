@@ -1,6 +1,6 @@
-# cfd-2d-natural
+# cfd-2d
 
-A simple two-dimensional natural convection CFD routine in Fortran.
+A simple two-dimensional CFD routine in Fortran.
 
 ## Status
 

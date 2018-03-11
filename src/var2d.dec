@@ -1,44 +1,45 @@
 ! Variable Declaration file for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-02-26 (YYYY-MM-DD)
+! Last Update: 2018-03-09 (YYYY-MM-DD)
 !
 ! This file defines the parameter and variable names used throughout
 ! the main2d function.
 !
-! These definitions are defined for a 2D natural convection cfd problem
-! that simulates the effects of a verticle at x = 0.
+! These definitions are defined for a 2D cfd problem with an inlet boundary
+! condition (west i=0), an outlet boundary condition (east i=m), a wall
+! (north j=1), and a wall (south j=n).
 
 ! Mesh parameters :: nodes in x, nodes in y, nodes in z
   integer :: m, n, l
-  parameter (m=5, n=5, l=1)
+  parameter (m=15, n=15, l=1)
 
 ! Geometry variables ::
   real(8) :: length, width, depth, dx, dy, dz, A_x, A_y, A_z
   common length, width, depth, dx, dy, dz, A_x, A_y, A_z
 
 ! Media variables ::
-  real(8) :: ReL, Pr, Pe, rho, mu, k_const, Cp, beta, g
-  common ReL, Pr, Pe, rho, mu, k_const, Cp, beta, g
+  real(8) :: ReL, Pr, Pe, rho, mu, k_const, Cp, beta
+  common ReL, Pr, Pe, rho, mu, k_const, Cp, beta
 
 ! Pressure :: P
-  real(8), dimension(1:m,1:n) :: P, P_star, P_prime, Sp_p, Su_p
+  real(8), dimension(1:m-1,1:n-1) :: P, P_star, P_prime, Sp_p, Su_p
   common P, P_star, P_prime, Sp_p, Su_p
 
 ! Pressure :: solution variables
-  real(8), dimension(1:m,1:n) :: As_p, Aw_p, Ap_p, Ae_p, An_p, b_p
+  real(8), dimension(1:m-1,1:n-1) :: As_p, Aw_p, Ap_p, Ae_p, An_p, b_p
   common As_p, Aw_p, Ap_p, Ae_p, An_p, b_p
 
-! Pressure :: boundary conditions (fixed pressure at inlet)
-  real(8) :: p_east
-  common p_east
+! Pressure :: fixed pressure point
+  real(8) :: p_fix
+  common p_fix
 
 ! U-Velocity :: u
-  real(8), dimension(1:m,1:n) :: u, u_hat, u_star, Sp_u, Su_u
+  real(8), dimension(1:m,1:n-1) :: u, u_hat, u_star, Sp_u, Su_u
   common u, u_hat, u_star, Sp_u, Su_u
 
 ! U-Velocity :: solution variables
-  real(8), dimension(1:m,1:n) :: As_u, Aw_u, Ap_u, Ae_u, An_u, b_u
+  real(8), dimension(1:m,1:n-1) :: As_u, Aw_u, Ap_u, Ae_u, An_u, b_u
   common As_u, Aw_u, Ap_u, Ae_u, An_u, b_u
 
 ! U-Velocity :: boundary conditions (fixed velocity at inlet)
@@ -53,21 +54,21 @@
   real(8), dimension(1:m,1:n) :: As_v, Aw_v, Ap_v, Ae_v, An_v, b_v
   common As_v, Aw_v, Ap_v, Ae_v, An_v, b_v
 
-! V-Velocity :: boundary conditions (fixed velocity at walls, inlet)
-  real(8) :: v_west, v_south, v_north
-  common v_west, v_south, v_north
+! V-Velocity :: boundary conditions (fixed velocity at walls)
+  real(8) :: v_south, v_north
+  common v_south, v_north
 
 ! Temperature :: T
-  real(8), dimension(0:m,1:n) :: T, Su_T, Sp_T
+  real(8), dimension(1:m-1,1:n-1) :: T, Su_T, Sp_T
   common T, Su_T, Sp_T
 
 ! Temperature :: solution variables
-  real(8), dimension(0:m,1:n) :: As_T, Aw_T, Ap_T, Ae_T, An_T, b_T
+  real(8), dimension(1:m-1,1:n-1) :: As_T, Aw_T, Ap_T, Ae_T, An_T, b_T
   common As_T, Aw_T, Ap_T, Ae_T, An_T, b_T
 
 ! Temperature :: boundary conditions (inlet temperature, heat flux south)
-  real(8) :: T_west, T_inf
-  common T_west, T_inf
+  real(8) :: T_north, T_south
+  common T_north, T_south
 
 ! Convergence variables
   real(8) :: tol, R_u, R_u0, R_v, R_v0, alpha

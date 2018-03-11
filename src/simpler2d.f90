@@ -1,13 +1,10 @@
 ! simpler2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-02-26 (YYYY-MM-DD)
+! Last Update: 2018-03-07 (YYYY-MM-DD)
 !
 ! This subroutine runs the SIMPLER algorithm for a 2D CFD problem.
 !
-! These definitions are defined for a 2D natural convection problem that 
-! simulates a vertical plate at i = 0.
-
 subroutine simpler2d
 
   implicit none
@@ -30,7 +27,7 @@ subroutine simpler2d
     ! Step 2: Calculate Pseudo-Velocities
     print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d
-    !print *, ".............."
+    print *, ".............."
     !print *, "u_hat:", u_hat
     !print *, "v_hat:", v_hat
     !print *, ".............."
@@ -42,8 +39,8 @@ subroutine simpler2d
     !print *, "P:", P
     !print *, ".............."
 
-	! Set p_star := P
-	P_star = P
+	  ! Set p_star := P
+	  P_star = P
 
     ! Step 4: Solve Momentum Equations
     print *, "Step 3: Solve Momentum Equations"
@@ -84,13 +81,13 @@ subroutine simpler2d
     print *, "R_v: ", R_v
     print *, "................................"
 
-    if ((R_u .le. tol) .and. (R_v .le. tol)) then
+    P_star = P
+	  u_star = u
+	  v_star = v
+
+    if ((R_u .le. 1e3*tol) .and. (R_v .le. 1e3*tol)) then
       print *, "Simpler completed in: ", i
       exit
-	  else
-	    P_star = P
-	    u_star = u
-	    v_star = v
     end if
 
   end do
