@@ -28,7 +28,7 @@ subroutine pseudo_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: Fixed Value
+    ! Caluclate West boundary source terms :: Wall
     ! Set i
     i = 1
 
@@ -36,7 +36,7 @@ subroutine pseudo_source2d(direction)
 
       ! Compute Coefficients - Fixed Value
       Aw_u(i,j) = 0
-      Ae_u(i,j) = 1
+      Ae_u(i,j) = 0
       As_u(i,j) = 0
       An_u(i,j) = 0
 
@@ -48,14 +48,14 @@ subroutine pseudo_source2d(direction)
 
     end do
 
-    ! Calculate East bounday source terms :: No gradient
+    ! Calculate East bounday source terms :: Wall
     ! Set i
     i = m
 
     do j = 1,n-1
 
       ! Compute Coefficients - No gradient
-      Aw_u(i,j) = 1
+      Aw_u(i,j) = 0
       Ae_u(i,j) = 0
       As_u(i,j) = 0
       An_u(i,j) = 0
@@ -73,16 +73,16 @@ subroutine pseudo_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = rho*A_x*(u_star(i,j)+u_star(i-1,j))/2
-		    Fe = rho*A_x*(u_star(i+1,j)+u_star(i,j))/2
-		    Fs = rho*A_y*(v_star(i,j)+v_star(i-1,j))/2
-		    Fn = rho*A_y*(v_star(i,j+1)+v_star(i-1,j+1))/2
+		    Fw = rho*dy*(u_star(i,j)+u_star(i-1,j))/2
+		    Fe = rho*dy*(u_star(i+1,j)+u_star(i,j))/2
+		    Fs = rho*dx*(v_star(i,j)+v_star(i-1,j))/2
+		    Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-		    Dw = mu*dy/dx
-        De = mu*dy/dx
-        Ds = mu*dy/dx
-        Dn = mu*dy/dx
+		    Dw = mu*dy/dx/Re
+        De = mu*dy/dx/Re
+        Ds = mu*dy/dx/Re
+        Dn = mu*dy/dx/Re
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -143,75 +143,43 @@ subroutine pseudo_source2d(direction)
 
 	  end do
 
-    ! West Boundary :: No gradient
-    ! Set i
-    i = 1
-
-    do j = 2, n-1
-
-      Aw_v(i,j) = 0
-      Ae_v(i,j) = 0
-      As_v(i,j) = 0
-      An_v(i,j) = 0
-
-      Ap_v(i,j) = 1
-    	b_v(i,j) = 0
-
-    end do
-
-	  ! East Boundary :: No gradient
-	  ! Set i
-	  i = m
-
-	  do j = 2, n-1
-
-	    Aw_v(i,j) = 1
-	    Ae_v(i,j) = 0
-	    As_v(i,j) = 0
-	    An_v(i,j) = 0
-
-	    Ap_v(i,j) = 1
-	    b_v(i,j) = 0
-
-	  end do
-
     ! Calculate interior source terms
-	do j = 2, n-1
-	  do i = 2,m-1
+	  do j = 2, n-1
+	    do i = 1,m-1
 
-		! Update convection terms
-		Fw = rho*A_x*(u_star(i,j-1)+u_star(i,j))/2
-		Fe = rho*A_x*(u_star(i+1,j-1)+u_star(i+1,j))/2
-		Fs = rho*A_y*(v_star(i,j-1)+v_star(i,j))/2
-		Fn = rho*A_y*(v_star(i,j)+v_star(i,j+1))/2
+		  ! Update convection terms
+		  Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
+		  Fe = rho*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
+		  Fs = rho*dx*(v_star(i,j-1)+v_star(i,j))/2
+		  Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
-        ! Update diffusion terms
-		Dw = mu*dy/dx
-        De = mu*dy/dx
-        Ds = mu*dy/dx
-        Dn = mu*dy/dx
+      ! Update diffusion terms
+		  Dw = mu*dy/dx/Re
+      De = mu*dy/dx/Re
+      Ds = mu*dy/dx/Re
+      Dn = mu*dy/dx/Re
 
-		! Compute Coefficients - Power Law Differening Scheme
-		Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-		Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-		As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-		An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+		  ! Compute Coefficients - Power Law Differening Scheme
+		  Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+		  Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+		  As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+		  An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-		! Check South / North Nodes
-		if (i .eq. 1) then
-		  Aw_v(i,j) = 0
-		elseif (i .eq. m-1) then
-		  Ae_v(i,j) = 0
-		end if
+		  ! Check South / North Nodes
+		  if (i .eq. 1) then
+		    Aw_v(i,j) = 0
+		  elseif (i .eq. m-1) then
+		    Ae_v(i,j) = 0
+		  end if
 
-		! Update Ap coefficient
-		Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+		  ! Update Ap coefficient
+		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
 
-		! Update b values
-		b_v(i,j) = Su_v(i,j)+9.81*beta*(T(i,j)-T_north)
+		  ! Update b values
+		  b_v(i,j) = Su_v(i,j)+Ra*T(i,j)/Re/Re/Pr
 
+	    end do
 	  end do
-	end do
 
   end if
 

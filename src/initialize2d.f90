@@ -1,15 +1,8 @@
 ! initialize2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-08 (YYYY-MM-DD)
+! Last Update: 2018-03-19 (YYYY-MM-DD)
 !
-! This subroutine runs the static calculations for geometry properties,
-! pressure properties, velocity, properties, temperature properties, and
-! sets the boundary conditions for pressure, velocity, and temperature.
-!
-! These definitions are defined for a 2D cfd problem with an inlet boundary
-! condition (left i=0), an outlet boundary condition (right i=m), a wall
-! (north j=1), and a wall (south j=n).
 
 subroutine initialize2d
 
@@ -26,20 +19,15 @@ subroutine initialize2d
   depth = 1      ! 1 inch deep
 
   ! Define media variables
-  ReL = 0
-  Pr = 3.56
-  Pe = ReL*Pr
-  rho = 1000
-  mu = 547.4
-  k_const = 640.6
-  Cp = 4.187
-  beta = 0.000214
+  Re = 7.397e4
+  Pr = 7.127e-1
+  Ra = 2.417e5
 
-  ! Define Pressure boundary condition
-  P_east = 0
-
-  ! Define U-Velocity boundary condition
-  u_west = ReL*mu/rho/length
+  rho = 1.276e0
+  mu = 1.725e-5
+  k_const = 2.435e-2
+  Cp = 1.006e3
+  beta = 3.663e-3
 
   ! Define V-Velocity boundary conditions
   v_west = 0
@@ -47,8 +35,8 @@ subroutine initialize2d
   v_south = 0
 
   ! Define Temperature Boundary conditions
-  T_north = 50       ! Inlet fluid temperature
-  T_south = 100     ! Heat flux from south
+  T_h = 1       ! Inlet fluid temperature
+  T_c = 0     ! Heat flux from south
 
   ! Define solution parameters
   itrmax = 4
