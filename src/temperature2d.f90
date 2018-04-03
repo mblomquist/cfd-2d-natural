@@ -1,8 +1,9 @@
 ! temperature2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-09 (YYYY-MM-DD)
+! Last Update: 2018-04-03 (YYYY-MM-DD)
 !
+
 subroutine temperature2d
 
   ! Pull in standard variable header
@@ -15,20 +16,21 @@ subroutine temperature2d
   Su_T = 0
   Sp_T = 0
 
-  ! North boundary source terms :: Inlet (fluid temperature)
-  Su_T(:, n-1) = 2*(k_const/Cp)*dx/dy*T_north
-  Sp_T(:, n-1) = -2*(k_const/Cp)*dx/dy
+  ! North boundary source terms :: Wall
+  Su_T(:, n-1) = 2*mu*Cp/Pr/dy*(T_n-T_c)
+  Sp_T(:, n-1) = -2*mu*Cp*delta_T/Pr/dy
 
-  ! West boundary source terms ::
-  !Su_T(1, :) = 2*(k_const/Cp)*dx/dy*T_north
-  !Sp_T(1, :) = -2*(k_const/Cp)*dx/dy
+  ! West boundary source terms :: Wall
+  Su_T(1, :) = 2*mu*Cp/Pr/dy*(T_w-T_c)
+  Sp_T(1, :) = -2*mu*Cp*delta_T/Pr/dy
 
-  !Su_T(m-1, :) = 2*(k_const/Cp)*dx/dy*T_north
-  !Sp_T(m-1, :) = -2*(k_const/Cp)*dx/dy
+  ! East boundary source terms :: Wall
+  Su_T(m-1, :) = 2*mu*Cp/Pr/dy*(T_e-T_c)
+  Sp_T(m-1, :) = -2*mu*Cp*delta_T/Pr/dy
 
-  ! South boundary source terms :: heat flux
-  Su_T(:, 1) = 2*(k_const/Cp)*dx/dy*T_south
-  Sp_T(:, 1) = -2*(k_const/Cp)*dx/dy
+  ! South boundary source terms :: Wall
+  Su_T(:, 1) = 2*mu*Cp/Pr/dy*(T_s-T_c)
+  Sp_T(:, 1) = -2*mu*Cp*delta_T/Pr/dy
 
   return
 
