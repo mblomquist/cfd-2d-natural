@@ -1,14 +1,11 @@
 ! pressure2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-07 (YYYY-MM-DD)
+! Last Update: 2018-04-02 (YYYY-MM-DD)
 !
 ! This subroutine calculates the boundary source terms, sets interior source
 ! terms to 0, sets boundary values, and initializes the pressure grid.
 !
-! These definitions are defined for a 2D cfd problem with an inlet boundary
-! condition (west i=0), an outlet boundary condition (east i=m), a wall
-! (north j=1), and a wall (south j=n).
 
 subroutine pressure2d
 
@@ -23,10 +20,6 @@ subroutine pressure2d
   ! Set pressure source terms
   Su_p = 0
   Sp_p = 0
-
-  ! Set pressure reference
-  !Sp_p(m-1,1) = -1e30
-  !Su_p(m-1,1) = 0
 
   return
 
