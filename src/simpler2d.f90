@@ -1,7 +1,7 @@
 ! simpler2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-07 (YYYY-MM-DD)
+! Last Update: 2018-04-03 (YYYY-MM-DD)
 !
 ! This subroutine runs the SIMPLER algorithm for a 2D CFD problem.
 !
@@ -39,8 +39,8 @@ subroutine simpler2d
     !print *, "P:", P
     !print *, ".............."
 
-	  ! Set p_star := P
-	  P_star = P
+	! Set p_star := P
+	P_star = P
 
     ! Step 4: Solve Momentum Equations
     print *, "Step 3: Solve Momentum Equations"
@@ -82,10 +82,10 @@ subroutine simpler2d
     print *, "................................"
 
     P_star = P
-	  u_star = u
-	  v_star = v
+	u_star = u
+	v_star = v
 
-    if ((R_u .le. 1e3*tol) .and. (R_v .le. 1e3*tol)) then
+    if ((R_u .le. simpler_tol) .and. (R_v .le. simpler_tol)) then
       print *, "Simpler completed in: ", i
       exit
     end if
