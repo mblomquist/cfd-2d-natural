@@ -1,11 +1,12 @@
 ! convergence2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-08 (YYYY-MM-DD)
+! Last Update: 2018-04-03 (YYYY-MM-DD)
 !
 ! This subroutine computes the error of the SIMPLER solution based on the
 ! residuals for the u- and v-momentum equations.
 !
+
 subroutine convergence2d(itr)
 
   ! Include variable header
@@ -17,6 +18,7 @@ subroutine convergence2d(itr)
 
    R_u = 0
    R_v = 0
+
    u_momentum_residual = 0
    v_momentum_residual = 0
 
