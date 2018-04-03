@@ -1,14 +1,10 @@
 ! velocity2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-07 (YYYY-MM-DD)
+! Last Update: 2018-04-03 (YYYY-MM-DD)
 !
 ! This subroutine calculates the boundary source terms, sets interior source
 ! terms, sets boundary values, and initializes the velocity grids.
-!
-! These definitions are defined for a 2D cfd problem with an inlet boundary
-! condition (west i=0), an outlet boundary condition (east i=m), a wall
-! (north j=1), and a wall (south j=n).
 
 subroutine velocity2d
 
@@ -29,12 +25,12 @@ subroutine velocity2d
   Sp_u = 0
 
   ! South boundary source terms :: none
-  Su_u(2:m-1, 1) = 0
-  Sp_u(2:m-1, 1) = -mu*(dx*dy)/(dy/2)
+  Su_u(:, 1) = 0
+  Sp_u(:, 1) = -mu**2*Re/rho
 
   ! North boundary source terms :: none
-  Su_u(2:m-1, n-1) = 0
-  Sp_u(2:m-1, n-1) = -mu*(dx*dy)/(dy/2)
+  Su_u(:, n-1) = 0
+  Sp_u(:, n-1) = -mu**2*Re/rho
 
 
   ! ====================== V-Velocity ====================== !
@@ -47,13 +43,13 @@ subroutine velocity2d
   Su_v = 0
   Sp_v = 0
 
-  ! South boundary source terms :: no slip
-  Su_v(:, 1) = 0
-  Sp_v(:, 1) = -1e30
+  ! West boundary source terms :: no slip
+  Su_v(1, :) = 0
+  Sp_v(1, :) = -mu**2*Re/rho
 
-  ! North boundary source terms :: no slip
-  Su_v(:, n) = 0
-  Sp_v(:, n) = -1e30
+  ! East boundary source terms :: no slip
+  Su_v(m-1, :) = 0
+  Sp_v(m-1, :) = -mu**2*Re/rho
 
   return
 
