@@ -1,6 +1,6 @@
-# cfd-2d
+# cfd-2d-natural
 
-A simple two-dimensional CFD routine in Fortran.
+This is a simple computational fluid dynamics solver for a two-dimensional, natural convection problem that utilizes dimensionless parameters. 
 
 ## Status
 
@@ -14,12 +14,14 @@ This repository contains a simple code base for solving two dimensional computat
 
 1. Clone this repository.
 2. Compile using `make`.
-3. Run it `./build/main.out`
-4. Change input parameters using the Python script. 
+3. Modify input parameters using the Python script, `helper.py`, or by modifying the `input2d.txt` file.
+4. Run it `./build/main.out`
+
+The program will generate results files for the pressure field, the temperature field, and the velocity fields in the `output` directory. 
 
 ## Changing Input Parameters
 
-Modify input parameters using the Python script `input_parameters.py`.
+In progress...
 
 ## Read Output Files
 
