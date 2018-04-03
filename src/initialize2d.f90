@@ -1,7 +1,7 @@
 ! initialize2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-19 (YYYY-MM-DD)
+! Last Update: 2018-04-03 (YYYY-MM-DD)
 !
 
 subroutine initialize2d
@@ -14,9 +14,9 @@ subroutine initialize2d
   ! ..........................
 
   ! Define geometry variables
-  length = 1   ! 8 inches long
-  width = 1      ! 1 inch wide
-  depth = 1      ! 1 inch deep
+  length = 1	! 1 meter long
+  width = 1     ! 1 meter wide
+  depth = 1     ! 1 meter deep
 
   ! Define media variables
   Re = 7.397e4
@@ -27,22 +27,26 @@ subroutine initialize2d
   mu = 1.725e-5
   k_const = 2.435e-2
   Cp = 1.006e3
+
+  alpha = k_const/Cp/rho
   beta = 3.663e-3
 
-  ! Define V-Velocity boundary conditions
-  v_west = 0
-  v_north = 0
-  v_south = 0
+  ! Define high and low temperature
+  T_h = 373     ! High temperature wall
+  T_c = 100     ! Low temperature wall
+  delta_T = T_h - T_c
 
-  ! Define Temperature Boundary conditions
-  T_h = 1       ! Inlet fluid temperature
-  T_c = 0     ! Heat flux from south
+  ! Define dimensionless temperature at boundaries
+  T_w = 0
+  T_e = 0
+  T_s = 1
+  T_n = 0
 
   ! Define solution parameters
   itrmax = 4
   maxit = 1000
-  tol = 1e-6
-  alpha = 1.0
+  solver_tol = 1e-6
+  simpler_tol = 1e-4
 
   ! Calculate geometry properties.
   call geometry2d
