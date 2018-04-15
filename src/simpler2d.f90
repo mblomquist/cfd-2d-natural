@@ -22,6 +22,10 @@ subroutine simpler2d
   u_star = u
   v_star = v
 
+  ! Solve Temperature for Natural Convection First
+  print *, "Step 0: Solve Temperature Equation"
+  call temperature_solve2d
+
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities
@@ -39,8 +43,8 @@ subroutine simpler2d
     !print *, "P:", P
     !print *, ".............."
 
-	! Set p_star := P
-	P_star = P
+	  ! Set p_star := P
+	  P_star = P
 
     ! Step 4: Solve Momentum Equations
     print *, "Step 3: Solve Momentum Equations"
