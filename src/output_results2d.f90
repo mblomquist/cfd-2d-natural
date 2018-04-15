@@ -1,7 +1,7 @@
 ! output_results2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-03 (YYYY-MM-DD)
+! Last Update: 2018-04-15 (YYYY-MM-DD)
 !
 ! This subroutine generates data files for the pressure, temperature, and velocity fields.
 
@@ -20,9 +20,12 @@ subroutine output_results2d
   write (2, '("field data: pressure, temperature", /)', advance="no")
   write (2, '("ASCII", /)', advance="no")
   write (2, '("DATASET STRUCTURED_POINT", /)', advance="no")
-  write (2, '("DIMENSIONS ", 5I, 1X, 5I, /)', advance="no"), M-1, N-1
-  write (2, '("ORIGIN ", 5D, 1X, 5D, /")', advance="no"), DX/2, DY/2
-  write (2, '("SPACING ", 5D, 1X, 5D, /)', advance="no"), DX, DY
+  write (2, '("DIMENSIONS ", 5I, 1X, 5I)', advance="no"), M-1, N-1
+  write (2, '(/)', advance="no")
+  write (2, '("ORIGIN ", E15.4, 1X, E15.4)', advance="no"), DX/2, DY/2
+  write (2, '(/)', advance="no")
+  write (2, '("SPACING ", E15.4, 1X, E15.4)', advance="no"), DX, DY
+  write (2, '(/)', advance="no")
 
   do j = 1, n-1
     do i = 1, m-1
@@ -40,8 +43,11 @@ subroutine output_results2d
   write (3, '("ASCII", /)', advance="no")
   write (3, '("DATASET STRUCTURED_POINT", /)', advance="no")
   write (3, '("DIMENSIONS ", 5I, 1X, 5I, /)', advance="no"), M, N-1
-  write (3, '("ORIGIN ", 5D, 1X, 5D, /")', advance="no"), 0.0, DY/2
+  write (3, '(/)', advance="no")
+  write (3, '("ORIGIN ", 5D, 1X, 5D, /)', advance="no"), 0.0, DY/2
+  write (3, '(/)', advance="no")
   write (3, '("SPACING ", 5D, 1X, 5D, /)', advance="no"), DX, DY
+  write (3, '(/)', advance="no")
 
   do j = 1, n-1
     do i = 1, m
@@ -59,8 +65,11 @@ subroutine output_results2d
   write (4, '("ASCII", /)', advance="no")
   write (4, '("DATASET STRUCTURED_POINT", /)', advance="no")
   write (4, '("DIMENSIONS ", 5I, 1X, 5I, /)', advance="no"), M-1, N
-  write (4, '("ORIGIN ", 5D, 1X, 5D, /")', advance="no"), DX/2, 0.0
+  write (4, '(/)', advance="no")
+  write (4, '("ORIGIN ", 5D, 1X, 5D, /)', advance="no"), DX/2, 0.0
+  write (4, '(/)', advance="no")
   write (4, '("SPACING ", 5D, 1X, 5D, /)', advance="no"), DX, DY
+  write (4, '(/)', advance="no")
 
   do j = 1, n
     do i = 1, m-1
