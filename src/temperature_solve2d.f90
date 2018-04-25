@@ -14,7 +14,7 @@ subroutine temperature_solve2d
   call temperature_source2d
 
   ! Solve velocity Equations
-  call solver2d_bicgstab(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
+  call solver2d_bicgstab2(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
 
   return
 

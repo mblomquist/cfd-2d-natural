@@ -112,7 +112,7 @@ subroutine pseudo_source2d(direction)
 	! Set j
 	j = 1
 
-	do i = 1,m
+	do i = 1,m-1
 
 	  Aw_v(i,j) = 0
 	  Ae_v(i,j) = 0
@@ -128,7 +128,7 @@ subroutine pseudo_source2d(direction)
 	! Set j
 	j = n
 
-	do i = 1, m
+	do i = 1, m-1
 
 	  Aw_v(i,j) = 0
 	  Ae_v(i,j) = 0

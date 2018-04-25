@@ -32,16 +32,16 @@ subroutine simpler2d
     print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d
     print *, ".............."
-    !print *, "u_hat:", u_hat
-    !print *, "v_hat:", v_hat
-    !print *, ".............."
+    print *, "u_hat:", u_hat
+    print *, "v_hat:", v_hat
+    print *, ".............."
 
     ! Step 3: Solve Pressure Equation
     print *, "Step 2: Solve Pressure Equation"
     call pressure_solve2d
-    !print *, ".............."
-    !print *, "P:", P
-    !print *, ".............."
+    print *, ".............."
+    print *, "P:", P
+    print *, ".............."
 
 	  ! Set p_star := P
 	  P_star = P
@@ -49,25 +49,25 @@ subroutine simpler2d
     ! Step 4: Solve Momentum Equations
     print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
-    !print *, ".............."
-    !print *, "u_star:", u_star
-    !print *, "v_star:", v_star
-    !print *, ".............."
+    print *, ".............."
+    print *, "u_star:", u_star
+    print *, "v_star:", v_star
+    print *, ".............."
 
     ! Step 5: Solve Pressure Equation
     print *, "Step 4: Solve Pressure Correction"
     call pressure_correct2d
-    !print *, ".............."
-    !print *, "P_prime:", P_prime
-    !print *, ".............."
+    print *, ".............."
+    print *, "P_prime:", P_prime
+    print *, ".............."
 
     ! Step 6: Correct Velocities
     print *, "Step 5: Correct Velocities"
     call velocity_correct2d
-    !print *, ".............."
-    !print *, "u:", u
-    !print *, "v:", v
-    !print *, ".............."
+    print *, ".............."
+    print *, "u:", u
+    print *, "v:", v
+    print *, ".............."
 
     ! Step 7: Solve Temperature Equation
     print *, "Step 6: Solve Temperature Equation"
@@ -86,8 +86,8 @@ subroutine simpler2d
     print *, "................................"
 
     P_star = P
-	u_star = u
-	v_star = v
+	  u_star = u
+	  v_star = v
 
     if ((R_u .le. simpler_tol) .and. (R_v .le. simpler_tol)) then
       print *, "Simpler completed in: ", i

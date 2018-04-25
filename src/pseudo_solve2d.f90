@@ -20,10 +20,49 @@ subroutine pseudo_solve2d
   ! Define internal variables
   integer :: i, j
 
+  ! ========================== v_hat ========================== !
+
+  ! Update stiffness coefficients
+  call pseudo_source2d("v")
+
+  print *, ".............."
+  print *, "Ap_v:", Ap_v
+  print *, ".............."
+
+  ! Calculate west nodes
+  ! Set i
+  i = 1
+  do j = 2, n-1
+
+	  v_hat(i,j) = (Ae_v(i,j)*v_star(i+1,j)+As_v(i,j)*v_star(i,j-1)+An_v(i,j)*v_star(i,j+1)+b_v(i,j))/Ap_v(i,j)
+
+  end do
+
+  ! Calulate south nodes :: fixed value
+  v_hat(1:m-1, 1) = v_star(1:m-1, 1)
+
+  ! Calculate north nodes :: fixed value
+  v_hat(1:m-1, n) = v_star(1:m-1, n)
+
+  ! Calculate interior nodes
+  do j = 2,n-1
+    do i = 2,m-1
+
+      v_hat(i,j) = (Aw_v(i,j)*v_star(i-1,j)+Ae_v(i,j)*v_star(i+1,j)+As_v(i,j)*v_star(i,j-1)+An_v(i,j)*v_star(i,j+1)+b_v(i,j))/Ap_v(i,j)
+
+	  end do
+  end do
+
+  v_hat(m,:) = v_hat(m-1,:)
+
   ! ========================== u_hat ========================== !
 
   ! Update stiffness coefficients
   call pseudo_source2d("u")
+
+  print *, ".............."
+  print *, "Ap_u:", Ap_u
+  print *, ".............."
 
   ! Calculate west nodes :: fixed value
   u_hat(1, :) = u_star(1, :)
@@ -52,37 +91,6 @@ subroutine pseudo_solve2d
 
   ! Update east nodes
   u_hat(m,:) = u_hat(m-1,:)
-
-  ! ========================== v_hat ========================== !
-
-  ! Update stiffness coefficients
-  call pseudo_source2d("v")
-
-  ! Calculate west nodes
-  ! Set i
-  i = 1
-  do j = 2, n-1
-
-	  v_hat(i,j) = (Ae_v(i,j)*v_star(i+1,j)+As_v(i,j)*v_star(i,j-1)+An_v(i,j)*v_star(i,j+1)+b_v(i,j))/Ap_v(i,j)
-
-  end do
-
-  ! Calulate south nodes :: fixed value
-  v_hat(1:m-1, 1) = v_star(1:m-1, 1)
-
-  ! Calculate north nodes :: fixed value
-  v_hat(1:m-1, n) = v_star(1:m-1, n)
-
-  ! Calculate interior nodes
-  do j = 2,n-1
-    do i = 2,m-1
-
-      v_hat(i,j) = (Aw_v(i,j)*v_star(i-1,j)+Ae_v(i,j)*v_star(i+1,j)+As_v(i,j)*v_star(i,j-1)+An_v(i,j)*v_star(i,j+1)+b_v(i,j))/Ap_v(i,j)
-
-	  end do
-  end do
-
-  v_hat(m,:) = v_hat(m-1,:)
 
   return
 

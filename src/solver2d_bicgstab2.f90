@@ -1,7 +1,7 @@
 ! solver2d_bicgstab2
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-12 (YYYY-MM-DD)
+! Last Update: 2018-04-25 (YYYY-MM-DD)
 !
 ! This program solves a three-dimensional finite volume discretization problem
 ! using the bi-conjugate gradients stabilized (2) algorithm by Sleijpen and Vorst.
@@ -38,8 +38,8 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
   ! Define internal variables
   integer :: i, j, itr
   integer, dimension(5) :: A_distance
-  real(8) :: alpha, beta, gamma, mu, nu, rho, rho_1, tau, omega_1, omega_2
-  real(8), dimension(m*n) :: Ax, p, r, r0, r0_hat, s, t, w, v, x, x0
+  real(8) :: alpha, beta, gamma, mu, nu, rho, rho_1, tau, omega_1, omega_2, r_norm
+  real(8), dimension(m*n) :: Ax, p, r, r0, r0_hat, s, t, w, v, x, x0, b_values
   real(8), dimension(m*n, 5) :: A_values
 
   !  Set A_distance
@@ -66,26 +66,25 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
   end do
 
   ! ======================================================================== !
-  ! ========== Start Bi-conjugate Gradients Stabilized (2) Method ========== ! 
+  ! ========== Start Bi-conjugate Gradients Stabilized (2) Method ========== !
   ! ======================================================================== !
 
   ! Check inital guess
   call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x0, Ax)
-  r0 = b - Ax
+  r0 = b_values - Ax
 
   r_norm = abs(dnrm2(m*n, r0, 1))
 
   if (r_norm < tol) then
     print *, 'Initial guess is a sufficient solution'
-	print *, 'relative residual: ', r_norm
-	exit
+	  print *, 'relative residual: ', r_norm
+    return
   end if
 
   ! Set r0_hat
   r0_hat = r0
 
   ! Check that dot(r0, r0_hat) .ne. 0
-  
   rho = ddot(m*n, r0, 1, r0_hat, 1)
   if (rho .eq. 0) then
     r0_hat = r0 + 1
@@ -125,14 +124,21 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
 	! Check solution
 	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
-	r_norm = abs(dnrm2(m*n, b - Ax, 1))
+	r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
 	if (r_norm < tol) then
       print *, 'BiCGSTAB(2) Algorithm successfully converged!'
       print *, 'Number of Iterations: ', itr
       print *, 'Relative residual: ', r_norm
-      exit
-    end if
+
+      do j = 1,n
+        do i = 1,m
+          phi(i,j) = x(i+(j-1)*m)
+        end do
+      end do
+
+      return
+  end if
 
 	! Odd Bi-CG step:
 	rho = ddot(m*n, s, 1, r0_hat, 1)
@@ -161,13 +167,20 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
 	! Check solution
 	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
-	r_norm = abs(dnrm2(m*n, b - Ax, 1))
+	r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
 	if (r_norm < tol) then
       print *, 'BiCGSTAB(2) Algorithm successfully converged!'
       print *, 'Number of Iterations: ', itr
       print *, 'Relative residual: ', r_norm
-      exit
+
+      do j = 1,n
+        do i = 1,m
+          phi(i,j) = x(i+(j-1)*m)
+        end do
+      end do
+      
+      return
     end if
 
 	if (itr .eq. maxit) then
@@ -183,7 +196,7 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
   end do
 
   ! ======================================================================== !
-  ! ============ End Bi-conjugate Gradients Stabilized (2) Method ========== ! 
+  ! ============ End Bi-conjugate Gradients Stabilized (2) Method ========== !
   ! ======================================================================== !
 
   ! Update phi with the solution

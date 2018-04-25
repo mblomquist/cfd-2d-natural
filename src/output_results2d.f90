@@ -29,7 +29,7 @@ subroutine output_results2d
 
   do j = 1, n-1
     do i = 1, m-1
-      write (2, '(E15.4, 1x, E15.4, /)', advance="no"), P(i,j), T(i,j)
+      write (2, '(E15.4, ",", 1x, E15.4, /)', advance="no"), P(i,j), T(i,j)
     end do
   end do
 

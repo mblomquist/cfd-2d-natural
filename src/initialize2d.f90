@@ -37,16 +37,16 @@ subroutine initialize2d
   delta_T = T_h - T_c
 
   ! Define dimensionless temperature at boundaries
-  T_w = 0
-  T_e = 0
-  T_s = 1
-  T_n = 0
+  T_w = T_c
+  T_e = T_c
+  T_s = T_h
+  T_n = T_c
 
   ! Define solution parameters
-  itrmax = 10
+  itrmax = 2
   maxit = 1000
   solver_tol = 1e-6
-  simpler_tol = 1e-4
+  simpler_tol = 1e-6
 
   ! Calculate geometry properties.
   call geometry2d

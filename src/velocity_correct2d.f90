@@ -14,7 +14,7 @@ subroutine velocity_correct2d
   ! Correct velocity values
   do i = 2,m-1
     do j = 1,n-1
-      u(i,j) = u_star(i,j)+A_x/Ap_u(i,j)*(P_prime(i-1,j)-P_prime(i,j))
+      u(i,j) = u_star(i,j)+dy*dz/Ap_u(i,j)*(P_prime(i-1,j)-P_prime(i,j))
     end do
   end do
 
@@ -24,7 +24,7 @@ subroutine velocity_correct2d
   ! Correct velocity values
   do i = 1,m-1
     do j = 2,n-1
-      v(i,j) = v_star(i,j)+A_y/Ap_v(i,j)*(P_prime(i,j-1)-P_prime(i,j))
+      v(i,j) = v_star(i,j)+dx*dz/Ap_v(i,j)*(P_prime(i,j-1)-P_prime(i,j))
     end do
   end do
 

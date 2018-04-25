@@ -42,6 +42,9 @@ subroutine convergence2d(itr)
   R_v = sum(v_momentum_residual)
 
   if (itr .eq. 1) then
+    R_u = 1
+    R_v = 1
+    
     if (R_u .le. 1) then
       R_u0 = 1
     else
