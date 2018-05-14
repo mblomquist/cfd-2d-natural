@@ -28,7 +28,7 @@ subroutine simpler2d
   print *, 'T:'
   print *, T
   print *, ".............."
-  
+
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities
@@ -75,9 +75,9 @@ subroutine simpler2d
     ! Step 7: Solve Temperature Equation
     print *, "Step 6: Solve Temperature Equation"
     call temperature_solve2d
-    !print *, ".............."
-    !print *, "T:", T
-    !print *, ".............."
+    print *, ".............."
+    print *, "T:", T
+    print *, ".............."
 
     ! Step 8: Check Convergence
     print *, "Step 7: Check Convergence"

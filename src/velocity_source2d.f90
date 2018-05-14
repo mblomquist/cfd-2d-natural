@@ -72,11 +72,11 @@ subroutine velocity_source2d(direction)
 		Fs = rho*dx*(v_star(i,j)+v_star(i-1,j))/2
 		Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
-        ! Update diffusion terms
-		Dw = mu*dy/dx/Re
-        De = mu*dy/dx/Re
-        Ds = mu*dy/dx/Re
-        Dn = mu*dy/dx/Re
+    ! Update diffusion terms
+    Dw = Pr*dy/dx
+    De = Pr*dy/dx
+    Ds = Pr*dx/dy
+    Dn = Pr*dx/dy
 
 		! Compute Coefficients - Power Law Differening Scheme
 		Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -140,18 +140,18 @@ subroutine velocity_source2d(direction)
     ! Calculate interior source terms
 	do j = 2, n-1
 	  do i = 1,m-1
-	  
+
 	    ! Update convection terms
 		Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
 		Fe = rho*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
 		Fs = rho*dx*(v_star(i,j-1)+v_star(i,j))/2
 		Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
-        ! Update diffusion terms
-		Dw = mu*dy/dx/Re
-        De = mu*dy/dx/Re
-        Ds = mu*dy/dx/Re
-        Dn = mu*dy/dx/Re
+    ! Update diffusion terms
+    Dw = Pr*dy/dx
+    De = Pr*dy/dx
+    Ds = Pr*dx/dy
+    Dn = Pr*dx/dy
 
 		! Compute Coefficients - Power Law Differening Scheme
 		Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)

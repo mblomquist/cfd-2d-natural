@@ -100,6 +100,11 @@ subroutine pseudo_source2d(direction)
 		! Update b values
 		b_u(i,j) = Su_u(i,j)
 
+    print *, '~~~~~~~~~~~~~~~~~~~~~'
+    print *, 'i,j:', i, j
+    print *, 'Ap_u(i,j):', Ap_u(i,j)
+    print *, '~~~~~~~~~~~~~~~~~~~~~'
+
       end do
     end do
 
@@ -144,36 +149,41 @@ subroutine pseudo_source2d(direction)
 	do j = 2, n-1
 	  do i = 1,m-1
 
-		! Update convection terms
-		Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
-		Fe = rho*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
-		Fs = rho*dx*(v_star(i,j-1)+v_star(i,j))/2
-		Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
+		  ! Update convection terms
+		  Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
+		  Fe = rho*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
+		  Fs = rho*dx*(v_star(i,j-1)+v_star(i,j))/2
+		  Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
-        ! Update diffusion terms
-		Dw = mu*dy/dx/Re
-        De = mu*dy/dx/Re
-        Ds = mu*dy/dx/Re
-        Dn = mu*dy/dx/Re
+      ! Update diffusion terms
+		  Dw = Pr*dy/dx
+      De = Pr*dy/dx
+      Ds = Pr*dx/dy
+      Dn = Pr*dx/dy
 
-		! Compute Coefficients - Power Law Differening Scheme
-		Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-		Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-		As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-		An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+		  ! Compute Coefficients - Power Law Differening Scheme
+		  Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+		  Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+		  As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+		  An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-		! Check South / North Nodes
-		if (i .eq. 1) then
-		  Aw_v(i,j) = 0
-		elseif (i .eq. m-1) then
-		  Ae_v(i,j) = 0
-		end if
+		  ! Check South / North Nodes
+		  if (i .eq. 1) then
+		    Aw_v(i,j) = 0
+		  elseif (i .eq. m-1) then
+		    Ae_v(i,j) = 0
+		  end if
 
-		! Update Ap coefficient
-		Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+		  ! Update Ap coefficient
+		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
 
-		! Update b values
-		b_v(i,j) = Su_v(i,j)+Ra*T(i,j)/Re/Re/Pr
+      print *, '~~~~~~~~~~~~~~~~~~~~~'
+      print *, 'i,j:', i, j
+      print *, 'Ap_v(i,j):', Ap_v(i,j)
+      print *, '~~~~~~~~~~~~~~~~~~~~~'
+
+		  ! Update b values
+		  b_v(i,j) = Su_v(i,j)+Ra*T(i,j)/Re/Re/Pr
 
 	  end do
 	end do
