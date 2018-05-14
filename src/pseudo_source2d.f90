@@ -76,10 +76,10 @@ subroutine pseudo_source2d(direction)
         Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-	    Dw = mu*dy/dx/Re
-        De = mu*dy/dx/Re
-        Ds = mu*dy/dx/Re
-        Dn = mu*dy/dx/Re
+  		  Dw = Pr*dy/dx
+        De = Pr*dy/dx
+        Ds = Pr*dx/dy
+        Dn = Pr*dx/dy
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -99,11 +99,6 @@ subroutine pseudo_source2d(direction)
 
 		! Update b values
 		b_u(i,j) = Su_u(i,j)
-
-    print *, '~~~~~~~~~~~~~~~~~~~~~'
-    print *, 'i,j:', i, j
-    print *, 'Ap_u(i,j):', Ap_u(i,j)
-    print *, '~~~~~~~~~~~~~~~~~~~~~'
 
       end do
     end do
@@ -176,11 +171,6 @@ subroutine pseudo_source2d(direction)
 
 		  ! Update Ap coefficient
 		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
-
-      print *, '~~~~~~~~~~~~~~~~~~~~~'
-      print *, 'i,j:', i, j
-      print *, 'Ap_v(i,j):', Ap_v(i,j)
-      print *, '~~~~~~~~~~~~~~~~~~~~~'
 
 		  ! Update b values
 		  b_v(i,j) = Su_v(i,j)+Ra*T(i,j)/Re/Re/Pr

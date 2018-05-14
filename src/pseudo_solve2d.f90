@@ -25,10 +25,6 @@ subroutine pseudo_solve2d
   ! Update stiffness coefficients
   call pseudo_source2d("v")
 
-  print *, ".............."
-  print *, "Ap_v:", Ap_v
-  print *, ".............."
-
   ! Calculate west nodes
   ! Set i
   i = 1
@@ -59,10 +55,6 @@ subroutine pseudo_solve2d
 
   ! Update stiffness coefficients
   call pseudo_source2d("u")
-
-  print *, ".............."
-  print *, "Ap_u:", Ap_u
-  print *, ".............."
 
   ! Calculate west nodes :: fixed value
   u_hat(1, :) = u_star(1, :)

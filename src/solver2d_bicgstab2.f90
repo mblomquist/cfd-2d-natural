@@ -179,7 +179,7 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
           phi(i,j) = x(i+(j-1)*m)
         end do
       end do
-      
+
       return
     end if
 
