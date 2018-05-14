@@ -33,29 +33,29 @@ subroutine temperature_source2d
       Ds = Pr*dx/dy
       Dn = Pr*dx/dy
 
-	  ! Compute Coefficients - Power Law Differening Scheme
-	  Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-	  Ae_T(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-	  As_T(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-	  An_T(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+	    ! Compute Coefficients - Power Law Differening Scheme
+	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+	    Ae_T(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+	    As_T(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+	    An_T(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
   	  ! Check sourth node
   	  if (j .eq. 1) then
   	    As_T(i,j) = 0
 	    end if
 
-	  ! Check north node
-	  if (j .eq. n-1) then
+	    ! Check north node
+	    if (j .eq. n-1) then
   	    An_T(i,j) = 0
       end if
 
-	  ! Check west node
-	  if (i .eq. 1) then
+	    ! Check west node
+	    if (i .eq. 1) then
         Aw_T(i,j) = 0
       end if
 
-	  ! Check east node
-	  if (i .eq. m-1) then
+	    ! Check east node
+	    if (i .eq. m-1) then
         Ae_T(i,j) = 0
   	  end if
 

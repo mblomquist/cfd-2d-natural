@@ -22,7 +22,7 @@ subroutine velocity_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: Wall
+    ! Caluclate West boundary source terms :: Symmetry
     ! Set i
     i = 1
 
@@ -42,7 +42,7 @@ subroutine velocity_source2d(direction)
 
     end do
 
-    ! Calculate East bounday source terms :: Wall
+    ! Calculate East bounday source terms :: Symmetry
     ! Set i
     i = m
 

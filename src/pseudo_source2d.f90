@@ -25,7 +25,7 @@ subroutine pseudo_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: Wall
+    ! Caluclate West boundary source terms :: Symmetry
     ! Set i
     i = 1
 
@@ -45,7 +45,7 @@ subroutine pseudo_source2d(direction)
 
     end do
 
-    ! Calculate East bounday source terms :: Wall
+    ! Calculate East bounday source terms :: Symmetry
     ! Set i
     i = m
 
@@ -70,9 +70,9 @@ subroutine pseudo_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-	    Fw = rho*dy*(u_star(i,j)+u_star(i-1,j))/2
-	    Fe = rho*dy*(u_star(i+1,j)+u_star(i,j))/2
-	    Fs = rho*dx*(v_star(i,j)+v_star(i-1,j))/2
+	      Fw = rho*dy*(u_star(i,j)+u_star(i-1,j))/2
+	      Fe = rho*dy*(u_star(i+1,j)+u_star(i,j))/2
+	      Fs = rho*dx*(v_star(i,j)+v_star(i-1,j))/2
         Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
@@ -81,24 +81,24 @@ subroutine pseudo_source2d(direction)
         Ds = Pr*dx/dy
         Dn = Pr*dx/dy
 
-	    ! Compute Coefficients - Power Law Differening Scheme
-	    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-	    Ae_u(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-	    As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-	    An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+	      ! Compute Coefficients - Power Law Differening Scheme
+	      Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+	      Ae_u(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+	      As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+	      An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-	    ! Check South / North Nodes
-		if (j .eq. 1) then
-		  As_u(i,j) = 0
-		elseif (j .eq. n-1) then
-		  An_u(i,j) = 0
-		end if
+	      ! Check South / North Nodes
+		  if (j .eq. 1) then
+		    As_u(i,j) = 0
+		  elseif (j .eq. n-1) then
+		    An_u(i,j) = 0
+		  end if
 
-		! Update Ap coefficient
-		Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+		  ! Update Ap coefficient
+		  Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
 
-		! Update b values
-		b_u(i,j) = Su_u(i,j)
+		  ! Update b values
+		  b_u(i,j) = Su_u(i,j)
 
       end do
     end do
