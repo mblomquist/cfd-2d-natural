@@ -9,7 +9,7 @@
 
 ! Mesh parameters :: nodes in x, nodes in y, nodes in z
   integer :: m, n, l
-  parameter (m=60, n=60, l=1)
+  parameter (m=25, n=25, l=1)
 
 ! Geometry variables ::
   real(8) :: length, width, depth, dx, dy, dz
