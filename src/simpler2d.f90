@@ -25,7 +25,10 @@ subroutine simpler2d
   ! Solve Temperature for Natural Convection First
   print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
-
+  print *, 'T:'
+  print *, T
+  print *, ".............."
+  
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities

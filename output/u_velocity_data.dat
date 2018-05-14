@@ -2,20 +2,10 @@
 u_velocity_data
 ASCII
 DATASET STRUCTURED_POINT
-DIMENSIONS           15          14
-ORIGIN   0.0000000D+00   0.3333333333333333D-01
-SPACING    0.6666666666666667D-01   0.6666666666666667D-01
+DIMENSIONS            5           4
+ORIGIN   0.0000000D+00   0.1000000000000000D+00
+SPACING    0.2000000000000000D+00   0.2000000000000000D+00
      0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
             NaN
             NaN
             NaN
@@ -25,192 +15,12 @@ SPACING    0.6666666666666667D-01   0.6666666666666667D-01
             NaN
             NaN
             NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
      0.0000E+00
             NaN
             NaN
             NaN
             NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
      0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-     0.0000E+00
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
-            NaN
             NaN
             NaN
             NaN

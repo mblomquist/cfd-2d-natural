@@ -42,8 +42,8 @@ subroutine temperature_source2d
   	  ! Check sourth node
   	  if (j .eq. 1) then
   	    As_T(i,j) = 0
-	  end if
-  	  
+	    end if
+
 	  ! Check north node
 	  if (j .eq. n-1) then
   	    An_T(i,j) = 0

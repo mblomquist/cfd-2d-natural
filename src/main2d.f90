@@ -1,7 +1,7 @@
 ! 2D CFD Solver
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-02-25 (YYYY-MM-DD)
+! Last Update: 2018-05-14 (YYYY-MM-DD)
 !
 ! This program solves a two-dimensional, steady state CFD problem
 ! using the SIMPLER method.
@@ -23,6 +23,7 @@ program main2d
   !   boundary conditions, calculate global values, etc.
   call initialize2d
   print *, 'Problem Initialization Complete.'
+  print *, 'Grid size: ', m, n
 
   call cpu_time(start_time)
 
@@ -35,7 +36,7 @@ program main2d
   call cpu_time(end_time)
 
   print *, "SIMPLER Algorithm Duration:", end_time-start_time
-  
+
   ! Output results
   !   The output subroutine writes the final values of P, T, Uvel, Vvel,
   !   and convergance outputs.
