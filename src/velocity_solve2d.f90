@@ -15,13 +15,13 @@ subroutine velocity_solve2d
   call velocity_source2d("v")
 
   ! Solve v-velocity equation
-  call solver2d_bicgstab2(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
+  call solver2d_bicgstab(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
 
   ! Update source terms
   call velocity_source2d("u")
 
   ! Solve u-velocity equation
-  call solver2d_bicgstab2(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
+  call solver2d_bicgstab(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
 
   return
 

@@ -76,10 +76,10 @@ subroutine pseudo_source2d(direction)
         Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-  		  Dw = Pr*dy/dx
-        De = Pr*dy/dx
-        Ds = Pr*dx/dy
-        Dn = Pr*dx/dy
+  		  Dw = mu*dy/dx/Re
+        De = mu*dy/dx/Re
+        Ds = mu*dx/dy/Re
+        Dn = mu*dx/dy/Re
 
 	      ! Compute Coefficients - Power Law Differening Scheme
 	      Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -103,6 +103,10 @@ subroutine pseudo_source2d(direction)
       end do
     end do
 
+    print *, "Dw:", Dw
+    print *, "Fw:", Fw
+    print *, "PeL:", Fw/Dw
+    print *, "Pe:", Pr*Re
   end if
 
   ! v-velocity update loop
@@ -151,10 +155,10 @@ subroutine pseudo_source2d(direction)
 		  Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
       ! Update diffusion terms
-		  Dw = Pr*dy/dx
-      De = Pr*dy/dx
-      Ds = Pr*dx/dy
-      Dn = Pr*dx/dy
+      Dw = mu*dy/dx/Re
+      De = mu*dy/dx/Re
+      Ds = mu*dx/dy/Re
+      Dn = mu*dx/dy/Re
 
 		  ! Compute Coefficients - Power Law Differening Scheme
 		  Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)

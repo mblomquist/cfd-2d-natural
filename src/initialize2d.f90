@@ -19,21 +19,21 @@ subroutine initialize2d
   depth = 1     ! 1 meter deep
 
   ! Define media variables
-  Re = 7.397e4
-  Pr = 7.127e-1
-  Ra = 2.417e5
+  Re = 2.801e2
+  Pr = 5.821e0
+  Ra = 3.448e3
 
-  rho = 1.276e0
-  mu = 1.725e-5
-  k_const = 2.435e-2
-  Cp = 1.006e3
+  rho = 9.970e2
+  mu = 8.900e-4
+  k_const = 6.400e-1
+  Cp = 4.186e3
 
   alpha = k_const/Cp/rho
-  beta = 3.663e-3
+  beta = 6.9e-5
 
   ! Define high and low temperature
-  T_h = 373     ! High temperature wall
-  T_c = 100     ! Low temperature wall
+  T_h = 343     ! High temperature wall
+  T_c = 293     ! Low temperature wall
   delta_T = T_h - T_c
 
   ! Define dimensionless temperature at boundaries
@@ -43,8 +43,8 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 10
-  maxit = 1000
+  itrmax = 1000
+  maxit = 10
   solver_tol = 1e-9
   simpler_tol = 1e-6
 

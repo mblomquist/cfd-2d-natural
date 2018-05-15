@@ -28,10 +28,10 @@ subroutine temperature_source2d
       Fn = dx*v(i,j+1)
 
       ! Update diffusion terms
-		  Dw = Pr*dy/dx
-      De = Pr*dy/dx
-      Ds = Pr*dx/dy
-      Dn = Pr*dx/dy
+      Dw = mu*dy/dx/Re/Pr
+      De = mu*dy/dx/Re/Pr
+      Ds = mu*dx/dy/Re/Pr
+      Dn = mu*dx/dy/Re/Pr
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)

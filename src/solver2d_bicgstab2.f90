@@ -75,6 +75,8 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
   r_norm = abs(dnrm2(m*n, r0, 1))
 
+  print *, 'r_norm(0):', r_norm
+
   if (r_norm < tol) then
     print *, 'Initial guess is a sufficient solution'
 	  print *, 'relative residual: ', r_norm
@@ -110,67 +112,28 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
     rho_1 = -omega_2*rho
 
-	! Even Bi-CG step:
-	rho = ddot(m*n,r,1,r0_hat,1)
-	beta = alpha * rho / rho_1
-	rho_1 = rho
-	p = r - beta * (p - omega_1 * v - omega_2 * w)
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, p, v)
-	gamma = ddot(m*n, v, 1, r0_hat, 1)
-	alpha = rho / gamma
-	r = r - alpha * v
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, r, s)
-	x = x + alpha * p
+	  ! Even Bi-CG step:
+	  rho = ddot(m*n,r,1,r0_hat,1)
+	  beta = alpha * rho / rho_1
+	  rho_1 = rho
+	  p = r - beta * (p - omega_1 * v - omega_2 * w)
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, p, v)
+	  gamma = ddot(m*n, v, 1, r0_hat, 1)
+	  alpha = rho / gamma
+	  r = r - alpha * v
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, r, s)
+	  x = x + alpha * p
 
-	! Check solution
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
-	r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
+	  ! Check solution
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
+	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
-	if (r_norm < tol) then
-      print *, 'BiCGSTAB(2) Algorithm successfully converged!'
-      print *, 'Number of Iterations: ', itr
-      print *, 'Relative residual: ', r_norm
+    print *, "x:", x
 
-      do j = 1,n
-        do i = 1,m
-          phi(i,j) = x(i+(j-1)*m)
-        end do
-      end do
+    print *, 'r_norm(1):', r_norm
 
-      return
-  end if
-
-	! Odd Bi-CG step:
-	rho = ddot(m*n, s, 1, r0_hat, 1)
-	beta = alpha * rho / rho_1
-	rho_1 = rho
-	v = s - beta * v
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, v, w)
-	gamma = ddot(m*n, w, 1, r0_hat, 1)
-	alpha = rho/gamma
-	p = r - beta * p
-	r = r - alpha * v
-	s = s - alpha * w
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, s, t)
-
-	! GMRES(2)-part
-	omega_1 = ddot(m*n, r, 1, s, 1)
-	mu = ddot(m*n, s, 1, s, 1)
-	nu = ddot(m*n, s, 1, t, 1)
-	tau = ddot(m*n, t, 1, t, 1)
-	omega_2 = ddot(m*n, r, 1, t, 1)
-	tau = tau - nu**2 / mu
-	omega_2 = (omega_2 - nu * omega_1 / mu) / tau
-	omega_1 = (omega_1 - nu*omega_2) / mu
-	x = x + alpha * p + omega_1 * r + omega_2 * s
-	r = r - omega_1 * s - omega_2 * t
-
-	! Check solution
-	call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
-	r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
-
-	if (r_norm < tol) then
-      print *, 'BiCGSTAB(2) Algorithm successfully converged!'
+	  if (r_norm < tol) then
+      print *, 'BiCGSTAB(2) Algorithm successfully converged!(mid)'
       print *, 'Number of Iterations: ', itr
       print *, 'Relative residual: ', r_norm
 
@@ -183,7 +146,92 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
       return
     end if
 
-	if (itr .eq. maxit) then
+	  ! Odd Bi-CG step:
+	  rho = ddot(m*n, s, 1, r0_hat, 1)
+
+    print *, "rho:", rho
+
+	  beta = alpha * rho / rho_1
+
+    print *, "beta:", beta
+	  rho_1 = rho
+	  v = s - beta * v
+
+    print *, "v:", v
+
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, v, w)
+    print *, "w:", w
+
+	  gamma = ddot(m*n, w, 1, r0_hat, 1)
+    print *, "gamma:", gamma
+
+	  alpha = rho/gamma
+
+    print *, "alpha:", alpha
+
+	  p = r - beta * p
+    print *, "p:", p
+
+	  r = r - alpha * v
+    print *, "r:", r
+
+	  s = s - alpha * w
+    print *, "s:", s
+
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, s, t)
+    print *, "t:", t
+
+	  ! GMRES(2)-part
+	  omega_1 = ddot(m*n, r, 1, s, 1)
+    print *, "omega_1:", omega_1
+
+	  mu = ddot(m*n, s, 1, s, 1)
+    print *, "mu", mu
+
+	  nu = ddot(m*n, s, 1, t, 1)
+    print *, "nu:", nu
+
+	  tau = ddot(m*n, t, 1, t, 1)
+    print *, "tau:", tau
+
+	  omega_2 = ddot(m*n, r, 1, t, 1)
+    print *, "omega_2", omega_2
+
+	  tau = tau - nu**2 / mu
+    print *, "tau:", tau
+
+	  omega_2 = (omega_2 - nu * omega_1 / mu) / tau
+    print *, "omega_2", omega_2
+
+	  omega_1 = (omega_1 - nu*omega_2) / mu
+    print *, "omega_1:", omega_1
+
+	  x = x + alpha * p + omega_1 * r + omega_2 * s
+	  r = r - omega_1 * s - omega_2 * t
+
+    print *, "x:", x
+
+	  ! Check solution
+	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
+	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
+
+    print *, 'r_norm(2):', r_norm
+
+	  if (r_norm < tol) then
+      print *, 'BiCGSTAB(2) Algorithm successfully converged! (end)'
+      print *, 'Number of Iterations: ', itr+1
+      print *, 'Relative residual: ', r_norm
+
+      do j = 1,n
+        do i = 1,m
+          phi(i,j) = x(i+(j-1)*m)
+        end do
+      end do
+
+      return
+    end if
+
+	  if (itr .gt. maxit) then
       print *, '************************************'
       print *, '************************************'
       print *, 'BiCGStab Algorithm did not converge!'
