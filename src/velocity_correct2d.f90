@@ -1,7 +1,7 @@
 ! velocity_correct2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03-08 (YYYY-MM-DD)
+! Last Update: 2018-05-15 (YYYY-MM-DD)
 !
 ! This subroutine corrects the velocity values for a 2D
 ! CFD problem
@@ -18,18 +18,12 @@ subroutine velocity_correct2d
     end do
   end do
 
-  ! Update east boundary
-  u(m,:) = u(m-1,:)
-
   ! Correct velocity values
   do i = 1,m-1
     do j = 2,n-1
       v(i,j) = v_star(i,j)+dx*dz/Ap_v(i,j)*(P_prime(i,j-1)-P_prime(i,j))
     end do
   end do
-
-  ! Update east boundary
-  v(m, 2:n-1) = v(m-1, 2:n-1)
 
   return
 

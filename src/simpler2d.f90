@@ -1,7 +1,7 @@
 ! simpler2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-03 (YYYY-MM-DD)
+! Last Update: 2018-05-15 (YYYY-MM-DD)
 !
 ! This subroutine runs the SIMPLER algorithm for a 2D CFD problem.
 !
@@ -22,18 +22,24 @@ subroutine simpler2d
   u_star = u
   v_star = v
 
+  P_prime = P
+  u_hat = u
+  v_hat = v
+
   ! Solve Temperature for Natural Convection First
   print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
-  print *, 'T:'
-  print *, T
-  print *, ".............."
+
+  !print *, ".............."
+  !print *, 'T:', T
+  !print *, ".............."
 
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities
     print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d
+
     !print *, ".............."
     !print *, "u_hat:", u_hat
     !print *, "v_hat:", v_hat
@@ -42,6 +48,7 @@ subroutine simpler2d
     ! Step 3: Solve Pressure Equation
     print *, "Step 2: Solve Pressure Equation"
     call pressure_solve2d
+
     !print *, ".............."
     !print *, "P:", P
     !print *, ".............."
@@ -52,6 +59,7 @@ subroutine simpler2d
     ! Step 4: Solve Momentum Equations
     print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
+
     !print *, ".............."
     !print *, "u_star:", u_star
     !print *, "v_star:", v_star
@@ -72,6 +80,8 @@ subroutine simpler2d
     !print *, "v:", v
     !print *, ".............."
 
+    return
+    
     ! Step 7: Solve Temperature Equation
     print *, "Step 6: Solve Temperature Equation"
     call temperature_solve2d

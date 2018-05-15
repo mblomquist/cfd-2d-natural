@@ -119,7 +119,7 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
 
     do j = 1, n
       do i = 1, m
-        r_sum = r_rum + abs(r(i,j))
+        r_sum = r_sum + abs(r(i,j))
       end do
     end do
 

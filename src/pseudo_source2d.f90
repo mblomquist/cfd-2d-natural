@@ -26,44 +26,30 @@ subroutine pseudo_source2d(direction)
   if (direction .eq. "u") then
 
     ! Caluclate West boundary source terms :: Symmetry
-    ! Set i
-    i = 1
+    ! Compute Coefficients - Fixed Value
+    Aw_u(1,:) = 0
+    Ae_u(1,:) = 0
+    As_u(1,:) = 0
+    An_u(1,:) = 0
 
-    do j = 1,n-1
+    ! Update Ap coefficient
+    Ap_u(1,:) = 1
 
-      ! Compute Coefficients - Fixed Value
-      Aw_u(i,j) = 0
-      Ae_u(i,j) = 0
-      As_u(i,j) = 0
-      An_u(i,j) = 0
-
-      ! Update Ap coefficient
-      Ap_u(i,j) = 1
-
-      ! Update b values
-      b_u(i,j) = 0
-
-    end do
+    ! Update b values
+    b_u(1,:) = 0
 
     ! Calculate East bounday source terms :: Symmetry
-    ! Set i
-    i = m
+    ! Compute Coefficients - Fixed Value
+    Aw_u(m,:) = 0
+    Ae_u(m,:) = 0
+    As_u(m,:) = 0
+    An_u(m,:) = 0
 
-    do j = 1,n-1
+    ! Update Ap coefficient
+    Ap_u(m,:) = 1
 
-      ! Compute Coefficients - No gradient
-      Aw_u(i,j) = 0
-      Ae_u(i,j) = 0
-      As_u(i,j) = 0
-      An_u(i,j) = 0
-
-      ! Update Ap coefficient
-      Ap_u(i,j) = 1
-
-      ! Update b values
-      b_u(i,j) = 0
-
-    end do
+    ! Update b values
+    b_u(m,:) = 0
 
     ! Calculate interior coefficients
     do i = 2,m-1
@@ -113,36 +99,22 @@ subroutine pseudo_source2d(direction)
   if (direction .eq. "v") then
 
     ! South Boundary :: No-slip
-	! Set j
-	j = 1
+	  Aw_v(:,1) = 0
+	  Ae_v(:,1) = 0
+	  As_v(:,1) = 0
+	  An_v(:,1) = 0
 
-	do i = 1,m-1
+	  Ap_v(:,1) = 1
+	  b_v(:,1) = 0
 
-	  Aw_v(i,j) = 0
-	  Ae_v(i,j) = 0
-	  As_v(i,j) = 0
-	  An_v(i,j) = 0
+	  ! North Boundary :: No-slip
+    Aw_v(:,n) = 0
+	  Ae_v(:,n) = 0
+	  As_v(:,n) = 0
+	  An_v(:,n) = 0
 
-	  Ap_v(i,j) = 1
-	  b_v(i,j) = 0
-
-	end do
-
-	! North Boundary :: No-slip
-	! Set j
-	j = n
-
-	do i = 1, m-1
-
-	  Aw_v(i,j) = 0
-	  Ae_v(i,j) = 0
-	  As_v(i,j) = 0
-	  An_v(i,j) = 0
-
-	  Ap_v(i,j) = 1
-	  b_v(i,j) = 0
-
-	end do
+	  Ap_v(:,n) = 1
+	  b_v(:,n) = 0
 
     ! Calculate interior source terms
 	do j = 2, n-1
