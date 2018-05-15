@@ -1,7 +1,7 @@
 ! initialize2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-03 (YYYY-MM-DD)
+! Last Update: 2018-05-14 (YYYY-MM-DD)
 !
 
 subroutine initialize2d
@@ -14,7 +14,7 @@ subroutine initialize2d
   ! ..........................
 
   ! Define geometry variables
-  length = 1	! 1 meter long
+  length = 1	  ! 1 meter long
   width = 1     ! 1 meter wide
   depth = 1     ! 1 meter deep
 
@@ -43,8 +43,8 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 1000
-  maxit = 10
+  itrmax = 10
+  maxit = 1000
   solver_tol = 1e-9
   simpler_tol = 1e-6
 

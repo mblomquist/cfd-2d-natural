@@ -29,8 +29,6 @@ subroutine simpler2d
   print *, T
   print *, ".............."
 
-  return
-  
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities
