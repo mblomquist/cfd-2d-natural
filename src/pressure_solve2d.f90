@@ -65,7 +65,8 @@ subroutine pressure_solve2d
   b_p(m-1,n-1) = 0
 
   ! Solve pressure equation
-  call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)
+  !call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)
+  call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P, m-1, n-1, solver_tol, maxit)
 
   return
 

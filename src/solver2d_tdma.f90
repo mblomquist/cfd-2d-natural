@@ -6,9 +6,9 @@
 ! This program solves a two-dimensional discretization problem utilizing a line-by-line
 ! TDMA (tri-diagonal matrix algorithm).
 !
-subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n)
+subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
 
-  integer, intent(in) :: m, n
+  integer, intent(in) :: m, n, maxit
   real(8), dimension(m,n), intent(in) :: Aw, Ae, As, An, Ap, b
   real(8), dimension(m,n), intent(inout) :: phi
 
@@ -16,9 +16,9 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n)
   real(8), dimension(m) :: awe, bwe, cwe, dwe, phiwe
   real(8), dimension(n) :: asn, bsn, csn, dsn, phisn
   real(8), dimension(m,n) :: r
-  real(8) :: r_sum
+  real(8) :: r_sum, tol
 
-  do k = 1, 10
+  do k = 1, maxit
 
     ! Start West - East Solve
     do j = 1, n, 1
@@ -125,7 +125,7 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n)
 
     print *, "r_sum:", r_sum
 
-    if (r_sum .le. 1e-6) then
+    if (r_sum < tol) then
       return
     end if
 

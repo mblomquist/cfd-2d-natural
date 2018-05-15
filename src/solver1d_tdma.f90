@@ -48,4 +48,4 @@ subroutine solver1d_tdma(a, b, c, d, phi, n)
 
   return
 
-end subroutine tdma
+end subroutine solver1d_tdma
