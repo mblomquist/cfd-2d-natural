@@ -1,51 +1,51 @@
 ! solver1d_tdma
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-01-31 (YYYY-MM-DD)
+! Last Update: 2018-05-15 (YYYY-MM-DD)
 !
 ! This program solves a one-dimensional tri-diagonal matrix
 ! using the Thomas Algorithm.
+!
+! Inputs ::
+!   a :: center diagonal
+!   b :: upper diagonal
+!   c :: lower diagonal
+!   d :: right hand side
+!   phi :: solution array
+!   n :: vector length
+!
+subroutine solver1d_tdma(a, b, c, d, phi, n)
 
-subroutine solver1d_tdma(aa, bb, cc, dd, x, m)
+  ! Define input / output variables
+  integer, intent(in) :: n
+  real(8), intent(in) :: a(n), b(n), c(n), d(n)
+  real(8), intent(out) :: phi(n)
 
-  ! Define implicit
-  implicit none
+  ! Define internal variables
+  real(8), dimension(n) :: P, Q
 
-  ! Input variables
-  integer, intent(in) :: m
-  real(8), dimension(m), intent(in) :: aa, bb, cc, dd
-  real(8), dimension(m), intent(out) :: x
-
-  ! Internal variables
   integer :: i
-  real(8) :: temp
-  real(8), dimension(m) :: a, b, c, d
 
-  ! Set x to 0
-  x = 0
+  ! Start forward-substitution
+  P(1) = b(1)/a(1)
+  Q(1) = d(1)/a(1)
 
-  a = aa
-  b = bb
-  c = cc
-  d = dd
+  do i = 2, n, 1
 
-  ! Solve initial c and d
-  c(1) = c(1)/b(1)
-  d(1) = d(1)/b(1)
+    P(i) = b(i)/(a(i)-c(i)*P(i-1))
+    Q(i) = (d(i)-c(i)*Q(i-1))/(a(i)-c(i)*P(i-1))
 
-  ! Run forward sub loop
-  do i = 2,m-1
-    temp = b(i)-a(i)*c(i-1)
-    c(i) = c(i)/temp
-    d(i) = (d(i)-a(i)*d(i-1))/(b(i)-a(i)*c(i-1))
   end do
 
-  x(m) = (d(m)-a(m)*d(m-1))/(b(m)-a(m)*c(m-1))
+  phi(n) = Q(n)
 
-  do i = m, 1, -1
-    x(i) = -c(i)*x(i+1)+d(i)
+  ! Start backward-substitution
+  do i = n-1, 1, -1
+
+    phi(i) = Q(i)-P(i)*phi(i+1)
+
   end do
 
   return
 
-end subroutine solver1d_tdma
+end subroutine tdma

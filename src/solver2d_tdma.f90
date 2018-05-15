@@ -1,134 +1,134 @@
 ! solver2d_tdma
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-02-05 (YYYY-MM-DD)
+! Last Update: 2018-05-15 (YYYY-MM-DD)
 !
 ! This program solves a two-dimensional discretization problem utilizing a line-by-line
-! TDMA (tri-diagonal matrix algorithm). The algorithm sweeps from South to North then from
-! West to East.
+! TDMA (tri-diagonal matrix algorithm).
+!
+subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n)
 
-subroutine solver2d_tdma(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
-
-  !implicit none
-
-  ! Include mkl header
-  include "mkl.fi"
-
-  ! Define input variables
   integer, intent(in) :: m, n
-  integer, intent(in) :: maxit
-  real(8), intent(in) :: tol
-  real(8), dimension(m,n), intent(in) :: As, Aw, Ap, Ae, An, b
+  real(8), dimension(m,n), intent(in) :: Aw, Ae, As, An, Ap, b
   real(8), dimension(m,n), intent(inout) :: phi
 
-  ! Define internal variables
-  integer :: i, j, k, itr
-  integer, dimension(5) :: A_distance
-  real(8) :: residual
-  real(8), dimension(m) :: bx_line
-  real(8), dimension(n) :: by_line
-  real(8), dimension(m,n) :: x
-  real(8), dimension(m*n) :: x_compressed, b_compressed, Ax
-  real(8), dimension(m*n,5) :: A_compressed
+  integer :: i, j, k
+  real(8), dimension(m) :: awe, bwe, cwe, dwe, phiwe
+  real(8), dimension(n) :: asn, bsn, csn, dsn, phisn
+  real(8), dimension(m,n) :: r
+  real(8) :: r_sum
 
-  ! Set temporary x value
-  x = phi
+  do k = 1, 10
 
-  ! Initilize b_line
-  bx_line = 0
-  by_line = 0
+    ! Start West - East Solve
+    do j = 1, n, 1
 
-  ! Start TDMA Sweep Loop
-  do itr = 1,maxit
+      do i = 1, m, 1
 
-    ! Iterate lines from South to North
-    !do k = 1,itr
+	      awe(i) = Ap(i,j)
+	      bwe(i) = Ae(i,j)
+	      cwe(i) = Aw(i,j)
 
-      do i = 1,m
-	    do j = 1,n
-
-	      if (i .eq. 1) then
-		    by_line(j) = b(i,j)-An(i,j)*x(i+1,j)
-		  else if (i .eq. m) then
-		    by_line(j) = b(i,j)-As(i,j)*x(i-1,j)
-		  else
-		    by_line(j) = b(i,j)-As(i,j)*x(i-1,j)-An(i,j)*x(i+1,j)
-		  end if
+	      if (j .eq. 1) then
+	        dwe(i) = b(i,j)-An(i,j)*phi(i,j+1)
+	      elseif (j .eq. n) then
+	        dwe(i) = b(i,j)-As(i,j)*phi(i,j-1)
+	      else
+	        dwe(i) = b(i,j)-As(i,j)*phi(i,j-1)-An(i,j)*phi(i,j+1)
+	      end if
 
 	    end do
 
-	    call solver1d_tdma(Aw(i,:), Ap(i,:), Ae(i,:), by_line, x(i,:), m)
+	    call solver1d_tdma(awe, bwe, cwe, dwe, phiwe, m)
+
+	    phi(:,j) = phiwe(:)
+
+    end do
+
+    ! Start South - North Solve
+    do i = 1, m, 1
+
+      do j = 1, n, 1
+
+	    asn(j) = Ap(i,j)
+	    bsn(j) = An(i,j)
+	    csn(j) = As(i,j)
+
+	    if (i .eq. 1) then
+	      dsn(j) = b(i,j)-Ae(i,j)*phi(i+1,j)
+	    elseif (i .eq. m) then
+	      dsn(j) = b(i,j)-Aw(i,j)*phi(i-1,j)
+	    else
+	      dsn(j) = b(i,j)-Aw(i,j)*phi(i-1,j)-Ae(i,j)*phi(i+1,j)
+	    end if
 
 	  end do
 
-    !end do
+	  call solver1d_tdma(asn, bsn, csn, dsn, phisn, n)
 
-    ! Iterate lines from West to East
-    !do k = 1,itr
-
-      do j = 1,n
-	    do i = 1,m
-
-	      if (j .eq. 1) then
-		    bx_line(i) = b(i,j)-Ae(i,j)*x(i,j+1)
-		  else if (j .eq. n) then
-		    bx_line(i) = b(i,j)-Aw(i,j)*x(i,j-1)
-		  else
-		    bx_line(i) = b(i,j)-Aw(i,j)*x(i,j-1)-Ae(i,j)*x(i,j+1)
-		  end if
-
-	  !end do
-
-	  call solver1d_tdma(As(:,j), Ap(:,j), An(:,j), bx_line, x(:,j), m)
+ 	  phi(i,:) = phisn(:)
 
     end do
 
     ! Check Residual
-    A_distance = (/-m, -1, 0, 1, m/)
+    r = 0
 
-    ! Convert values into CDS Format
-    do j = 1,n
-      do i = 1,m
+    do j = 1, n
 
-        ! Compress stiffness matrix values
-        A_compressed(i+(j-1)*m,1) = As(i,j)
-        A_compressed(i+(j-1)*m,2) = Aw(i,j)
-        A_compressed(i+(j-1)*m,3) = Ap(i,j)
-        A_compressed(i+(j-1)*m,4) = Ae(i,j)
-        A_compressed(i+(j-1)*m,5) = An(i,j)
+      if (j .eq. 1) then
+        do i = 1, m
 
-        ! Compress right-hand side values
-        b_compressed(i+(j-1)*m) = b(i,j)
+          if (i .eq. 1) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+          elseif (i .eq. m) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+          else
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+          end if
 
-        ! Compress preconditioning values
-        x_compressed(i+(j-1)*m) = x(i,j)
+        end do
+      elseif (j .eq. n) then
+        do i = 1, m
 
+          if (i .eq. 1) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+          elseif (i .eq. m) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+          else
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+          end if
+
+        end do
+      else
+        do i = 1, m
+
+          if (i .eq. 1) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+          elseif (i .eq. m) then
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+          else
+            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+          end if
+
+        end do
+      end if
+
+    end do
+
+    r_sum = 0
+
+    do j = 1, n
+      do i = 1, m
+        r_sum = r_rum + abs(r(i,j))
       end do
-	end do
+    end do
 
-	! Compute matrix-vector product of A_compressed and x_compressed
-	call mkl_ddiagemv('N', m*n, A_compressed, m*n, A_distance, 5, x_compressed, Ax)
+    print *, "r_sum:", r_sum
 
-	! Compute norm of b-Ax
-	residual = abs(dnrm2(m*n, b_compressed-Ax, 1))
-
-	if (residual < tol) then
-      print *, 'Completed!'
-      print *, 'Number of Iterations: ', itr
-      print *, 'Relative residual: ', residual
-      exit
-    elseif (k .eq. maxit) then
-      print *, 'TDMA did not converge!'
-      print *, 'Number of Iterations: ', itr
-      print *, 'Relative residual: ', residual
+    if (r_sum .le. 1e-6) then
+      return
     end if
 
-  end do
-  ! Update phi with the solution
-  do j = 1,n
-    do i = 1,m
-      phi(i,j) = x(i,j)
-    end do
   end do
 
   return
