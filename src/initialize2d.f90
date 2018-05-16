@@ -19,7 +19,7 @@ subroutine initialize2d
   depth = 1     ! 1 meter deep
 
   ! Define media variables
-  Re = 2.801e2
+  Re = 2.801e4
   Pr = 5.821e0
   Ra = 3.448e3
 
@@ -37,14 +37,14 @@ subroutine initialize2d
   delta_T = T_h - T_c
 
   ! Define dimensionless temperature at boundaries
-  T_w = T_c
-  T_e = T_c
-  T_s = T_h
-  T_n = T_c
+  T_w = 0
+  T_e = 0
+  T_s = 1
+  T_n = 0
 
   ! Define solution parameters
-  itrmax = 10
-  maxit = 10000
+  itrmax = 2
+  maxit = 1000
   solver_tol = 1e-6
   simpler_tol = 1e-6
 

@@ -22,16 +22,16 @@ subroutine temperature_source2d
     do j = 1,n-1
 
       ! Update convective terms
-      Fw = dy*u(i,j)
-      Fe = dy*u(i+1,j)
-      Fs = dx*v(i,j)
-      Fn = dx*v(i,j+1)
+      Fw = rho*dy*u(i,j)
+      Fe = rho*dy*u(i+1,j)
+      Fs = rho*dx*v(i,j)
+      Fn = rho*dx*v(i,j+1)
 
       ! Update diffusion terms
-      Dw = mu*dy/dx/Re/Pr
-      De = mu*dy/dx/Re/Pr
-      Ds = mu*dx/dy/Re/Pr
-      Dn = mu*dx/dy/Re/Pr
+      Dw = k_const/Cp*dy/dx/Re/Pr
+      De = k_const/Cp*dy/dx/Re/Pr
+      Ds = k_const/Cp*dx/dy/Re/Pr
+      Dn = k_const/Cp*dx/dy/Re/Pr
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -49,16 +49,6 @@ subroutine temperature_source2d
   	    An_T(i,j) = 0
       end if
 
-	    ! Check west node
-	    if (i .eq. 1) then
-        Aw_T(i,j) = 0
-      end if
-
-	    ! Check east node
-	    if (i .eq. m-1) then
-        Ae_T(i,j) = 0
-  	  end if
-
   	  ! Update Ap coefficient
   	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
 
@@ -67,6 +57,24 @@ subroutine temperature_source2d
 
     end do
   end do
+
+  ! Update west coefficients :: Symmetry
+  Aw_T(1,2:n-1) = 0
+  Ae_T(1,2:n-1) = -1
+  As_T(1,2:n-1) = 0
+  An_T(1,2:n-1) = 0
+
+  Ap_T(1,2:n-1) = 1
+  b_T(1,2:n-1) = 0
+
+  ! Update east coefficients :: Symmetry
+  Aw_T(m-1,2:n-1) = -1
+  Ae_T(m-1,2:n-1) = 0
+  As_T(m-1,2:n-1) = 0
+  An_T(m-1,2:n-1) = 0
+
+  Ap_T(m-1,2:n-1) = 1
+  b_T(m-1,2:n-1) = 0
 
   return
 

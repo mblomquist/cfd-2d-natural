@@ -1,7 +1,7 @@
 ! pressure_solve2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-03 (YYYY-MM-DD)
+! Last Update: 2018-05-15 (YYYY-MM-DD)
 !
 ! This subroutine solves the pressure equation for the SIMPLER algorithm
 ! using u_hat and v_hat.
@@ -56,13 +56,13 @@ subroutine pressure_solve2d
   end do
 
   ! Set reference pressure node (east-north corner)
-  Aw_p(m-1,n-1) = 0
-  Ae_p(m-1,n-1) = 0
-  As_p(m-1,n-1) = 0
-  An_p(m-1,n-1) = 0
+  !Aw_p(m-1,n-1) = 0
+  !Ae_p(m-1,n-1) = 0
+  !As_p(m-1,n-1) = 0
+  !An_p(m-1,n-1) = 0
 
-  Ap_p(m-1,n-1) = 1
-  b_p(m-1,n-1) = 0
+  !Ap_p(m-1,n-1) = 1
+  !b_p(m-1,n-1) = 0
 
   ! Solve pressure equation
   call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)

@@ -56,13 +56,13 @@ subroutine pressure_correct2d
   end do
 
   ! Set reference pressure node (east-north corner)
-  Aw_p(m-1,n-1) = 0
-  Ae_p(m-1,n-1) = 0
-  As_p(m-1,n-1) = 0
-  An_p(m-1,n-1) = 0
+  !Aw_p(m-1,n-1) = 0
+  !Ae_p(m-1,n-1) = 0
+  !As_p(m-1,n-1) = 0
+  !An_p(m-1,n-1) = 0
 
-  Ap_p(m-1,n-1) = 1
-  b_p(m-1,n-1) = 0
+  !Ap_p(m-1,n-1) = 1
+  !b_p(m-1,n-1) = 0
 
   ! Solve pressure equation
   call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
