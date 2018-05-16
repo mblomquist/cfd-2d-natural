@@ -21,36 +21,36 @@ subroutine pressure_correct2d
     do j = 1,n-1
 
       ! Update coefficients
-	  Ae_p(i,j) = rho*dy*dy/Ap_u(i+1,j)
-	  Aw_p(i,j) = rho*dy*dy/Ap_u(i,j)
-	  An_p(i,j) = rho*dx*dx/Ap_v(i,j+1)
-	  As_p(i,j) = rho*dx*dx/Ap_v(i,j)
+	    Ae_p(i,j) = rho*dy*dy/Ap_u(i+1,j)
+	    Aw_p(i,j) = rho*dy*dy/Ap_u(i,j)
+	    An_p(i,j) = rho*dx*dx/Ap_v(i,j+1)
+	    As_p(i,j) = rho*dx*dx/Ap_v(i,j)
 
-	  ! Check west node
+	    ! Check west node
       if (i .eq. 1) then
         Aw_p(i,j) = 0
       end if
 
-	  ! Check east node
-	  if (i .eq. m-1) then
-	    Ae_p(i,j) = 0
-	  end if
+	    ! Check east node
+	    if (i .eq. m-1) then
+	      Ae_p(i,j) = 0
+	    end if
 
-	  ! Check south node
+	    ! Check south node
       if (j .eq. 1) then
         As_p(i,j) = 0
       end if
 
-	  ! Check north node
+	    ! Check north node
       if (j .eq. n-1) then
         An_p(i,j) = 0
       end if
 
-	  ! Ap coefficient
+	    ! Ap coefficient
       Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)-Sp_p(i,j)
 
-	  ! Update b values
-	  b_p(i,j) = rho*(u_star(i,j)-u_star(i+1,j))*dy+rho*(v_star(i,j)-v_star(i,j+1))*dx+Su_p(i,j)
+	    ! Update b values
+	    b_p(i,j) = rho*(u_star(i,j)-u_star(i+1,j))*dy+rho*(v_star(i,j)-v_star(i,j+1))*dx
 
     end do
   end do
@@ -65,8 +65,8 @@ subroutine pressure_correct2d
   !b_p(m-1,n-1) = 0
 
   ! Solve pressure equation
-  call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
-  !call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
+  !call solver2d_bicgstab(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
+  call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
 
   return
 

@@ -30,15 +30,8 @@ subroutine simpler2d
   print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
   print *, "......T........"
-  do j = 1, n-1
-    do i = 1, m-1
-      print *, T(i,j)
-    end do
-  end do
-
+  print *, "T:", T
   print *, ".............."
-
-  return
 
   do i = 1,itrmax
 
@@ -100,6 +93,8 @@ subroutine simpler2d
     print *, "R_u: ", R_u
     print *, "R_v: ", R_v
     print *, "................................"
+
+    return
 
     P_star = P
 	  u_star = u

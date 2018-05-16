@@ -28,7 +28,7 @@ subroutine pseudo_source2d(direction)
     ! Caluclate West boundary source terms :: Symmetry
     ! Compute Coefficients - Fixed Value
     Aw_u(1,:) = 0
-    Ae_u(1,:) = -1
+    Ae_u(1,:) = 1
     As_u(1,:) = 0
     An_u(1,:) = 0
 
@@ -40,7 +40,7 @@ subroutine pseudo_source2d(direction)
 
     ! Calculate East bounday source terms :: Symmetry
     ! Compute Coefficients - Fixed Value
-    Aw_u(m,:) = -1
+    Aw_u(m,:) = 1
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0
@@ -89,10 +89,6 @@ subroutine pseudo_source2d(direction)
       end do
     end do
 
-    print *, "Dw:", Dw
-    print *, "Fw:", Fw
-    print *, "PeL:", Fw/Dw
-    print *, "Pe:", Pr*Re
   end if
 
   ! v-velocity update loop
