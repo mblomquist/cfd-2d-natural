@@ -13,7 +13,7 @@ subroutine simpler2d
   include "var2d.dec"
 
   ! Define Internal Variables
-  integer :: i
+  integer :: i, j
 
   print *, 'Start SIMPLER Algorithm.'
 
@@ -29,12 +29,17 @@ subroutine simpler2d
   ! Solve Temperature for Natural Convection First
   print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
-  print *, ".............."
-  print *, 'T:', T
+  print *, "......T........"
+  do j = 1, n-1
+    do i = 1, m-1
+      print *, T(i,j)
+    end do
+  end do
+
   print *, ".............."
 
   return
-  
+
   do i = 1,itrmax
 
     ! Step 2: Calculate Pseudo-Velocities

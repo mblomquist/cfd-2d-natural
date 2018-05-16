@@ -19,7 +19,7 @@ subroutine initialize2d
   depth = 1     ! 1 meter deep
 
   ! Define media variables
-  Re = 2.801e4
+  Re = 2.801e-4
   Pr = 5.821e0
   Ra = 3.448e3
 
@@ -40,7 +40,7 @@ subroutine initialize2d
   T_w = 0
   T_e = 0
   T_s = 1
-  T_n = 0
+  T_n = 0.1
 
   ! Define solution parameters
   itrmax = 2

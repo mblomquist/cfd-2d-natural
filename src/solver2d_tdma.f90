@@ -26,15 +26,15 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
       do i = 1, m, 1
 
 	      awe(i) = Ap(i,j)
-	      bwe(i) = Ae(i,j)
-	      cwe(i) = Aw(i,j)
+	      bwe(i) = -Ae(i,j)
+	      cwe(i) = -Aw(i,j)
 
 	      if (j .eq. 1) then
-	        dwe(i) = b(i,j)-An(i,j)*phi(i,j+1)
+	        dwe(i) = b(i,j)+An(i,j)*phi(i,j+1)
 	      elseif (j .eq. n) then
-	        dwe(i) = b(i,j)-As(i,j)*phi(i,j-1)
+	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)
 	      else
-	        dwe(i) = b(i,j)-As(i,j)*phi(i,j-1)-An(i,j)*phi(i,j+1)
+	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)
 	      end if
 
 	    end do
@@ -51,15 +51,15 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
       do j = 1, n, 1
 
 	    asn(j) = Ap(i,j)
-	    bsn(j) = An(i,j)
-	    csn(j) = As(i,j)
+	    bsn(j) = -An(i,j)
+	    csn(j) = -As(i,j)
 
 	    if (i .eq. 1) then
-	      dsn(j) = b(i,j)-Ae(i,j)*phi(i+1,j)
+	      dsn(j) = b(i,j)+Ae(i,j)*phi(i+1,j)
 	    elseif (i .eq. m) then
-	      dsn(j) = b(i,j)-Aw(i,j)*phi(i-1,j)
+	      dsn(j) = b(i,j)+Aw(i,j)*phi(i-1,j)
 	    else
-	      dsn(j) = b(i,j)-Aw(i,j)*phi(i-1,j)-Ae(i,j)*phi(i+1,j)
+	      dsn(j) = b(i,j)+Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)
 	    end if
 
 	  end do
@@ -79,11 +79,11 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
         do i = 1, m
 
           if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)+b(i,j))
           elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+An(i,j)*phi(i,j+1)+b(i,j))
           else
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)+b(i,j))
           end if
 
         end do
@@ -91,11 +91,11 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
         do i = 1, m
 
           if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+b(i,j))
           elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+b(i,j))
           else
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+b(i,j))
           end if
 
         end do
@@ -103,11 +103,11 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
         do i = 1, m
 
           if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
           elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
           else
-            r(i,j) = Ap(i,j)*phi(i,j) + (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)-b(i,j))
+            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
           end if
 
         end do

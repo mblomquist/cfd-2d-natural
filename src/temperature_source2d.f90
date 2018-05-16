@@ -60,7 +60,7 @@ subroutine temperature_source2d
 
   ! Update west coefficients :: Symmetry
   Aw_T(1,2:n-1) = 0
-  Ae_T(1,2:n-1) = -1
+  Ae_T(1,2:n-1) = 1
   As_T(1,2:n-1) = 0
   An_T(1,2:n-1) = 0
 
@@ -68,7 +68,7 @@ subroutine temperature_source2d
   b_T(1,2:n-1) = 0
 
   ! Update east coefficients :: Symmetry
-  Aw_T(m-1,2:n-1) = -1
+  Aw_T(m-1,2:n-1) = 1
   Ae_T(m-1,2:n-1) = 0
   As_T(m-1,2:n-1) = 0
   An_T(m-1,2:n-1) = 0
