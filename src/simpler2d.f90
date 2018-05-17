@@ -78,8 +78,6 @@ subroutine simpler2d
     print *, "v:", v
     print *, ".............."
 
-    return
-
     ! Step 7: Solve Temperature Equation
     print *, "Step 6: Solve Temperature Equation"
     call temperature_solve2d
@@ -96,8 +94,6 @@ subroutine simpler2d
     print *, "R_v: ", R_v
     print *, "................................"
 
-    return
-
     P_star = P
 	  u_star = u
 	  v_star = v
@@ -106,6 +102,8 @@ subroutine simpler2d
       print *, "Simpler completed in: ", i
       exit
     end if
+
+    return
 
   end do
 
