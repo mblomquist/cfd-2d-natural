@@ -39,6 +39,16 @@ subroutine temperature_source2d
 	    As_T(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 	    An_T(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
+      ! Check sourth node
+  	  if (i .eq. 1) then
+  	    Aw_T(i,j) = 0
+	    end if
+
+	    ! Check north node
+	    if (i .eq. m-1) then
+  	    Ae_T(i,j) = 0
+      end if
+
   	  ! Check sourth node
   	  if (j .eq. 1) then
   	    As_T(i,j) = 0
@@ -57,24 +67,6 @@ subroutine temperature_source2d
 
     end do
   end do
-
-  ! Update west coefficients :: Symmetry
-  Aw_T(1,2:n-1) = 0
-  Ae_T(1,2:n-1) = 1
-  As_T(1,2:n-1) = 0
-  An_T(1,2:n-1) = 0
-
-  Ap_T(1,2:n-1) = 1
-  b_T(1,2:n-1) = 0
-
-  ! Update east coefficients :: Symmetry
-  Aw_T(m-1,2:n-1) = 1
-  Ae_T(m-1,2:n-1) = 0
-  As_T(m-1,2:n-1) = 0
-  An_T(m-1,2:n-1) = 0
-
-  Ap_T(m-1,2:n-1) = 1
-  b_T(m-1,2:n-1) = 0
 
   return
 
