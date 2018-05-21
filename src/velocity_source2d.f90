@@ -80,6 +80,11 @@ subroutine velocity_source2d(direction)
 		    ! Update Ap coefficient
 		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
 
+        if (Ap_u(i,j) .eq. 0) then
+          Ap_u(i,j) = 1
+          Aw_u(i,j) = 1
+        end if
+
 		    ! Update b values
 		    b_u(i,j) = Su_u(i,j)+dy*(P_star(i-1,j)-P_star(i,j))
 
@@ -140,6 +145,11 @@ subroutine velocity_source2d(direction)
 
 		    ! Update Ap coefficient
 		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+
+        if (Ap_v(i,j) .eq. 0) then
+          Ap_v(i,j) = 1
+          As_v(i,j) = 1
+        end if
 
 		    ! Update b values
 		    b_v(i,j) = Su_v(i,j)+Ra*T(i,j)/Re/Re/Pr+dx*(P_star(i,j)-P_star(i,j-1))

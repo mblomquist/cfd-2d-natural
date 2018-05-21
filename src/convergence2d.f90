@@ -24,9 +24,35 @@ subroutine convergence2d(itr)
 
   ! Compute the momentum residuals for u
   !call velocity_source2d("u")
-  do i = 2,m-1
-    do j = 2,n-2
-      u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Aw_u(i,j)*u(i-1,j)+Ae_u(i,j)*u(i+1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+  do i = 1,m
+    do j = 1,n-1
+
+      if (i .eq. 1) then
+        if (j .eq. 1) then
+          u_momentum_residual(i,j) = abs(Ae_u(i,j)*u(i+1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        elseif (j .eq. n-1) then
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Ae_u(i,j)*u(i+1,j)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        else
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Ae_u(i,j)*u(i+1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        end if
+      elseif (i .eq. m) then
+        if (j .eq. 1) then
+          u_momentum_residual(i,j) = abs(Aw_u(i,j)*u(i-1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        elseif (j .eq. n-1) then
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Aw_u(i,j)*u(i-1,j)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        else
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Aw_u(i,j)*u(i-1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        end if
+      else
+        if (j .eq. 1) then
+          u_momentum_residual(i,j) = abs(Aw_u(i,j)*u(i-1,j)+Ae_u(i,j)*u(i+1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        elseif (j .eq. n-1) then
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Aw_u(i,j)*u(i-1,j)+Ae_u(i,j)*u(i+1,j)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        else
+          u_momentum_residual(i,j) = abs(As_u(i,j)*u(i,j-1)+Aw_u(i,j)*u(i-1,j)+Ae_u(i,j)*u(i+1,j)+An_u(i,j)*u(i,j+1)+b_u(i,j)-Ap_u(i,j)*u(i,j))
+        end if
+      end if
+
     end do
   end do
 
@@ -38,28 +64,8 @@ subroutine convergence2d(itr)
     end do
   end do
 
-  R_u = sum(u_momentum_residual)/(m*n)
+  R_u = sum(u_momentum_residual)
   R_v = sum(v_momentum_residual)
-
-  if (itr .eq. 1) then
-    R_u = 1
-    R_v = 1
-    
-    if (R_u .le. 1) then
-      R_u0 = 1
-    else
-      R_u0 = R_u
-    end if
-
-    if (R_v .le. 1) then
-      R_v0 = 1
-    else
-      R_v0 = R_v
-    end if
-  else
-    R_u = R_u/R_u0
-    R_v = R_v/R_v0
-  end if
 
   return
 
