@@ -1,7 +1,7 @@
 ! velocity_solve2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-02 (YYYY-MM-DD)
+! Last Update: 2018-05-21 (YYYY-MM-DD)
 !
 ! This subroutine updates the source terms for the solution of the momentum
 ! equations in the SIMPLER algorithm.
@@ -22,10 +22,10 @@ subroutine velocity_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: Symmetry
+    ! Caluclate West boundary source terms :: No slip
     ! Compute Coefficients - Fixed Value
     Aw_u(1,:) = 0
-    Ae_u(1,:) = 1
+    Ae_u(1,:) = 0
     As_u(1,:) = 0
     An_u(1,:) = 0
 
@@ -35,9 +35,9 @@ subroutine velocity_source2d(direction)
     ! Update b values
     b_u(1,:) = 0
 
-    ! Calculate East bounday source terms :: Symmetry
+    ! Calculate East bounday source terms :: No slip
     ! Compute Coefficients - Fixed Value
-    Aw_u(m,:) = 1
+    Aw_u(m,:) = 0
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0

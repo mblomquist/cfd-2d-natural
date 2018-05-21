@@ -25,10 +25,10 @@ subroutine pseudo_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: Symmetry
+    ! Caluclate West boundary source terms :: No slip
     ! Compute Coefficients - Fixed Value
     Aw_u(1,:) = 0
-    Ae_u(1,:) = 1
+    Ae_u(1,:) = 0
     As_u(1,:) = 0
     An_u(1,:) = 0
 
@@ -38,9 +38,9 @@ subroutine pseudo_source2d(direction)
     ! Update b values
     b_u(1,:) = 0
 
-    ! Calculate East bounday source terms :: Symmetry
+    ! Calculate East bounday source terms :: No slip
     ! Compute Coefficients - Fixed Value
-    Aw_u(m,:) = 1
+    Aw_u(m,:) = 0
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0

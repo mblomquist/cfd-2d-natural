@@ -19,12 +19,12 @@ subroutine initialize2d
   depth = 1     ! 1 meter deep
 
   ! Define media variables
-  Re = 2.801e2
-  Pr = 5.821e0
-  Ra = 3.448e3
+  Pr = 7.000e0  ! Ref :: Kimura, Bejan 1983
+  Ra = 1.400e5  ! Ref :: Kimura, Bejan 1983
+  Re = Ra*Pr    ! Grashoff Number for Natural Convection
 
   rho = 9.970e2
-  mu = 8.900e-4
+  mu = 1.070e-3
   k_const = 6.400e-1
   Cp = 4.186e3
 
@@ -37,9 +37,9 @@ subroutine initialize2d
   delta_T = T_h - T_c
 
   ! Define dimensionless temperature at boundaries
-  T_w = 0
+  T_w = 1
   T_e = 0
-  T_s = 1
+  T_s = 0
   T_n = 0
 
   ! Define solution parameters
