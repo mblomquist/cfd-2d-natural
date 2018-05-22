@@ -18,9 +18,6 @@ subroutine velocity_correct2d
     end do
   end do
 
-  u(1,:) = u(2,:)
-  u(m,:) = u(m-1,:)
-
   ! Correct velocity values
   do i = 1,m-1
     do j = 2,n-1

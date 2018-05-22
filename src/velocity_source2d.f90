@@ -70,12 +70,6 @@ subroutine velocity_source2d(direction)
 		    As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 		    An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-        ! Compute Coefficients - Hybrid Scheme
-		    !Aw_u(i,j) = max(Fw,(Dw+Fw/2),0.0)
-		    !Ae_u(i,j) = max(-Fe,(De-Fe/2),0.0)
-		    !As_u(i,j) = max(Fs,(Ds+Fs/2),0.0)
-		    !An_u(i,j) = max(-Fn,(Dn-Fn/2),0.0)
-
 		    ! Check South / North Nodes
 		    if (j .eq. 1) then
 		      As_u(i,j) = 0
@@ -87,9 +81,13 @@ subroutine velocity_source2d(direction)
 		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
 
         if (Ap_u(i,j) .eq. 0) then
-          Ap_u(i,j) = 1.0
-          Aw_u(i,j) = 0.5
-          Ae_u(i,j) = 0.5
+          Aw_u(i,j) = Dw
+          Ae_u(i,j) = De
+          As_u(i,j) = Ds
+          An_u(i,j) = Dn
+
+          Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+
           print *, "False Diffusion (u-velocity)@:", i,j
         end if
 
@@ -161,9 +159,13 @@ subroutine velocity_source2d(direction)
 		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
 
         if (Ap_v(i,j) .eq. 0) then
-          Ap_v(i,j) = 1.0
-          As_v(i,j) = 0.5
-          An_v(i,j) = 0.5
+          Aw_v(i,j) = Dw
+          Ae_v(i,j) = De
+          As_v(i,j) = Ds
+          An_v(i,j) = Dn
+
+          Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+
           print *, "False Diffusion (v-velocity)@:", i,j
         end if
 

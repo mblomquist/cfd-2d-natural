@@ -73,24 +73,18 @@ subroutine pseudo_source2d(direction)
 	      As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 	      An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-        ! Compute Coefficients - Hybrid Scheme
-		    !Aw_u(i,j) = max(Fw,(Dw+Fw/2),0.0)
-		    !Ae_u(i,j) = max(-Fe,(De-Fe/2),0.0)
-		    !As_u(i,j) = max(Fs,(Ds+Fs/2),0.0)
-		    !An_u(i,j) = max(-Fn,(Dn-Fn/2),0.0)
-
 	      ! Check South / North Nodes
-		  if (j .eq. 1) then
-		    As_u(i,j) = 0
-		  elseif (j .eq. n-1) then
-		    An_u(i,j) = 0
-		  end if
+		    if (j .eq. 1) then
+		      As_u(i,j) = 0
+		    elseif (j .eq. n-1) then
+		      An_u(i,j) = 0
+		    end if
 
-		  ! Update Ap coefficient
-		  Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+		    ! Update Ap coefficient
+		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
 
-		  ! Update b values
-		  b_u(i,j) = Su_u(i,j)
+		    ! Update b values
+		    b_u(i,j) = Su_u(i,j)
 
       end do
     end do

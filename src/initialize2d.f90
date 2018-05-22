@@ -21,7 +21,7 @@ subroutine initialize2d
   ! Define media variables
   Pr = 7.000e0  ! Ref :: Kimura, Bejan 1983
   Ra = 1.400e5  ! Ref :: Kimura, Bejan 1983
-  Re = Ra*Pr    ! Grashoff Number for Natural Convection
+  Re = (Ra*Pr/10)**(0.5)    ! Grashoff Number for Natural Convection (Gr/Re^2 >> 1)
 
   rho = 9.970e2
   mu = 1.070e-3
@@ -32,7 +32,7 @@ subroutine initialize2d
   beta = 6.9e-5
 
   ! Define high and low temperature
-  T_h = 293+250     ! High temperature wall
+  T_h = 294     ! High temperature wall
   T_c = 293     ! Low temperature wall
   delta_T = T_h - T_c
 
@@ -43,10 +43,10 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 4
-  maxit = 1000
-  solver_tol = 1e-6
-  simpler_tol = 1e-6
+  itrmax = 10
+  maxit = 10000
+  solver_tol = 1e-4
+  simpler_tol = 1e-4
 
   ! Calculate geometry properties.
   call geometry2d

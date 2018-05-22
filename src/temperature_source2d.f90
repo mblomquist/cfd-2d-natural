@@ -62,6 +62,17 @@ subroutine temperature_source2d
   	  ! Update Ap coefficient
   	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
 
+      if (Ap_T(i,j) .eq. 0) then
+        Aw_T(i,j) = Dw
+        Ae_T(i,j) = De
+        As_T(i,j) = Ds
+        An_T(i,j) = Dn
+
+        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
+
+        print *, "False Diffusion (temperature)@:", i,j
+      end if
+
   	  ! Update b values
   	  b_T(i,j) = Su_T(i,j)
 
