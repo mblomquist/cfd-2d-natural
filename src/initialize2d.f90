@@ -44,7 +44,7 @@ subroutine initialize2d
 
   ! Define solution parameters
   itrmax = 4
-  maxit = 10000
+  maxit = 1000
   solver_tol = 1e-6
   simpler_tol = 1e-6
 
