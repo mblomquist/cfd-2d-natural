@@ -65,10 +65,16 @@ subroutine velocity_source2d(direction)
         Dn = mu*dx/dy/Re
 
 		    ! Compute Coefficients - Power Law Differening Scheme
-		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-		    Ae_u(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-		    As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-		    An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+		    !Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+		    !Ae_u(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+		    !As_u(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+		    !An_u(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+
+        ! Compute Coefficients - Hybrid Scheme
+		    Aw_u(i,j) = max(Fw,(Dw+Fw/2),0.0)
+		    Ae_u(i,j) = max(-Fe,(De-Fe/2),0.0)
+		    As_u(i,j) = max(Fs,(Ds+Fs/2),0.0)
+		    An_u(i,j) = max(-Fn,(Dn-Fn/2),0.0)
 
 		    ! Check South / North Nodes
 		    if (j .eq. 1) then
@@ -78,7 +84,7 @@ subroutine velocity_source2d(direction)
 		    end if
 
 		    ! Update Ap coefficient
-		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)+(Fe-Fw+Fn-Fs)
 
         if (Ap_u(i,j) .eq. 0) then
           Ap_u(i,j) = 1.0
@@ -133,10 +139,17 @@ subroutine velocity_source2d(direction)
         Dn = mu*dx/dy/Re
 
 		    ! Compute Coefficients - Power Law Differening Scheme
-		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
-		    Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
-		    As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
-		    An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+		    !Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
+		    !Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
+		    !As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
+		    !An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
+
+
+        ! Compute Coefficients - Hybrid Scheme
+        Aw_v(i,j) = max(Fw,(Dw+Fw/2),0.0)
+        Ae_v(i,j) = max(-Fe,(De-Fe/2),0.0)
+        As_v(i,j) = max(Fs,(Ds+Fs/2),0.0)
+        An_v(i,j) = max(-Fn,(Dn-Fn/2),0.0)
 
 		    ! Check South / North Nodes
 		    if (i .eq. 1) then
@@ -146,7 +159,7 @@ subroutine velocity_source2d(direction)
 		    end if
 
 		    ! Update Ap coefficient
-		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)+(Fe-Fw+Fn-Fs)
 
         if (Ap_v(i,j) .eq. 0) then
           Ap_v(i,j) = 1.0

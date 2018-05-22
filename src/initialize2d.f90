@@ -32,7 +32,7 @@ subroutine initialize2d
   beta = 6.9e-5
 
   ! Define high and low temperature
-  T_h = 343     ! High temperature wall
+  T_h = 293+250     ! High temperature wall
   T_c = 293     ! Low temperature wall
   delta_T = T_h - T_c
 
@@ -43,7 +43,7 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 3
+  itrmax = 4
   maxit = 10000
   solver_tol = 1e-6
   simpler_tol = 1e-6
