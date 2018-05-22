@@ -82,6 +82,8 @@ subroutine velocity_source2d(direction)
 
         if (Ap_u(i,j) .eq. 0) then
           Ap_u(i,j) = 1.0
+          Aw_u(i,j) = 0.5
+          Ae_u(i,j) = 0.5
           print *, "False Diffusion (u-velocity)@:", i,j
         end if
 
@@ -148,6 +150,8 @@ subroutine velocity_source2d(direction)
 
         if (Ap_v(i,j) .eq. 0) then
           Ap_v(i,j) = 1.0
+          As_v(i,j) = 0.5
+          An_v(i,j) = 0.5
           print *, "False Diffusion (v-velocity)@:", i,j
         end if
 

@@ -128,10 +128,6 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
 	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
-    print *, "x:", x
-
-    print *, 'r_norm(1):', r_norm
-
 	  if (r_norm < tol) then
       print *, 'BiCGSTAB(2) Algorithm successfully converged!(mid)'
       print *, 'Number of Iterations: ', itr
@@ -149,73 +145,50 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 	  ! Odd Bi-CG step:
 	  rho = ddot(m*n, s, 1, r0_hat, 1)
 
-    print *, "rho:", rho
-
 	  beta = alpha * rho / rho_1
 
-    print *, "beta:", beta
 	  rho_1 = rho
 	  v = s - beta * v
 
-    print *, "v:", v
-
 	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, v, w)
-    print *, "w:", w
 
 	  gamma = ddot(m*n, w, 1, r0_hat, 1)
-    print *, "gamma:", gamma
 
 	  alpha = rho/gamma
 
-    print *, "alpha:", alpha
 
 	  p = r - beta * p
-    print *, "p:", p
 
 	  r = r - alpha * v
-    print *, "r:", r
 
 	  s = s - alpha * w
-    print *, "s:", s
 
 	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, s, t)
-    print *, "t:", t
 
 	  ! GMRES(2)-part
 	  omega_1 = ddot(m*n, r, 1, s, 1)
-    print *, "omega_1:", omega_1
 
 	  mu = ddot(m*n, s, 1, s, 1)
-    print *, "mu", mu
 
 	  nu = ddot(m*n, s, 1, t, 1)
-    print *, "nu:", nu
 
 	  tau = ddot(m*n, t, 1, t, 1)
-    print *, "tau:", tau
 
 	  omega_2 = ddot(m*n, r, 1, t, 1)
-    print *, "omega_2", omega_2
 
 	  tau = tau - nu**2 / mu
-    print *, "tau:", tau
 
 	  omega_2 = (omega_2 - nu * omega_1 / mu) / tau
-    print *, "omega_2", omega_2
 
 	  omega_1 = (omega_1 - nu*omega_2) / mu
-    print *, "omega_1:", omega_1
 
 	  x = x + alpha * p + omega_1 * r + omega_2 * s
 	  r = r - omega_1 * s - omega_2 * t
 
-    print *, "x:", x
 
 	  ! Check solution
 	  call mkl_ddiagemv('N', m*n, A_values, m*n, A_distance, 5, x, Ax)
 	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
-
-    print *, 'r_norm(2):', r_norm
 
 	  if (r_norm < tol) then
       print *, 'BiCGSTAB(2) Algorithm successfully converged! (end)'
