@@ -58,9 +58,35 @@ subroutine convergence2d(itr)
 
   ! Compute the momentum residuals for v
   !call velocity_source2d("v")
-  do i = 2,m-1
-    do j = 2,n-1
-      v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Aw_v(i,j)*v(i-1,j)+Ae_v(i,j)*v(i+1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+  do i = 1,m-1
+    do j = 1,n
+
+      if (i .eq. 1) then
+        if (j .eq. 1) then
+          v_momentum_residual(i,j) = abs(Ae_v(i,j)*v(i+1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        elseif (j .eq. n) then
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Ae_v(i,j)*v(i+1,j)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        else
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Ae_v(i,j)*v(i+1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        end if
+      elseif (i .eq. m-1) then
+        if (j .eq. 1) then
+          v_momentum_residual(i,j) = abs(Aw_v(i,j)*v(i-1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        elseif (j .eq. n) then
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Aw_v(i,j)*v(i-1,j)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        else
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Aw_v(i,j)*v(i-1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        end if
+      else
+        if (j .eq. 1) then
+          v_momentum_residual(i,j) = abs(Aw_v(i,j)*v(i-1,j)+Ae_v(i,j)*v(i+1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        elseif (j .eq. n) then
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Aw_v(i,j)*v(i-1,j)+Ae_v(i,j)*v(i+1,j)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        else
+          v_momentum_residual(i,j) = abs(As_v(i,j)*v(i,j-1)+Aw_v(i,j)*v(i-1,j)+Ae_v(i,j)*v(i+1,j)+An_v(i,j)*v(i,j+1)+b_v(i,j)-Ap_v(i,j)*v(i,j))
+        end if
+      end if
+
     end do
   end do
 

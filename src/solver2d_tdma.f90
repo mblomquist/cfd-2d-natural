@@ -123,9 +123,11 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
       end do
     end do
 
-    print *, "r_sum:", r_sum
+    !print *, "r_sum:", r_sum
 
     if (r_sum < tol) then
+      print *, "r_sum:", r_sum
+      print *, "itrs:", k
       return
     end if
 

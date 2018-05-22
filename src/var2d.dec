@@ -1,7 +1,7 @@
 ! Variable Declaration file for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-04-03 (YYYY-MM-DD)
+! Last Update: 2018-05-22 (YYYY-MM-DD)
 !
 ! This file defines the parameter and variable names used throughout
 ! the main2d function.
@@ -9,7 +9,7 @@
 
 ! Mesh parameters :: nodes in x, nodes in y, nodes in z
   integer :: m, n, l
-  parameter (m=10, n=10, l=1)
+  parameter (m=15, n=15, l=1)
 
 ! Geometry variables ::
   real(8) :: length, width, depth, dx, dy, dz

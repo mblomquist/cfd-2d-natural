@@ -32,8 +32,20 @@ subroutine solver1d_tdma(a, b, c, d, phi, n)
 
   do i = 2, n, 1
 
-    P(i) = b(i)/(a(i)-c(i)*P(i-1))
-    Q(i) = (d(i)-c(i)*Q(i-1))/(a(i)-c(i)*P(i-1))
+    if (a(i) .eq. c(i)*P(i-1)) then
+      P(i) = .5
+      Q(i) = .5
+      print *, "False Diffusion @ i,j", i
+      print *, "a(i):", a(i)
+      print *, "c(i):", c(i)
+      print *, "P(i-1):", P(i-1)
+      print *, "b(i-1):", b(i-1)
+    else
+      P(i) = b(i)/(a(i)-c(i)*P(i-1))
+      Q(i) = (d(i)-c(i)*Q(i-1))/(a(i)-c(i)*P(i-1))
+    end if
+
+
 
   end do
 

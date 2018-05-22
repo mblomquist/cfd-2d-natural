@@ -17,7 +17,7 @@ subroutine velocity_solve2d
   ! Solve v-velocity equation
   !call solver2d_bicgstab(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
   call solver2d_tdma(Aw_v, Ae_v, As_v, An_v, Ap_v, b_v, v_star, m-1, n, solver_tol, maxit)
-
+  
   ! Update source terms
   call velocity_source2d("u")
 
