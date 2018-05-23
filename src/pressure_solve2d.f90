@@ -50,7 +50,7 @@ subroutine pressure_solve2d
       Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)-Sp_p(i,j)
 
 	    ! Update b values
-	    b_p(i,j) = rho*(u_hat(i,j)-u_hat(i+1,j))*dy+rho*(v_hat(i,j)-v_hat(i,j+1))*dx+Su_p(i,j)
+	    b_p(i,j) = rho*dx*(u_hat(i,j)-u_hat(i+1,j))+rho*dy*(v_hat(i,j)-v_hat(i,j+1))+Su_p(i,j)
 
     end do
   end do

@@ -23,7 +23,13 @@ program main2d
   !   boundary conditions, calculate global values, etc.
   call initialize2d
   print *, 'Problem Initialization Complete.'
+  print *, ''
   print *, 'Grid size: ', m, n
+  print *, 'Rayleigh Number: ', Ra
+  print *, 'Prandtl Number: ', Pr
+  print *, 'Grashoff Number: ', Gr
+  print *, 'delta_T:', delta_T
+  print *, ''
 
   call cpu_time(start_time)
 

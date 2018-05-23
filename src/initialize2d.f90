@@ -19,22 +19,27 @@ subroutine initialize2d
   depth = 1     ! 1 meter deep
 
   ! Define media variables
-  Pr = 7.000e0  ! Ref :: Kimura, Bejan 1983
-  Ra = 1.400e5  ! Ref :: Kimura, Bejan 1983
-  Re = (Ra*Pr/10)**(0.5)    ! Grashoff Number for Natural Convection (Gr/Re^2 >> 1)
+  g = 9.81e0
+  rho = 9.97e2
+  mu = 1.07e-3
+  k_const = 6.40e-1
+  Cp = 4.19e3
+  beta = 6.90e-5
 
-  rho = 9.970e2
-  mu = 1.070e-3
-  k_const = 6.400e-1
-  Cp = 4.186e3
+  ! Calculate variables
+  nu = mu / rho
+  alpha = k_const / rho / Cp
 
-  alpha = k_const/Cp/rho
-  beta = 6.9e-5
+  ! Define Non-Dimensional parameters
+  Ra = 1.4e5
 
-  ! Define high and low temperature
-  T_h = 294     ! High temperature wall
-  T_c = 293     ! Low temperature wall
-  delta_T = T_h - T_c
+  ! Calculate Non-Dimensional parameters
+  Pr = nu / alpha
+  Gr = Ra / Pr
+  Re = (Gr/10)**(0.5)
+
+  ! Calculate delta temperature
+  delta_T = Ra * alpha * nu / g / beta
 
   ! Define dimensionless temperature at boundaries
   T_w = 1
@@ -43,8 +48,8 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 10
-  maxit = 10000
+  itrmax = 1
+  maxit = 10
   solver_tol = 1e-4
   simpler_tol = 1e-4
 
