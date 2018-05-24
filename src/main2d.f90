@@ -28,6 +28,7 @@ program main2d
   print *, 'Rayleigh Number: ', Ra
   print *, 'Prandtl Number: ', Pr
   print *, 'Grashoff Number: ', Gr
+  print *, 'Reynolds Number', Re
   print *, 'delta_T:', delta_T
   print *, ''
 

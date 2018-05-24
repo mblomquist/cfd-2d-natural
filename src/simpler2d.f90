@@ -43,6 +43,8 @@ subroutine simpler2d
     print *, "v_hat:", v_hat
     print *, ".............."
 
+    return
+    
     ! Step 3: Solve Pressure Equation
     print *, "Step 2: Solve Pressure Equation"
     call pressure_solve2d

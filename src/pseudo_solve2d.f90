@@ -26,12 +26,12 @@ subroutine pseudo_solve2d
   call pseudo_source2d("v")
 
   ! Print coefficients
-  print *, "Aw_v:", Aw_v
-  print *, "Ae_v:", Ae_v
-  print *, "An_v:", As_v
-  print *, "As_v:", An_v
-  print *, "Ap_v:", Ap_v
-  print *, "b_v:", b_v
+  !print *, "Aw_v:", Aw_v
+  !print *, "Ae_v:", Ae_v
+  !print *, "An_v:", As_v
+  !print *, "As_v:", An_v
+  !print *, "Ap_v:", Ap_v
+  !print *, "b_v:", b_v
 
   ! Calculate nodes
   do j = 1,n
@@ -78,13 +78,13 @@ subroutine pseudo_solve2d
   call pseudo_source2d("u")
 
   ! Print coefficients
-  print *, "Aw_u:", Aw_u
-  print *, "Ae_u:", Ae_u
-  print *, "An_u:", As_u
-  print *, "As_u:", An_u
-  print *, "Ap_u:", Ap_u
-  print *, "b_u:", b_u
-  
+  !print *, "Aw_u:", Aw_u
+  !print *, "Ae_u:", Ae_u
+  !print *, "An_u:", As_u
+  !print *, "As_u:", An_u
+  !print *, "Ap_u:", Ap_u
+  !print *, "b_u:", b_u
+
   ! Calculate nodes
   do i = 1,m
     do j = 1,n-1
