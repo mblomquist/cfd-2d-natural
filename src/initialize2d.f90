@@ -31,7 +31,7 @@ subroutine initialize2d
   alpha = k_const / rho / Cp
 
   ! Define Non-Dimensional parameters
-  Ra = 1.4e5
+  Ra = 1.4e2
 
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
@@ -49,7 +49,7 @@ subroutine initialize2d
 
   ! Define solution parameters
   itrmax = 2
-  maxit = 10000
+  maxit = 1000
   solver_tol = 1e-4
   simpler_tol = 1e-4
 
