@@ -59,10 +59,10 @@ subroutine velocity_source2d(direction)
 		    Fn = rho*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = 1/nu*dy/dx/Re*100
-        De = 1/nu*dy/dx/Re*100
-        Ds = 1/nu*dx/dy/Re*100
-        Dn = 1/nu*dx/dy/Re*100
+        Dw = 1/nu*dy/dx/Re*1000
+        De = 1/nu*dy/dx/Re*1000
+        Ds = 1/nu*dx/dy/Re*1000
+        Dn = 1/nu*dx/dy/Re*1000
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -131,10 +131,10 @@ subroutine velocity_source2d(direction)
 		    Fn = rho*dx*(v_hat(i,j)+v_hat(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = 1/nu*dy/dx/Re*100
-        De = 1/nu*dy/dx/Re*100
-        Ds = 1/nu*dx/dy/Re*100
-        Dn = 1/nu*dx/dy/Re*100
+        Dw = 1/nu*dy/dx/Re*1000
+        De = 1/nu*dy/dx/Re*1000
+        Ds = 1/nu*dx/dy/Re*1000
+        Dn = 1/nu*dx/dy/Re*1000
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
