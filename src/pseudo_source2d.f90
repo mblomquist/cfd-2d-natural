@@ -62,10 +62,10 @@ subroutine pseudo_source2d(direction)
         Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-  		  Dw = 1/nu*dy/dx/Re*500
-        De = 1/nu*dy/dx/Re*500
-        Ds = 1/nu*dx/dy/Re*500
-        Dn = 1/nu*dx/dy/Re*500
+  		  Dw = 1/nu*dy/dx/Re*50
+        De = 1/nu*dy/dx/Re*50
+        Ds = 1/nu*dx/dy/Re*50
+        Dn = 1/nu*dx/dy/Re*50
 
 	      ! Compute Coefficients - Power Law Differening Scheme
 	      Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -123,10 +123,10 @@ subroutine pseudo_source2d(direction)
 		  Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
       ! Update diffusion terms
-      Dw = 1/nu*dy/dx/Re*500
-      De = 1/nu*dy/dx/Re*500
-      Ds = 1/nu*dx/dy/Re*500
-      Dn = 1/nu*dx/dy/Re*500
+      Dw = 1/nu*dy/dx/Re*50
+      De = 1/nu*dy/dx/Re*50
+      Ds = 1/nu*dx/dy/Re*50
+      Dn = 1/nu*dx/dy/Re*50
 
 		  ! Compute Coefficients - Power Law Differening Scheme
 		  Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
