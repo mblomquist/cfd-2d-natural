@@ -35,6 +35,9 @@ subroutine simpler2d
 
   do i = 1,itrmax
 
+    u_hat = 0
+    v_hat = 0
+    
     ! Step 2: Calculate Pseudo-Velocities
     !print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d

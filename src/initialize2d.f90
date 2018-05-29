@@ -52,6 +52,7 @@ subroutine initialize2d
   maxit = 100
   solver_tol = 1e-4
   simpler_tol = 1e-4
+  relax = 1.0
 
   ! Calculate geometry properties.
   call geometry2d
