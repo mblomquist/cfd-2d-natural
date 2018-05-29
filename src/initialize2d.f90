@@ -14,7 +14,7 @@ subroutine initialize2d
   ! ..........................
 
   ! Define geometry variables
-  length = 1	  ! 1 meter long
+  length = 1  ! 1 meter long
   width = 1     ! 1 meter wide
   depth = 1     ! 1 meter deep
 
@@ -31,12 +31,12 @@ subroutine initialize2d
   alpha = k_const / rho / Cp
 
   ! Define Non-Dimensional parameters
-  Ra = 1.4e5
+  Ra = 1.4e2
 
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
   Gr = Ra / Pr
-  Re = (Gr/10)**(0.5)
+  Re = (Gr/1)**(0.5)
 
   ! Calculate delta temperature
   delta_T = Ra * alpha * nu / g / beta
