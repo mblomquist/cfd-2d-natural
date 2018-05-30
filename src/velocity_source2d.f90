@@ -53,16 +53,16 @@ subroutine velocity_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = rho*dy*(u_hat(i,j)+u_hat(i-1,j))/2
-		    Fe = rho*dy*(u_hat(i+1,j)+u_hat(i,j))/2
-		    Fs = rho*dx*(v_hat(i,j)+v_hat(i-1,j))/2
-		    Fn = rho*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
+		    Fw = rho*u0*dy*(u_hat(i,j)+u_hat(i-1,j))/2
+		    Fe = rho*u0*dy*(u_hat(i+1,j)+u_hat(i,j))/2
+		    Fs = rho*u0*dx*(v_hat(i,j)+v_hat(i-1,j))/2
+		    Fn = rho*u0*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = 1/nu*dy/dx/Re*100
-        De = 1/nu*dy/dx/Re*100
-        Ds = 1/nu*dx/dy/Re*100
-        Dn = 1/nu*dx/dy/Re*100
+        Dw = rho*u0*dy/Re/dx
+        De = rho*u0*dy/Re/dx
+        Ds = rho*u0*dx/Re/dy
+        Dn = rho*u0*dx/Re/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -125,28 +125,22 @@ subroutine velocity_source2d(direction)
 	    do i = 1,m-1
 
 	      ! Update convection terms
-		    Fw = rho*dy*(u_hat(i,j-1)+u_hat(i,j))/2
-		    Fe = rho*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
-		    Fs = rho*dx*(v_hat(i,j-1)+v_hat(i,j))/2
-		    Fn = rho*dx*(v_hat(i,j)+v_hat(i,j+1))/2
+		    Fw = rho*u0*dy*(u_hat(i,j-1)+u_hat(i,j))/2
+		    Fe = rho*u0*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
+		    Fs = rho*u0*dx*(v_hat(i,j-1)+v_hat(i,j))/2
+		    Fn = rho*u0*dx*(v_hat(i,j)+v_hat(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = 1/nu*dy/dx/Re*100
-        De = 1/nu*dy/dx/Re*100
-        Ds = 1/nu*dx/dy/Re*100
-        Dn = 1/nu*dx/dy/Re*100
+        Dw = rho*u0*dy/Re/dx
+        De = rho*u0*dy/Re/dx
+        Ds = rho*u0*dx/Re/dy
+        Dn = rho*u0*dx/Re/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
 		    Ae_v(i,j) = De*max(0.0,(1-0.1*abs(Fe/De))**5)+max(-Fe,0.0)
 		    As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 		    An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
-
-        ! Compute Coefficients - Hybrid Scheme
-        !Aw_v(i,j) = max(Fw,(Dw+Fw/2),0.0)
-        !Ae_v(i,j) = max(-Fe,(De-Fe/2),0.0)
-        !As_v(i,j) = max(Fs,(Ds+Fs/2),0.0)
-        !An_v(i,j) = max(-Fn,(Dn-Fn/2),0.0)
 
 		    ! Check South / North Nodes
 		    if (i .eq. 1) then
@@ -170,7 +164,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)+dx*(P_star(i,j)-P_star(i,j-1))+(Gr/Re/Re)*(T(i,j)+T(i,j-1))*dx
+		    b_v(i,j) = Su_v(i,j)+dx*(P_star(i,j)-P_star(i,j-1))+(Gr/Re/Re)*(T(i,j)+T(i,j-1))*dx-1/beta/delta_T
 
 	    end do
 	  end do

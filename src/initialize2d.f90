@@ -31,16 +31,19 @@ subroutine initialize2d
   alpha = k_const / rho / Cp
 
   ! Define Non-Dimensional parameters
-  Ra = 1.4e5
+  Ra = 1.4e2
 
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
   Gr = Ra / Pr
-  Re = (Gr/1)**(0.5)
+  Re = (Gr/10)**(0.5)
 
   ! Calculate delta temperature
   delta_T = Ra * alpha * nu / g / beta
 
+  ! Calculate u0
+  u0 = (g*beta*delta_T)**(0.5)
+  
   ! Define dimensionless temperature at boundaries
   T_w = 1
   T_e = 0
@@ -48,8 +51,8 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 1000
-  maxit = 100
+  itrmax = 10
+  maxit = 1
   solver_tol = 1e-4
   simpler_tol = 1e-4
   relax = 1.0

@@ -17,21 +17,27 @@ subroutine temperature_source2d
   integer :: i, j
   real(8) :: Fw, Fe, Fs, Fn, Dw, De, Dn, Ds
 
+  print *, "Check vals: "
+  print *, "rho: ", rho
+  print *, "u0: ", u0
+  print *, "Re: ", Re
+  print *, "Pr: ", Pr
+
   ! Solve for source coefficients
   do i = 1,m-1
     do j = 1,n-1
 
       ! Update convective terms
-      Fw = dy*u(i,j)
-      Fe = dy*u(i+1,j)
-      Fs = dx*v(i,j)
-      Fn = dx*v(i,j+1)
+      Fw = rho*u0*dy*u(i,j)
+      Fe = rho*u0*dy*u(i+1,j)
+      Fs = rho*u0*dx*v(i,j)
+      Fn = rho*u0*dx*v(i,j+1)
 
       ! Update diffusion terms
-      Dw = alpha*dy/dx/Re/Pr
-      De = alpha*dy/dx/Re/Pr
-      Ds = alpha*dx/dy/Re/Pr
-      Dn = alpha*dx/dy/Re/Pr
+      Dw = rho*u0*dx/dy/Re/Pr
+      De = rho*u0*dx/dy/Re/Pr
+      Ds = rho*u0*dy/dx/Re/Pr
+      Dn = rho*u0*dy/dx/Re/Pr
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -60,7 +66,7 @@ subroutine temperature_source2d
       end if
 
   	  ! Update Ap coefficient
-  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
+  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)*dx*dy
 
       if (Ap_T(i,j) .eq. 0) then
         Aw_T(i,j) = Dw
@@ -74,7 +80,7 @@ subroutine temperature_source2d
       end if
 
   	  ! Update b values
-  	  b_T(i,j) = Su_T(i,j)
+  	  b_T(i,j) = Su_T(i,j)*dx*dy
 
     end do
   end do
