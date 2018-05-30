@@ -142,10 +142,10 @@ subroutine pseudo_source2d(direction)
 		  end if
 
 		  ! Update Ap coefficient
-		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
 		  ! Update b values
-		  b_v(i,j) = Su_v(i,j)+(Gr/Re/Re)*(T(i,j)+T(i,j-1))*dx-1/beta/delta_T
+		  b_v(i,j) = (Su_v(i,j)+(Gr/Re/Re)*(T(i,j)+T(i,j-1)))*dx*dy
 
 	  end do
 	end do
