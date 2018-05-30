@@ -21,10 +21,10 @@ subroutine pressure_solve2d
     do j = 1,n-1
 
       ! Update coefficients
-	    Ae_p(i,j) = rho*u0*dy*dy/Ap_u(i+1,j)
-	    Aw_p(i,j) = rho*u0*dy*dy/Ap_u(i,j)
-	    An_p(i,j) = rho*u0*dx*dx/Ap_v(i,j+1)
-	    As_p(i,j) = rho*u0*dx*dx/Ap_v(i,j)
+	    Ae_p(i,j) = rho*dy*dy/Ap_u(i+1,j)
+	    Aw_p(i,j) = rho*dy*dy/Ap_u(i,j)
+	    An_p(i,j) = rho*dx*dx/Ap_v(i,j+1)
+	    As_p(i,j) = rho*dx*dx/Ap_v(i,j)
 
 	    ! Check west node
       if (i .eq. 1) then
@@ -63,6 +63,14 @@ subroutine pressure_solve2d
 
   Ap_p(m-1,n-1) = 1
   b_p(m-1,n-1) = 0
+
+  ! Print coefficients
+  !print *, "Aw_p:", Aw_p
+  !print *, "Ae_p:", Ae_p
+  !print *, "An_p:", As_p
+  !print *, "As_p:", An_p
+  !print *, "Ap_p:", Ap_p
+  !print *, "b_p:", b_p
 
   ! Solve pressure equation
   !call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)

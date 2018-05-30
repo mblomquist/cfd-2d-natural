@@ -43,7 +43,7 @@ subroutine initialize2d
 
   ! Calculate u0
   u0 = (g*beta*delta_T)**(0.5)
-  
+
   ! Define dimensionless temperature at boundaries
   T_w = 1
   T_e = 0
@@ -51,10 +51,10 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 10
-  maxit = 1
-  solver_tol = 1e-4
-  simpler_tol = 1e-4
+  itrmax = 100
+  maxit = 1000
+  solver_tol = 1e-6
+  simpler_tol = 1e-6
   relax = 1.0
 
   ! Calculate geometry properties.

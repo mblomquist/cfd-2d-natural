@@ -21,10 +21,10 @@ subroutine pressure_correct2d
     do j = 1,n-1
 
       ! Update coefficients
-      Ae_p(i,j) = rho*u0*dy*dy/Ap_u(i+1,j)
-	    Aw_p(i,j) = rho*u0*dy*dy/Ap_u(i,j)
-	    An_p(i,j) = rho*u0*dx*dx/Ap_v(i,j+1)
-	    As_p(i,j) = rho*u0*dx*dx/Ap_v(i,j)
+      Ae_p(i,j) = rho*dy*dy/Ap_u(i+1,j)
+	    Aw_p(i,j) = rho*dy*dy/Ap_u(i,j)
+	    An_p(i,j) = rho*dx*dx/Ap_v(i,j+1)
+	    As_p(i,j) = rho*dx*dx/Ap_v(i,j)
 
 	    ! Check west node
       if (i .eq. 1) then

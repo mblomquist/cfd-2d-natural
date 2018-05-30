@@ -17,12 +17,6 @@ subroutine temperature_source2d
   integer :: i, j
   real(8) :: Fw, Fe, Fs, Fn, Dw, De, Dn, Ds
 
-  print *, "Check vals: "
-  print *, "rho: ", rho
-  print *, "u0: ", u0
-  print *, "Re: ", Re
-  print *, "Pr: ", Pr
-
   ! Solve for source coefficients
   do i = 1,m-1
     do j = 1,n-1

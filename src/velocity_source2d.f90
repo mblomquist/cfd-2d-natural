@@ -53,16 +53,16 @@ subroutine velocity_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = rho*u0*dy*(u_hat(i,j)+u_hat(i-1,j))/2
-		    Fe = rho*u0*dy*(u_hat(i+1,j)+u_hat(i,j))/2
-		    Fs = rho*u0*dx*(v_hat(i,j)+v_hat(i-1,j))/2
-		    Fn = rho*u0*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
+		    Fw = rho*dy*(u_hat(i,j)+u_hat(i-1,j))/2
+		    Fe = rho*dy*(u_hat(i+1,j)+u_hat(i,j))/2
+		    Fs = rho*dx*(v_hat(i,j)+v_hat(i-1,j))/2
+		    Fn = rho*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = rho*u0*dy/Re/dx
-        De = rho*u0*dy/Re/dx
-        Ds = rho*u0*dx/Re/dy
-        Dn = rho*u0*dx/Re/dy
+        Dw = rho*dy/Re/dx
+        De = rho*dy/Re/dx
+        Ds = rho*dx/Re/dy
+        Dn = rho*dx/Re/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -125,16 +125,16 @@ subroutine velocity_source2d(direction)
 	    do i = 1,m-1
 
 	      ! Update convection terms
-		    Fw = rho*u0*dy*(u_hat(i,j-1)+u_hat(i,j))/2
-		    Fe = rho*u0*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
-		    Fs = rho*u0*dx*(v_hat(i,j-1)+v_hat(i,j))/2
-		    Fn = rho*u0*dx*(v_hat(i,j)+v_hat(i,j+1))/2
+		    Fw = rho*dy*(u_hat(i,j-1)+u_hat(i,j))/2
+		    Fe = rho*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
+		    Fs = rho*dx*(v_hat(i,j-1)+v_hat(i,j))/2
+		    Fn = rho*dx*(v_hat(i,j)+v_hat(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = rho*u0*dy/Re/dx
-        De = rho*u0*dy/Re/dx
-        Ds = rho*u0*dx/Re/dy
-        Dn = rho*u0*dx/Re/dy
+        Dw = rho*dy/Re/dx
+        De = rho*dy/Re/dx
+        Ds = rho*dx/Re/dy
+        Dn = rho*dx/Re/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
