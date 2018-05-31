@@ -31,7 +31,7 @@ subroutine initialize2d
   alpha = k_const / rho / Cp
 
   ! Define Non-Dimensional parameters
-  Ra = 1.4e5
+  Ra = 1.4e2
 
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
