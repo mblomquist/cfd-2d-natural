@@ -31,7 +31,7 @@ subroutine pseudo_solve2d
   !print *, "An_v:", As_v
   !print *, "As_v:", An_v
   !print *, "Ap_v:", Ap_v
-  !print *, "b_v:", b_v
+  print *, "b_v:", b_v
 
   ! Calculate nodes
   do j = 1,n
