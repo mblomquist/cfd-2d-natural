@@ -36,7 +36,7 @@ subroutine initialize2d
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
   Gr = Ra / Pr
-  Re = (Gr/10)**(0.5)
+  Re = (Gr/1)**(0.5)
 
   ! Calculate delta temperature
   delta_T = Ra * alpha * nu / g / beta
