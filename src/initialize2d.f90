@@ -36,7 +36,7 @@ subroutine initialize2d
   ! Calculate Non-Dimensional parameters
   Pr = nu / alpha
   Gr = Ra / Pr
-  Re = (Gr/1)**(0.5)
+  Re = (Gr/10)**(0.5)
 
   ! Calculate delta temperature
   delta_T = Ra * alpha * nu / g / beta
@@ -51,7 +51,7 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 100
+  itrmax = 1
   maxit = 1000
   solver_tol = 1e-6
   simpler_tol = 1e-6

@@ -65,12 +65,12 @@ subroutine pressure_solve2d
   b_p(m-1,n-1) = 0
 
   ! Print coefficients
-  !print *, "Aw_p:", Aw_p
-  !print *, "Ae_p:", Ae_p
-  !print *, "An_p:", As_p
-  !print *, "As_p:", An_p
-  !print *, "Ap_p:", Ap_p
-  !print *, "b_p:", b_p
+  print *, "Aw_p:", Aw_p
+  print *, "Ae_p:", Ae_p
+  print *, "An_p:", As_p
+  print *, "As_p:", An_p
+  print *, "Ap_p:", Ap_p
+  print *, "b_p:", b_p
 
   ! Solve pressure equation
   !call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)

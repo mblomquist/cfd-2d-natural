@@ -93,6 +93,19 @@ subroutine convergence2d(itr)
   R_u = sum(u_momentum_residual)
   R_v = sum(v_momentum_residual)
 
+  if (itr .eq. 1) then
+    R_u0 = R_u
+    R_v0 = R_v
+
+    R_u = 1
+    R_v = 1
+
+  else
+    R_u = R_u/R_u0
+    R_v = R_v/R_v0
+  end if
+
+
   return
 
 end subroutine convergence2d
