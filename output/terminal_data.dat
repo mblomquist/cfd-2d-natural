@@ -1,8 +1,8 @@
-Grid size:           10          10Rayleigh Number:      0.1400E+06
-Prandtl Number:      0.7005E+01
-Grashoff Number:      0.1999E+05
-Reynolds Number:      0.4470E+02
-delta_T:      0.3401E-04
+Grid size:           10          10Rayleigh Number:      0.1400E+03
+Prandtl Number:      0.7000E+01
+Grashoff Number:      0.2000E+02
+Reynolds Number:      0.1414E+01
+delta_T:      0.1000E+01
 R_u:      0.1000E+01
 R_v:      0.1000E+01
 

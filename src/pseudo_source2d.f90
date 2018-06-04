@@ -56,16 +56,16 @@ subroutine pseudo_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-	      Fw = rho*dy*(u_star(i,j)+u_star(i-1,j))/2
-	      Fe = rho*dy*(u_star(i+1,j)+u_star(i,j))/2
-	      Fs = rho*dx*(v_star(i,j)+v_star(i-1,j))/2
-        Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
+	      Fw = rho*u0*length*dy*(u_star(i,j)+u_star(i-1,j))/2
+	      Fe = rho*u0*length*dy*(u_star(i+1,j)+u_star(i,j))/2
+	      Fs = rho*u0*length*dx*(v_star(i,j)+v_star(i-1,j))/2
+        Fn = rho*u0*length*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-  		  Dw = rho*dy/Re/dx
-        De = rho*dy/Re/dx
-        Ds = rho*dx/Re/dy
-        Dn = rho*dx/Re/dy
+  		  Dw = dy/Re/dx
+        De = dy/Re/dx
+        Ds = dx/Re/dy
+        Dn = dx/Re/dy
 
 	      ! Compute Coefficients - Power Law Differening Scheme
 	      Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -117,16 +117,16 @@ subroutine pseudo_source2d(direction)
 	  do i = 1,m-1
 
 		  ! Update convection terms
-		  Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
-		  Fe = rho*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
-		  Fs = rho*dx*(v_star(i,j-1)+v_star(i,j))/2
-		  Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
+		  Fw = rho*u0*length*dy*(u_star(i,j-1)+u_star(i,j))/2
+		  Fe = rho*u0*length*dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
+		  Fs = rho*u0*length*dx*(v_star(i,j-1)+v_star(i,j))/2
+		  Fn = rho*u0*length*dx*(v_star(i,j)+v_star(i,j+1))/2
 
       ! Update diffusion terms
-      Dw = rho*dy/Re/dx
-      De = rho*dy/Re/dx
-      Ds = rho*dx/Re/dy
-      Dn = rho*dx/Re/dy
+      Dw = dy/Re/dx
+      De = dy/Re/dx
+      Ds = dx/Re/dy
+      Dn = dx/Re/dy
 
 		  ! Compute Coefficients - Power Law Differening Scheme
 		  Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -145,7 +145,7 @@ subroutine pseudo_source2d(direction)
 		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
 		  ! Update b values
-		  b_v(i,j) = (Su_v(i,j)+(Gr/Re/Re)*(T(i,j)+T(i,j-1))/2-g/2)*dx*dy
+		  b_v(i,j) = (Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/beta/delta_T/Re**2)*dx*dy
 
 	  end do
 	end do

@@ -21,10 +21,10 @@ subroutine pressure_correct2d
     do j = 1,n-1
 
       ! Update coefficients
-      Ae_p(i,j) = rho*dy*dy/Ap_u(i+1,j)
-	    Aw_p(i,j) = rho*dy*dy/Ap_u(i,j)
-	    An_p(i,j) = rho*dx*dx/Ap_v(i,j+1)
-	    As_p(i,j) = rho*dx*dx/Ap_v(i,j)
+      Ae_p(i,j) = rho*u0*length*dy*dy/Ap_u(i+1,j)
+	    Aw_p(i,j) = rho*u0*length*dy*dy/Ap_u(i,j)
+	    An_p(i,j) = rho*u0*length*dx*dx/Ap_v(i,j+1)
+	    As_p(i,j) = rho*u0*length*dx*dx/Ap_v(i,j)
 
 	    ! Check west node
       if (i .eq. 1) then
@@ -50,7 +50,7 @@ subroutine pressure_correct2d
       Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)-Sp_p(i,j)
 
 	    ! Update b values
-	    b_p(i,j) = rho*dx*(u_star(i,j)-u_star(i+1,j))+rho*dy*(v_star(i,j)-v_star(i,j+1))
+	    b_p(i,j) = rho*u0*length*dx*(u_star(i,j)-u_star(i+1,j))+rho*u0*length*dy*(v_star(i,j)-v_star(i,j+1))
 
     end do
   end do
@@ -70,7 +70,7 @@ subroutine pressure_correct2d
   print *, "As_p:", An_p
   print *, "Ap_p:", Ap_p
   print *, "b_p:", b_p
-  
+
   ! Solve pressure equation
   !call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
   call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)

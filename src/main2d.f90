@@ -30,6 +30,8 @@ program main2d
   print *, 'Grashoff Number: ', Gr
   print *, 'Reynolds Number', Re
   print *, 'delta_T:', delta_T
+  print *, 'length:', length
+  print *, 'u0:', u0
   print *, ''
 
   call cpu_time(start_time)

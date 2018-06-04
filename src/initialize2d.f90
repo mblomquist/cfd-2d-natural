@@ -13,10 +13,14 @@ subroutine initialize2d
   ! ..........................
   ! ..........................
 
-  ! Define geometry variables
-  length = 1  ! 1 meter long
-  width = 1     ! 1 meter wide
-  depth = 1     ! 1 meter deep
+  ! Define Dimensionless Inputs
+  Ra = 1.4e2
+  Pr = 7.0e0
+
+  ! Define Dimensionless Temperatures
+  T_h = 1
+  T_c = 0
+  delta_T = 1
 
   ! Define media variables
   g = 9.81e0
@@ -30,25 +34,22 @@ subroutine initialize2d
   nu = mu / rho
   alpha = k_const / rho / Cp
 
-  ! Define Non-Dimensional parameters
-  Ra = 1.4e5
-
-  ! Calculate Non-Dimensional parameters
-  Pr = nu / alpha
+  ! Calculate Dimensionless Values
   Gr = Ra / Pr
   Re = (Gr/10)**(0.5)
 
-  ! Calculate delta temperature
-  delta_T = Ra * alpha * nu / g / beta
+  ! Calculate Scale Values
+  length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.3333)
+  width = length
+  depth = 1
 
-  ! Calculate u0
-  u0 = (g*beta*delta_T)**(0.5)
+  u0 = Re*nu/length
 
   ! Define dimensionless temperature at boundaries
-  T_w = 1
-  T_e = 0
-  T_s = 0
-  T_n = 0
+  T_w = T_h
+  T_e = T_c
+  T_s = T_c
+  T_n = T_c
 
   ! Define solution parameters
   itrmax = 1
