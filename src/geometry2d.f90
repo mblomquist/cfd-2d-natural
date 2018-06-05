@@ -12,8 +12,8 @@ subroutine geometry2d
   include "var2d.dec"
 
   ! Calculate non-dimensional quantities for SIMPLER
-  dx = length/m
-  dy = width/n
+  dx = 1.0/m
+  dy = 1.0/n
   dz = 1
 
   return
