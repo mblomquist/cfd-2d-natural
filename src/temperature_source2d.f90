@@ -60,7 +60,7 @@ subroutine temperature_source2d
       end if
 
   	  ! Update Ap coefficient
-  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)*dx*dy
+  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j) !*dx*dy
 
       if (Ap_T(i,j) .eq. 0) then
         Aw_T(i,j) = Dw

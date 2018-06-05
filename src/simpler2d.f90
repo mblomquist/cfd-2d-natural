@@ -60,7 +60,7 @@ subroutine simpler2d
     print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
 
-    print *, ".............."
+    !print *, ".............."
     print *, "v_star:", v_star
     print *, "u_star:", u_star
     print *, ".............."
