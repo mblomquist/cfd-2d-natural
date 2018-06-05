@@ -145,7 +145,7 @@ subroutine pseudo_source2d(direction)
 		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
 		  ! Update b values
-		  b_v(i,j) = (Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/g/delta_T/Re**2)*dx*dy
+		  b_v(i,j) = (Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/2/delta_T/Re**2)*dx*dy
 
 	  end do
 	end do
