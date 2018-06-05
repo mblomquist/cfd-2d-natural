@@ -50,7 +50,7 @@ subroutine pressure_correct2d
       Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)-Sp_p(i,j)
 
 	    ! Update b values
-	    b_p(i,j) = rho*u0*length*((u_star(i,j)-u_star(i+1,j))*dy+(v_star(i,j)-v_star(i,j+1))*dx)*rho*u0**2
+	    b_p(i,j) = rho*u0**2.0*length*((u_star(i,j)-u_star(i+1,j))*dy+(v_star(i,j)-v_star(i,j+1))*dx)
 
     end do
   end do
