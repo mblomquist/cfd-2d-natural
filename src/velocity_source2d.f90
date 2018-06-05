@@ -164,7 +164,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = dx*(P_star(i,j)-P_star(i,j-1))+(Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/beta/delta_T/Re**2)*dx*dy
+		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/beta/delta_T/Re**2)*dx*dy
 
 	    end do
 	  end do
