@@ -14,7 +14,7 @@ subroutine initialize2d
   ! ..........................
 
   ! Define Dimensionless Inputs
-  Ra = 1.4e2
+  Ra = 1.4e5
   Pr = 7.0e0
 
   ! Define Dimensionless Temperatures
