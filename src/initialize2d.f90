@@ -52,10 +52,10 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 6
+  itrmax = 15
   maxit = 1000
-  solver_tol = 1e-4
-  simpler_tol = 1e-2
+  solver_tol = 1e-6
+  simpler_tol = 1e-4
   relax = 1.0
 
   ! Calculate geometry properties.
