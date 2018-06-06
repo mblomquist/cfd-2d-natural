@@ -39,7 +39,7 @@ subroutine initialize2d
   Re = (Gr/10)**(0.5)
 
   ! Calculate Scale Values
-  length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.3333)
+  length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.333)
   width = length
   depth = 1
 
@@ -52,8 +52,8 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 1
-  maxit = 100
+  itrmax = 3
+  maxit = 1000
   solver_tol = 1e-4
   simpler_tol = 1e-2
   relax = 1.0

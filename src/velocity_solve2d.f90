@@ -15,12 +15,12 @@ subroutine velocity_solve2d
   call velocity_source2d("v")
 
   ! Print coefficients
-  print *, "Aw_v:", Aw_v
-  print *, "Ae_v:", Ae_v
-  print *, "An_v:", As_v
-  print *, "As_v:", An_v
-  print *, "Ap_v:", Ap_v
-  print *, "b_v:", b_v
+  !print *, "Aw_v:", Aw_v
+  !print *, "Ae_v:", Ae_v
+  !print *, "An_v:", As_v
+  !print *, "As_v:", An_v
+  !print *, "Ap_v:", Ap_v
+  !print *, "b_v:", b_v
 
   ! Solve v-velocity equation
   !call solver2d_bicgstab2(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)

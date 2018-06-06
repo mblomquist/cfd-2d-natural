@@ -53,16 +53,16 @@ subroutine velocity_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = rho*u0*length*dy*(u_hat(i,j)+u_hat(i-1,j))/2
-		    Fe = rho*u0*length*dy*(u_hat(i+1,j)+u_hat(i,j))/2
-		    Fs = rho*u0*length*dx*(v_hat(i,j)+v_hat(i-1,j))/2
-		    Fn = rho*u0*length*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
+		    Fw = rho*u0/length*dy*(u_hat(i,j)+u_hat(i-1,j))/2
+		    Fe = rho*u0/length*dy*(u_hat(i+1,j)+u_hat(i,j))/2
+		    Fs = rho*u0/length*dx*(v_hat(i,j)+v_hat(i-1,j))/2
+		    Fn = rho*u0/length*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/Re/dx
-        De = dy/Re/dx
-        Ds = dx/Re/dy
-        Dn = dx/Re/dy
+        Dw = (mu/length/length)*dy/dx
+        De = (mu/length/length)*dy/dx
+        Ds = (mu/length/length)*dx/dy
+        Dn = (mu/length/length)*dx/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -92,7 +92,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)+dy*rho*u0**2.0*(P_star(i-1,j)-P_star(i,j))
+		    b_u(i,j) = Su_u(i,j)+dy*(P_star(i-1,j)-P_star(i,j))
 
       end do
     end do
@@ -125,16 +125,16 @@ subroutine velocity_source2d(direction)
 	    do i = 1,m-1
 
 	      ! Update convection terms
-		    Fw = rho*u0*length*dy*(u_hat(i,j-1)+u_hat(i,j))/2
-		    Fe = rho*u0*length*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
-		    Fs = rho*u0*length*dx*(v_hat(i,j-1)+v_hat(i,j))/2
-		    Fn = rho*u0*length*dx*(v_hat(i,j)+v_hat(i,j+1))/2
+		    Fw = rho*u0/length*dy*(u_hat(i,j-1)+u_hat(i,j))/2
+		    Fe = rho*u0/length*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
+		    Fs = rho*u0/length*dx*(v_hat(i,j-1)+v_hat(i,j))/2
+		    Fn = rho*u0/length*dx*(v_hat(i,j)+v_hat(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/Re/dx
-        De = dy/Re/dx
-        Ds = dx/Re/dy
-        Dn = dx/Re/dy
+        Dw = (mu/length/length)*dy/dx
+        De = (mu/length/length)*dy/dx
+        Ds = (mu/length/length)*dx/dy
+        Dn = (mu/length/length)*dx/dy
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -150,7 +150,7 @@ subroutine velocity_source2d(direction)
 		    end if
 
 		    ! Update Ap coefficient
-		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+		    Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
         if (Ap_v(i,j) .eq. 0) then
           Aw_v(i,j) = Dw
@@ -158,13 +158,13 @@ subroutine velocity_source2d(direction)
           As_v(i,j) = Ds
           An_v(i,j) = Dn
 
-          Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)
+          Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
           print *, "False Diffusion (v-velocity)@:", i,j
         end if
 
 		    ! Update b values
-		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)+Gr/Re**2*(T(i,j)+T(i,j+1))/2-Gr/beta/delta_T/Re**2)*dx*dy
+		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-rho*g*(1-beta*(T(i,j)+T(i,j+1))/2))*dx*dy
 
 	    end do
 	  end do

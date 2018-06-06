@@ -22,16 +22,16 @@ subroutine temperature_source2d
     do j = 1,n-1
 
       ! Update convective terms
-      Fw = rho*u0*length*dy*u(i,j)
-      Fe = rho*u0*length*dy*u(i+1,j)
-      Fs = rho*u0*length*dx*v(i,j)
-      Fn = rho*u0*length*dx*v(i,j+1)
+      Fw = rho*u0/length*u(i,j)*dy
+      Fe = rho*u0/length*u(i+1,j)*dy
+      Fs = rho*u0/length*v(i,j)*dx
+      Fn = rho*u0/length*v(i,j+1)*dx
 
       ! Update diffusion terms
-      Dw = dx/dy/Re/Pr
-      De = dx/dy/Re/Pr
-      Ds = dy/dx/Re/Pr
-      Dn = dy/dx/Re/Pr
+      Dw = (k_const/Cp/length/length)*dy/dx
+      De = (k_const/Cp/length/length)*dy/dx
+      Ds = (k_const/Cp/length/length)*dx/dy
+      Dn = (k_const/Cp/length/length)*dx/dy
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -68,13 +68,13 @@ subroutine temperature_source2d
         As_T(i,j) = Ds
         An_T(i,j) = Dn
 
-        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)
+        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)*dx*dy
 
         print *, "False Diffusion (temperature)@:", i,j
       end if
 
   	  ! Update b values
-  	  b_T(i,j) = Su_T(i,j) !*dx*dy
+  	  b_T(i,j) = Su_T(i,j)!*dx*dy
 
     end do
   end do
