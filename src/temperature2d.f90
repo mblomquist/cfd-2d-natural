@@ -25,12 +25,12 @@ subroutine temperature2d
   !Sp_T(:, 1) = -2*mu*Cp*delta_T*dx/Pr/dy
 
   ! West boundary source terms :: Wall
-  Su_T(1, :) = 2*mu*Cp*dx*dy/Pr/dx*T_w
-  Sp_T(1, :) = -2*mu*Cp*dx*dy/Pr/dx
+  Su_T(1, :) = 2*(k_const/Cp/length/length)*dy/dx*T_w
+  Sp_T(1, :) = -2*(k_const/Cp/length/length)*dy/dx
 
   ! East boundary source terms :: Wall
-  Su_T(m-1, :) = 2*mu*Cp*dx*dy/Pr/dx*T_e
-  Sp_T(m-1, :) = -2*mu*Cp*dx*dy/Pr/dx
+  Su_T(m-1, :) = 2*(k_const/Cp/length/length)*dy/dx*T_e
+  Sp_T(m-1, :) = -2*(k_const/Cp/length/length)*dy/dx
 
   return
 
