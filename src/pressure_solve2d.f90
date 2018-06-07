@@ -57,14 +57,14 @@ subroutine pressure_solve2d
 
   ! Set reference pressure node (east-north corner)
   do i = 1, m-1
-    
-    Aw_p(:,n-1) = 0
-    Ae_p(:,n-1) = 0
-    As_p(:,n-1) = 0
-    An_p(:,n-1) = 0
 
-    Ap_p(:,n-1) = 1
-    b_p(:,n-1) = 1-(m-1)/i
+    Aw_p(i,n-1) = 0
+    Ae_p(i,n-1) = 0
+    As_p(i,n-1) = 0
+    An_p(i,n-1) = 0
+
+    Ap_p(i,n-1) = 1
+    b_p(i,n-1) = 1.0-1.0*(m-1)/i
 
   end do
 
