@@ -1,7 +1,7 @@
 ! velocity_solve2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-21 (YYYY-MM-DD)
+! Last Update: 2018-06-07 (YYYY-MM-DD)
 !
 ! This subroutine updates the source terms for the solution of the momentum
 ! equations in the SIMPLER algorithm.
@@ -78,7 +78,7 @@ subroutine velocity_source2d(direction)
 		    end if
 
 		    ! Update Ap coefficient
-		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+		    Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)*dx*dy
 
         if (Ap_u(i,j) .eq. 0) then
           Aw_u(i,j) = Dw
@@ -86,13 +86,13 @@ subroutine velocity_source2d(direction)
           As_u(i,j) = Ds
           An_u(i,j) = Dn
 
-          Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)
+          Ap_u(i,j) = Ae_u(i,j)+Aw_u(i,j)+An_u(i,j)+As_u(i,j)-Sp_u(i,j)*dx*dy
 
           print *, "False Diffusion (u-velocity)@:", i,j
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)+dy*(P_star(i-1,j)-P_star(i,j))
+		    b_u(i,j) = Su_u(i,j)*dx*dy+dy*(P_star(i-1,j)-P_star(i,j))
 
       end do
     end do
