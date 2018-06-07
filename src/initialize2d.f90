@@ -14,7 +14,7 @@ subroutine initialize2d
   ! ..........................
 
   ! Define Dimensionless Inputs
-  Ra = 1.4e10
+  Ra = 1.4e5
   Pr = 7.0e0
 
   ! Define Dimensionless Temperatures
@@ -54,7 +54,7 @@ subroutine initialize2d
   ! Define solution parameters
   itrmax = 50
   maxit = 1e9
-  solver_tol = 1e-8
+  solver_tol = 1e-6
   simpler_tol = 1e-2
   relax = 1.0
 

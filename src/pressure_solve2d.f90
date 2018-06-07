@@ -64,9 +64,17 @@ subroutine pressure_solve2d
     An_p(i,n-1) = 0
 
     Ap_p(i,n-1) = 1
-    b_p(i,n-1) = 0 !1.0-1.0*(m-1)/i
+    b_p(i,n-1) = 1.0-1.0*(m-1)/i
 
   end do
+
+  !Aw_p(m-1,n-1) = 0
+  !Ae_p(m-1,n-1) = 0
+  !As_p(m-1,n-1) = 0
+  !An_p(m-1,n-1) = 0
+
+  !Ap_p(m-1,n-1) = 1
+  !b_p(m-1,n-1) = 0
 
   ! Print coefficients
   !print *, "Aw_p:", Aw_p
