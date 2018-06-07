@@ -64,7 +64,7 @@ subroutine pressure_solve2d
     An_p(i,n-1) = 0
 
     Ap_p(i,n-1) = 1
-    b_p(i,n-1) = 10.0-10.0*i/(m-1)
+    b_p(i,n-1) = 1.0-1.0*(m-1)/i
 
   end do
 
