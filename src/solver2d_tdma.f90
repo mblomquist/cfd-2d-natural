@@ -20,6 +20,31 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
 
   do k = 1, maxit
 
+    ! Start West - East Solve
+    do j = 1, n, 1
+
+      do i = 1, m, 1
+
+	      awe(i) = Ap(i,j)
+	      bwe(i) = -Ae(i,j)
+	      cwe(i) = -Aw(i,j)
+
+	      if (j .eq. 1) then
+	        dwe(i) = b(i,j)+An(i,j)*phi(i,j+1)
+	      elseif (j .eq. n) then
+	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)
+	      else
+	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)
+	      end if
+
+	    end do
+
+	    call solver1d_tdma(awe, bwe, cwe, dwe, phiwe, m)
+
+	    phi(:,j) = phiwe(:)
+
+    end do
+
     ! Start South - North Solve
     do i = 1, m, 1
 
@@ -45,31 +70,6 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
 
     end do
 
-    ! Start West - East Solve
-    do j = 1, n, 1
-
-      do i = 1, m, 1
-
-	      awe(i) = Ap(i,j)
-	      bwe(i) = -Ae(i,j)
-	      cwe(i) = -Aw(i,j)
-
-	      if (j .eq. 1) then
-	        dwe(i) = b(i,j)+An(i,j)*phi(i,j+1)
-	      elseif (j .eq. n) then
-	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)
-	      else
-	        dwe(i) = b(i,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)
-	      end if
-
-	    end do
-
-	    call solver1d_tdma(awe, bwe, cwe, dwe, phiwe, m)
-
-	    phi(:,j) = phiwe(:)
-
-    end do
-    
     ! Check Residual
     r = 0
 

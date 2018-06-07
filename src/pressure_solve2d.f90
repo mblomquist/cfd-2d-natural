@@ -18,7 +18,7 @@ subroutine pressure_solve2d
 
   ! Update coefficients
   do i = 1,m-1
-    do j = 1,n-1
+    do j = 1,n-2
 
       ! Update coefficients
 	    Ae_p(i,j) = rho*u0/length*dy*dy/Ap_u(i+1,j)
@@ -56,13 +56,13 @@ subroutine pressure_solve2d
   end do
 
   ! Set reference pressure node (east-north corner)
-  Aw_p(m-1,n-1) = 0
-  Ae_p(m-1,n-1) = 0
-  As_p(m-1,n-1) = 0
-  An_p(m-1,n-1) = 0
+  Aw_p(:,n-1) = 0
+  Ae_p(:,n-1) = 0
+  As_p(:,n-1) = 0
+  An_p(:,n-1) = 0
 
-  Ap_p(m-1,n-1) = 1
-  b_p(m-1,n-1) = 0
+  Ap_p(:,n-1) = 1
+  b_p(:,n-1) = 0
 
   ! Print coefficients
   !print *, "Aw_p:", Aw_p
