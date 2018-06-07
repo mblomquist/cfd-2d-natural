@@ -92,7 +92,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)*dx*dy+dy*(P_star(i-1,j)-P_star(i,j))
+		    b_u(i,j) = Su_u(i,j)*dx*dy-dy*(P_star(i-1,j)-P_star(i,j))
 
       end do
     end do
@@ -164,7 +164,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-rho*g*(1-beta*(T(i,j)+T(i,j+1))/2))*dx*dy
+		    b_v(i,j) = -dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-rho*g*(1-beta*(T(i,j)+T(i,j+1))/2))*dx*dy
 
 	    end do
 	  end do
