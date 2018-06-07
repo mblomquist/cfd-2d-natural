@@ -68,7 +68,7 @@ subroutine temperature_source2d
         As_T(i,j) = Ds
         An_T(i,j) = Dn
 
-        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)*dx*dy
+        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j) !*dx*dy
 
         print *, "False Diffusion (temperature)@:", i,j
       end if
