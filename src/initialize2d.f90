@@ -14,7 +14,7 @@ subroutine initialize2d
   ! ..........................
 
   ! Define Dimensionless Inputs
-  Ra = 1.4e5
+  Ra = 1.4e2
   Pr = 7.0e0
 
   ! Define Dimensionless Temperatures
@@ -36,7 +36,7 @@ subroutine initialize2d
 
   ! Calculate Dimensionless Values
   Gr = Ra / Pr
-  Re = (Gr/0.1)**(0.5)
+  Re = (Gr/10.0)**(0.5)
 
   ! Calculate Scale Values
   length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.333)

@@ -22,8 +22,8 @@ subroutine temperature_solve2d
   !print *, "b_T:", b_T
 
   ! Solve velocity Equations
-  !call solver2d_bicgstab2(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
-  call solver2d_tdma(Aw_T, Ae_T, As_T, An_T, Ap_T, b_T, T, m-1, n-1, solver_tol, maxit)
+  call solver2d_bicgstab2(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
+  !call solver2d_tdma(Aw_T, Ae_T, As_T, An_T, Ap_T, b_T, T, m-1, n-1, solver_tol, maxit)
 
   return
 
