@@ -52,9 +52,9 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 10
-  maxit = 1e8
-  solver_tol = 1e-4
+  itrmax = 14
+  maxit = 1e9
+  solver_tol = 1e-7
   simpler_tol = 1e-2
   relax = 1.0
 

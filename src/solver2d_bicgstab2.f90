@@ -75,11 +75,11 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
   r_norm = abs(dnrm2(m*n, r0, 1))
 
-  print *, 'r_norm(0):', r_norm
+  !print *, 'r_norm(0):', r_norm
 
   if (r_norm < tol) then
-    print *, 'Initial guess is a sufficient solution'
-	  print *, 'relative residual: ', r_norm
+    !print *, 'Initial guess is a sufficient solution'
+	  !print *, 'relative residual: ', r_norm
     return
   end if
 
@@ -129,9 +129,9 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
 	  if (r_norm < tol) then
-      print *, 'BiCGSTAB(2) Algorithm successfully converged!(mid)'
-      print *, 'Number of Iterations: ', itr
-      print *, 'Relative residual: ', r_norm
+      !print *, 'BiCGSTAB(2) Algorithm successfully converged!(mid)'
+      !print *, 'Number of Iterations: ', itr
+      !print *, 'Relative residual: ', r_norm
 
       do j = 1,n
         do i = 1,m
@@ -191,9 +191,9 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 	  r_norm = abs(dnrm2(m*n, b_values - Ax, 1))
 
 	  if (r_norm < tol) then
-      print *, 'BiCGSTAB(2) Algorithm successfully converged! (end)'
-      print *, 'Number of Iterations: ', itr+1
-      print *, 'Relative residual: ', r_norm
+      !print *, 'BiCGSTAB(2) Algorithm successfully converged! (end)'
+      !print *, 'Number of Iterations: ', itr+1
+      !print *, 'Relative residual: ', r_norm
 
       do j = 1,n
         do i = 1,m
@@ -205,13 +205,13 @@ subroutine solver2d_bicgstab2(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
     end if
 
 	  if (itr .gt. maxit) then
-      print *, '************************************'
-      print *, '************************************'
-      print *, 'BiCGStab Algorithm did not converge!'
-      print *, 'Number of Iterations: ', itr
-      print *, 'Relative residual: ', r_norm
-      print *, '************************************'
-      print *, '************************************'
+      !print *, '************************************'
+      !print *, '************************************'
+      !print *, 'BiCGStab Algorithm did not converge!'
+      !print *, 'Number of Iterations: ', itr
+      !print *, 'Relative residual: ', r_norm
+      !print *, '************************************'
+      !print *, '************************************'
     end if
 
   end do

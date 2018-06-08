@@ -74,8 +74,8 @@ subroutine pressure_correct2d
   P_prime = 0
 
   ! Solve pressure equation
-  !call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
-  call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
+  call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
+  !call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P_prime, m-1, n-1, solver_tol, maxit)
 
   return
 
