@@ -36,7 +36,7 @@ subroutine initialize2d
 
   ! Calculate Dimensionless Values
   Gr = Ra / Pr
-  Re = (Gr/10.0)**(0.5)
+  Re = (Gr/1.0)**(0.5)
 
   ! Calculate Scale Values
   length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.333)
@@ -52,10 +52,10 @@ subroutine initialize2d
   T_n = T_c
 
   ! Define solution parameters
-  itrmax = 15
+  itrmax = 10
   maxit = 1e6
   solver_tol = 1e-9
-  simpler_tol = 1e-2
+  simpler_tol = 1e-4
   relax = 1.0
 
   ! Calculate geometry properties.
