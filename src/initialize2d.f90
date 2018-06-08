@@ -36,7 +36,7 @@ subroutine initialize2d
 
   ! Calculate Dimensionless Values
   Gr = Ra / Pr
-  Re = (Gr/10.0)**(0.5)
+  Re = (Gr/10000.0)**(0.5)
 
   ! Calculate Scale Values
   length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.333)
