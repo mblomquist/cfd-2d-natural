@@ -22,7 +22,7 @@ subroutine simpler2d
   u = 0
   v = 0
   T = 0
-  
+
   P_star = P
   u_star = u
   v_star = v
@@ -32,8 +32,8 @@ subroutine simpler2d
   v_hat = v
 
   ! Solve Temperature for Natural Convection First
-  print *, "Step 0: Solve Temperature Equation"
-  call temperature_solve2d
+  !print *, "Step 0: Solve Temperature Equation"
+  !call temperature_solve2d
   !print *, ".............."
   !print *, "T:", T
   !print *, ".............."
@@ -65,8 +65,8 @@ subroutine simpler2d
     print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
     !print *, ".............."
-    !print *, "v_star:", v_star
     !print *, "u_star:", u_star
+    !print *, "v_star:", v_star
     !print *, ".............."
 
     ! Step 5: Solve Pressure Equation
@@ -85,8 +85,8 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 7: Solve Temperature Equation
-    print *, "Step 6: Solve Temperature Equation"
-    call temperature_solve2d
+    !print *, "Step 6: Solve Temperature Equation"
+    !call temperature_solve2d
     !print *, ".............."
     !print *, "T:", T
     !print *, ".............."

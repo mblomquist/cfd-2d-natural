@@ -14,12 +14,12 @@ subroutine initialize2d
   ! ..........................
 
   ! Define length Scale
-  length = 0.01     ! (m)
-  width = 0.01      ! (m)
+  length = 0.1     ! (m)
+  width = 0.1      ! (m)
   depth = 1.0         ! (m)
 
   ! Define velocity scale
-  u0 = 0.01           ! (m/s)
+  u0 = 100.0           ! (m/s)
 
   ! Define temperature sclae
   T_h = 274.0
@@ -40,9 +40,9 @@ subroutine initialize2d
   nu = mu / rho
 
   ! Calculate dimensionless numbers
-  Ra = g*beta*delta_T*length**3.0/alpha/nu
-  Pr = nu/alpha
-  Gr = Ra/Pr
+  Ra = 0 !g*beta*delta_T*length**3.0/alpha/nu
+  Pr = 1 !nu/alpha
+  Gr = 0 !Ra/Pr
   Re = u0*length/nu
 
 

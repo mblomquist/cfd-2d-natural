@@ -22,32 +22,6 @@ subroutine velocity_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! Caluclate West boundary source terms :: No slip
-    ! Compute Coefficients - Fixed Value
-    Aw_u(1,:) = 0
-    Ae_u(1,:) = 0
-    As_u(1,:) = 0
-    An_u(1,:) = 0
-
-    ! Update Ap coefficient
-    Ap_u(1,:) = 1
-
-    ! Update b values
-    b_u(1,:) = 0
-
-    ! Calculate East bounday source terms :: No slip
-    ! Compute Coefficients - Fixed Value
-    Aw_u(m,:) = 0
-    Ae_u(m,:) = 0
-    As_u(m,:) = 0
-    An_u(m,:) = 0
-
-    ! Update Ap coefficient
-    Ap_u(m,:) = 1
-
-    ! Update b values
-    b_u(m,:) = 0
-
     ! South Boundary :: No-slip
 	  Aw_u(:,1) = 0
 	  Ae_u(:,1) = 0
@@ -60,11 +34,37 @@ subroutine velocity_source2d(direction)
 	  ! North Boundary :: No-slip
     Aw_u(:,n-1) = 0
 	  Ae_u(:,n-1) = 0
-	  As_u(:,n-1) = 0
+	  As_u(:,n-1) = 1
 	  An_u(:,n-1) = 0
 
 	  Ap_u(:,n-1) = 1
 	  b_u(:,n-1) = 0
+
+    ! Caluclate West boundary source terms :: No slip
+    ! Compute Coefficients - Fixed Value
+    Aw_u(1,:) = 0
+    Ae_u(1,:) = 0
+    As_u(1,:) = 0
+    An_u(1,:) = 0
+
+    ! Update Ap coefficient
+    Ap_u(1,:) = Sp_u(1,:)
+
+    ! Update b values
+    b_u(1,:) = Su_u(1,:)
+
+    ! Calculate East bounday source terms :: No slip
+    ! Compute Coefficients - Fixed Value
+    Aw_u(m,:) = 1
+    Ae_u(m,:) = 0
+    As_u(m,:) = 0
+    An_u(m,:) = 0
+
+    ! Update Ap coefficient
+    Ap_u(m,:) = 1
+
+    ! Update b values
+    b_u(m,:) = 0
 
     ! Calculate interior coefficients
     do i = 2,m-1
@@ -110,7 +110,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)*dx*dydy*(P_star(i-1,j)-P_star(i,j))
+		    b_u(i,j) = Su_u(i,j)*dx*dy+dy*(P_star(i-1,j)-P_star(i,j))
 
       end do
     end do
@@ -182,7 +182,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-Gr/Re/Re*(1/beta/delta_T-(T(i,j)+T(i,j+1))/2))*dx*dy
+		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-g*length/u0**2.0)*dx*dy
 
 	    end do
 	  end do

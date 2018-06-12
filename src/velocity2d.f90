@@ -32,6 +32,9 @@ subroutine velocity2d
   Su_u(:, n-1) = 0
   Sp_u(:, n-1) = 0 !-2*mu*u0/length*dy/dx
 
+  ! West boundary source terms ::
+  Su_u(1, :) = 1
+  Sp_u(1, :) = 1
 
   ! ====================== V-Velocity ====================== !
   ! Initialize v-velocity field

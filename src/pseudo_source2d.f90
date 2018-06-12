@@ -25,6 +25,24 @@ subroutine pseudo_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
+    ! South Boundary :: No-slip
+    Aw_u(:,1) = 0
+    Ae_u(:,1) = 0
+    As_u(:,1) = 0
+    An_u(:,1) = 0
+
+    Ap_u(:,1) = 1
+    b_u(:,1) = 0
+
+    ! North Boundary :: Symmetry
+    Aw_u(:,n-1) = 0
+    Ae_u(:,n-1) = 0
+    As_u(:,n-1) = 1
+    An_u(:,n-1) = 0
+
+    Ap_u(:,n-1) = 1
+    b_u(:,n-1) = 0
+
     ! Caluclate West boundary source terms :: No slip
     ! Compute Coefficients - Fixed Value
     Aw_u(1,:) = 0
@@ -33,14 +51,14 @@ subroutine pseudo_source2d(direction)
     An_u(1,:) = 0
 
     ! Update Ap coefficient
-    Ap_u(1,:) = 1
+    Ap_u(1,:) = Sp_u(1,:)
 
     ! Update b values
-    b_u(1,:) = 0
+    b_u(1,:) = Su_u(1,:)
 
     ! Calculate East bounday source terms :: No slip
     ! Compute Coefficients - Fixed Value
-    Aw_u(m,:) = 0
+    Aw_u(m,:) = 1
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0
@@ -50,24 +68,6 @@ subroutine pseudo_source2d(direction)
 
     ! Update b values
     b_u(m,:) = 0
-
-    ! South Boundary :: No-slip
-	  Aw_u(:,1) = 0
-	  Ae_u(:,1) = 0
-	  As_u(:,1) = 0
-	  An_u(:,1) = 0
-
-	  Ap_u(:,1) = 1
-	  b_u(:,1) = 0
-
-	  ! North Boundary :: No-slip
-    Aw_u(:,n-1) = 0
-	  Ae_u(:,n-1) = 0
-	  As_u(:,n-1) = 0
-	  An_u(:,n-1) = 0
-
-	  Ap_u(:,n-1) = 1
-	  b_u(:,n-1) = 0
 
     ! Calculate interior coefficients
     do i = 2,m-1
@@ -163,7 +163,7 @@ subroutine pseudo_source2d(direction)
 		  Ap_v(i,j) = Ae_v(i,j)+Aw_v(i,j)+An_v(i,j)+As_v(i,j)-Sp_v(i,j)*dx*dy
 
 		  ! Update b values
-		  b_v(i,j) = (Su_v(i,j)-Gr/Re/Re*(1/beta/delta_T-(T(i,j)+T(i,j+1))/2))*dx*dy
+		  b_v(i,j) = (Su_v(i,j)-g*length/u0**2.0)*dx*dy
 
 	  end do
 	end do

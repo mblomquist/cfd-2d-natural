@@ -20,6 +20,60 @@ subroutine pseudo_solve2d
   ! Define internal variables
   integer :: i, j
 
+  ! ========================== u_hat ========================== !
+
+  ! Update stiffness coefficients
+  call pseudo_source2d("u")
+
+  ! Print coefficients
+  !print *, "Aw_u:", Aw_u
+  !print *, "Ae_u:", Ae_u
+  !print *, "An_u:", As_u
+  !print *, "As_u:", An_u
+  !print *, "Ap_u:", Ap_u
+  !print *, "b_u:", b_u
+
+  u_hat = 0
+
+  ! Calculate nodes
+  do i = 1,m
+    do j = 1,n-1
+
+      if (i .eq. 1) then
+
+        if (j .eq. 1) then
+          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        elseif (j .eq. n-1) then
+          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
+        else
+          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        end if
+
+      elseif (i .eq. m) then
+
+        if (j .eq. 1) then
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        elseif (j .eq. n-1) then
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
+        else
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        end if
+
+      else
+
+        if (j .eq. 1) then
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        elseif (j .eq. n-1) then
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
+        else
+          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
+        end if
+
+      end if
+
+	  end do
+  end do
+
   ! ========================== v_hat ========================== !
 
   ! Update stiffness coefficients
@@ -73,61 +127,7 @@ subroutine pseudo_solve2d
 
 	  end do
   end do
-
-  ! ========================== u_hat ========================== !
-
-  ! Update stiffness coefficients
-  call pseudo_source2d("u")
-
-  ! Print coefficients
-  !print *, "Aw_u:", Aw_u
-  !print *, "Ae_u:", Ae_u
-  !print *, "An_u:", As_u
-  !print *, "As_u:", An_u
-  !print *, "Ap_u:", Ap_u
-  !print *, "b_u:", b_u
-
-  u_hat = 0
   
-  ! Calculate nodes
-  do i = 1,m
-    do j = 1,n-1
-
-      if (i .eq. 1) then
-
-        if (j .eq. 1) then
-          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        elseif (j .eq. n-1) then
-          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
-        else
-          u_hat(i,j) = (Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        end if
-
-      elseif (i .eq. m) then
-
-        if (j .eq. 1) then
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        elseif (j .eq. n-1) then
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
-        else
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        end if
-
-      else
-
-        if (j .eq. 1) then
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        elseif (j .eq. n-1) then
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+b_u(i,j))/Ap_u(i,j)
-        else
-          u_hat(i,j) = (Aw_u(i,j)*u_star(i-1,j)+Ae_u(i,j)*u_star(i+1,j)+As_u(i,j)*u_star(i,j-1)+An_u(i,j)*u_star(i,j+1)+b_u(i,j))/Ap_u(i,j)
-        end if
-
-      end if
-
-	  end do
-  end do
-
   return
 
 end subroutine pseudo_solve2d
