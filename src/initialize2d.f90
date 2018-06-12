@@ -19,7 +19,7 @@ subroutine initialize2d
   depth = 1.0         ! (m)
 
   ! Define velocity scale
-  u0 = 0.005         ! (m/s)
+  u0 = 0.01         ! (m/s)
 
   ! Define temperature sclae
   T_h = 274
