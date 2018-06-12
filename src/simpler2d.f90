@@ -27,7 +27,7 @@ subroutine simpler2d
   v_hat = v
 
   ! Solve Temperature for Natural Convection First
-  !print *, "Step 0: Solve Temperature Equation"
+  print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
   !print *, ".............."
   !print *, "T:", T
@@ -39,7 +39,7 @@ subroutine simpler2d
     v_hat = 0
 
     ! Step 2: Calculate Pseudo-Velocities
-    !print *, "Step 1: Solve Pseudo-Velocities"
+    print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d
     !print *, ".............."
     !print *, "u_hat:", u_hat
@@ -47,7 +47,7 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 3: Solve Pressure Equation
-    !print *, "Step 2: Solve Pressure Equation"
+    print *, "Step 2: Solve Pressure Equation"
     call pressure_solve2d
     !print *, ".............."
     !print *, "P:", P
@@ -57,7 +57,7 @@ subroutine simpler2d
 	  P_star = P
 
     ! Step 4: Solve Momentum Equations
-    !print *, "Step 3: Solve Momentum Equations"
+    print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
     !print *, ".............."
     !print *, "v_star:", v_star
@@ -65,14 +65,14 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 5: Solve Pressure Equation
-    !print *, "Step 4: Solve Pressure Correction"
+    print *, "Step 4: Solve Pressure Correction"
     call pressure_correct2d
     !print *, ".............."
     !print *, "P_prime:", P_prime
     !print *, ".............."
 
     ! Step 6: Correct Velocities
-    !print *, "Step 5: Correct Velocities"
+    print *, "Step 5: Correct Velocities"
     call velocity_correct2d
     !print *, ".............."
     !print *, "u:", u
@@ -80,7 +80,7 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 7: Solve Temperature Equation
-    !print *, "Step 6: Solve Temperature Equation"
+    print *, "Step 6: Solve Temperature Equation"
     call temperature_solve2d
     !print *, ".............."
     !print *, "T:", T

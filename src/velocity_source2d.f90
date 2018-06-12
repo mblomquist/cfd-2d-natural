@@ -53,16 +53,16 @@ subroutine velocity_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = rho*u0/length*dy*(u_hat(i,j)+u_hat(i-1,j))/2
-		    Fe = rho*u0/length*dy*(u_hat(i+1,j)+u_hat(i,j))/2
-		    Fs = rho*u0/length*dx*(v_hat(i,j)+v_hat(i-1,j))/2
-		    Fn = rho*u0/length*dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
+		    Fw = dy*(u_hat(i,j)+u_hat(i-1,j))/2
+		    Fe = dy*(u_hat(i+1,j)+u_hat(i,j))/2
+		    Fs = dx*(v_hat(i,j)+v_hat(i-1,j))/2
+		    Fn = dx*(v_hat(i,j+1)+v_hat(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = (mu/length/length)*dy/dx
-        De = (mu/length/length)*dy/dx
-        Ds = (mu/length/length)*dx/dy
-        Dn = (mu/length/length)*dx/dy
+        Dw = 1/Re
+        De = 1/Re
+        Ds = 1/Re
+        Dn = 1/Re
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -125,16 +125,16 @@ subroutine velocity_source2d(direction)
 	    do i = 1,m-1
 
 	      ! Update convection terms
-		    Fw = rho*u0/length*dy*(u_hat(i,j-1)+u_hat(i,j))/2
-		    Fe = rho*u0/length*dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
-		    Fs = rho*u0/length*dx*(v_hat(i,j-1)+v_hat(i,j))/2
-		    Fn = rho*u0/length*dx*(v_hat(i,j)+v_hat(i,j+1))/2
+		    Fw = dy*(u_hat(i,j-1)+u_hat(i,j))/2
+		    Fe = dy*(u_hat(i+1,j-1)+u_hat(i+1,j))/2
+		    Fs = dx*(v_hat(i,j-1)+v_hat(i,j))/2
+		    Fn = dx*(v_hat(i,j)+v_hat(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = (mu/length/length)*dy/dx
-        De = (mu/length/length)*dy/dx
-        Ds = (mu/length/length)*dx/dy
-        Dn = (mu/length/length)*dx/dy
+        Dw = dy/dx/Re
+        De = dy/dx/Re
+        Ds = dx/dy/Re
+        Dn = dx/dy/Re
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -164,7 +164,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-rho*g*(1-beta*(T(i,j)+T(i,j+1))/2))*dx*dy
+		    b_v(i,j) = dx*(P_star(i,j-1)-P_star(i,j))+(Su_v(i,j)-Gr/Re/Re*(1/beta/delta_T-(T(i,j)+T(i,j+1))/2))*dx*dy
 
 	    end do
 	  end do

@@ -22,16 +22,16 @@ subroutine temperature_source2d
     do j = 1,n-1
 
       ! Update convective terms
-      Fw = rho*u0/length*u(i,j)*dy
-      Fe = rho*u0/length*u(i+1,j)*dy
-      Fs = rho*u0/length*v(i,j)*dx
-      Fn = rho*u0/length*v(i,j+1)*dx
+      Fw = dy*u(i,j)*dy
+      Fe = dy*u(i+1,j)*dy
+      Fs = dx*v(i,j)*dx
+      Fn = dx*v(i,j+1)*dx
 
       ! Update diffusion terms
-      Dw = (k_const/Cp/length/length)*dy/dx
-      De = (k_const/Cp/length/length)*dy/dx
-      Ds = (k_const/Cp/length/length)*dx/dy
-      Dn = (k_const/Cp/length/length)*dx/dy
+      Dw = dy/dx/Re/Pr
+      De = dy/dx/Re/Pr
+      Ds = dx/dy/Re/Pr
+      Dn = dx/dy/Re/Pr
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
