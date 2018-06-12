@@ -14,8 +14,8 @@ subroutine initialize2d
   ! ..........................
 
   ! Define length Scale
-  length = 0.1     ! (m)
-  width = 0.1      ! (m)
+  length = 0.01     ! (m)
+  width = 0.01      ! (m)
   depth = 1.0         ! (m)
 
   ! Define velocity scale
@@ -53,7 +53,7 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 18
+  itrmax = 4
   maxit = 1e8
   solver_tol = 1e-9
   simpler_tol = 1e-2
