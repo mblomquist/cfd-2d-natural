@@ -22,8 +22,8 @@ subroutine initialize2d
   u0 = 1.0           ! (m/s)
 
   ! Define temperature sclae
-  T_h = 274
-  T_c = 273
+  T_h = 274.0
+  T_c = 273.0
 
   delta_T = T_h - T_c
 
@@ -53,7 +53,7 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 5
+  itrmax = 2
   maxit = 1e8
   solver_tol = 1e-9
   simpler_tol = 1e-4
