@@ -19,7 +19,7 @@ subroutine initialize2d
   depth = 1.0         ! (m)
 
   ! Define velocity scale
-  u0 = 0.1         ! (m/s)
+  u0 = 1.0           ! (m/s)
 
   ! Define temperature sclae
   T_h = 274
@@ -56,7 +56,7 @@ subroutine initialize2d
   itrmax = 5
   maxit = 1e8
   solver_tol = 1e-9
-  simpler_tol = 1e-2
+  simpler_tol = 1e-4
   relax = 1.0
 
   ! Calculate geometry properties.
