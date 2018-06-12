@@ -51,9 +51,27 @@ subroutine pseudo_source2d(direction)
     ! Update b values
     b_u(m,:) = 0
 
+    ! South Boundary :: No-slip
+	  Aw_u(:,1) = 0
+	  Ae_u(:,1) = 0
+	  As_u(:,1) = 0
+	  An_u(:,1) = 0
+
+	  Ap_u(:,1) = 1
+	  b_u(:,1) = 0
+
+	  ! North Boundary :: No-slip
+    Aw_u(:,n-1) = 0
+	  Ae_u(:,n-1) = 0
+	  As_u(:,n-1) = 0
+	  An_u(:,n-1) = 0
+
+	  Ap_u(:,n-1) = 1
+	  b_u(:,n-1) = 0
+
     ! Calculate interior coefficients
     do i = 2,m-1
-      do j = 1,n-1
+      do j = 2,n-2
 
         ! Update convection terms
 	      Fw = dy*(u_star(i,j)+u_star(i-1,j))/2
