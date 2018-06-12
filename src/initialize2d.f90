@@ -19,7 +19,7 @@ subroutine initialize2d
   depth = 1.0         ! (m)
 
   ! Define velocity scale
-  u0 = 1.0           ! (m/s)
+  u0 = 0.01           ! (m/s)
 
   ! Define temperature sclae
   T_h = 274.0
@@ -53,7 +53,7 @@ subroutine initialize2d
   T_n = 0
 
   ! Define solution parameters
-  itrmax = 10
+  itrmax = 4
   maxit = 1e4
   solver_tol = 1e-6
   simpler_tol = 1e-4
