@@ -16,10 +16,10 @@ subroutine initialize2d
   ! Define length Scale
   length = 0.1     ! (m)
   width = 0.1      ! (m)
-  depth = 1         ! (m)
+  depth = 1.0         ! (m)
 
   ! Define velocity scale
-  u0 = 0.01         ! (m/s)
+  u0 = 0.03         ! (m/s)
 
   ! Define temperature sclae
   T_h = 274

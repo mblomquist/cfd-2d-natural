@@ -29,6 +29,7 @@ program main2d
   print *, 'Prandtl Number: ', Pr
   print *, 'Grashoff Number: ', Gr
   print *, 'Reynolds Number', Re
+  print *, 'Gr/Re2:', Gr/Re/Re
   print *, 'delta_T:', delta_T
   print *, 'length:', length
   print *, 'u0:', u0

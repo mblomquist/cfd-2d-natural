@@ -18,6 +18,11 @@ subroutine simpler2d
   print *, 'Start SIMPLER Algorithm.'
 
   ! Set initial guesses
+  P = 0
+  u = 0
+  v = 0
+  T = 0
+  
   P_star = P
   u_star = u
   v_star = v
