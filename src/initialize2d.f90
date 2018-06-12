@@ -13,48 +13,49 @@ subroutine initialize2d
   ! ..........................
   ! ..........................
 
-  ! Define Dimensionless Inputs
-  Ra = 1.4e2
-  Pr = 7.0e0
+  ! Define length Scale
+  length = 0.01     ! (m)
+  width = 0.01      ! (m)
+  depth = 1         ! (m)
 
-  ! Define Dimensionless Temperatures
-  T_h = 1
-  T_c = 0
-  delta_T = 1
+  ! Define velocity scale
+  u0 = 0.01         ! (m/s)
 
-  ! Define media variables
+  ! Define temperature sclae
+  T_h = 274
+  T_c = 273
+
+  delta_T = T_h - T_c
+
+  ! Define media parameters
   g = 9.81e0
-  rho = 9.97e2
-  mu = 1.07e-3
-  k_const = 6.40e-1
-  Cp = 4.19e3
-  beta = 6.90e-5
+  rho = 1.28e0
+  mu = 1.73e-5
+  k_const = 2.44e-2
+  Cp = 1.01e3
+  beta = 3.66e-3
 
-  ! Calculate variables
+  ! Calculate parameters
+  alpha = k_const / Cp / rho
   nu = mu / rho
-  alpha = k_const / rho / Cp
 
-  ! Calculate Dimensionless Values
-  Gr = Ra / Pr
-  Re = (Gr/10.0)**(0.5)
+  ! Calculate dimensionless numbers
+  Ra = g*beta*delta_T*length**3.0/alpha/nu
+  Pr = nu/alpha
+  Gr = Ra/Pr
+  Re = u0*length/nu
 
-  ! Calculate Scale Values
-  length = ((Ra*nu**2)/(Pr*g*beta*delta_T))**(0.333)
-  width = length
-  depth = 1
-
-  u0 = Re*nu/length
 
   ! Define dimensionless temperature at boundaries
-  T_w = T_h
-  T_e = T_c
-  T_s = T_c
-  T_n = T_c
+  T_w = 1
+  T_e = 0
+  T_s = 0
+  T_n = 0
 
   ! Define solution parameters
-  itrmax = 11
-  maxit = 1e6
-  solver_tol = 1e-6
+  itrmax = 25
+  maxit = 1e8
+  solver_tol = 1e-9
   simpler_tol = 1e-2
   relax = 1.0
 

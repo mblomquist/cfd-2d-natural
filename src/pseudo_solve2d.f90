@@ -33,6 +33,8 @@ subroutine pseudo_solve2d
   !print *, "Ap_v:", Ap_v
   !print *, "b_v:", b_v
 
+  v_hat = 0
+
   ! Calculate nodes
   do j = 1,n
     do i = 1,m-1
@@ -85,6 +87,8 @@ subroutine pseudo_solve2d
   !print *, "Ap_u:", Ap_u
   !print *, "b_u:", b_u
 
+  u_hat = 0
+  
   ! Calculate nodes
   do i = 1,m
     do j = 1,n-1

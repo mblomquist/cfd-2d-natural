@@ -134,7 +134,7 @@ subroutine pseudo_source2d(direction)
 		  As_v(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 		  An_v(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-		  ! Check South / North Nodes
+		  ! Check West / East Nodes
 		  if (i .eq. 1) then
 		    Aw_v(i,j) = 0
 		  elseif (i .eq. m-1) then
