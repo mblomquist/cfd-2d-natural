@@ -14,8 +14,8 @@ subroutine initialize2d
   ! ..........................
 
   ! Define length Scale
-  length = 0.01     ! (m)
-  width = 0.01      ! (m)
+  length = 0.1     ! (m)
+  width = 0.1      ! (m)
   depth = 1         ! (m)
 
   ! Define velocity scale
