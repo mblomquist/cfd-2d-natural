@@ -1,7 +1,7 @@
 ! simpler2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-15 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 ! This subroutine runs the SIMPLER algorithm for a 2D CFD problem.
 !
@@ -22,7 +22,7 @@ subroutine simpler2d
   u = 0
   v = 0
   T = 0
-  
+
   P_star = P
   u_star = u
   v_star = v
@@ -32,7 +32,7 @@ subroutine simpler2d
   v_hat = v
 
   ! Solve Temperature for Natural Convection First
-  print *, "Step 0: Solve Temperature Equation"
+  !print *, "Step 0: Solve Temperature Equation"
   call temperature_solve2d
   !print *, ".............."
   !print *, "T:", T
@@ -40,11 +40,30 @@ subroutine simpler2d
 
   do i = 1,itrmax
 
-    u_hat = 0
-    v_hat = 0
+    ! Update stiffness coefficients :: u
+    call velocity_source2d("u")
+
+    ! Print coefficients
+    !print *, "Aw_u:", Aw_u
+    !print *, "Ae_u:", Ae_u
+    !print *, "An_u:", As_u
+    !print *, "As_u:", An_u
+    !print *, "Ap_u:", Ap_u
+    !print *, "b_u:", b_u
+
+    ! Update stiffness coefficients :: v
+    call velocity_source2d("v")
+
+    ! Print coefficients
+    !print *, "Aw_v:", Aw_v
+    !print *, "Ae_v:", Ae_v
+    !print *, "An_v:", As_v
+    !print *, "As_v:", An_v
+    !print *, "Ap_v:", Ap_v
+    !print *, "b_v:", b_v
 
     ! Step 2: Calculate Pseudo-Velocities
-    print *, "Step 1: Solve Pseudo-Velocities"
+    !print *, "Step 1: Solve Pseudo-Velocities"
     call pseudo_solve2d
     !print *, ".............."
     !print *, "u_hat:", u_hat
@@ -52,7 +71,7 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 3: Solve Pressure Equation
-    print *, "Step 2: Solve Pressure Equation"
+    !print *, "Step 2: Solve Pressure Equation"
     call pressure_solve2d
     !print *, ".............."
     !print *, "P:", P
@@ -61,8 +80,20 @@ subroutine simpler2d
 	  ! Set p_star := P
 	  P_star = P
 
+    ! Step 8: Check Convergence
+    print *, "Step 7: Check Convergence"
+    call convergence2d(i)
+
+    print *, "Iteration:", i
+    print *, "Maximum Error: ", R_e
+
+    if (R_e .le. simpler_tol) then
+      print *, "Simpler completed in: ", i
+      exit
+    end if
+
     ! Step 4: Solve Momentum Equations
-    print *, "Step 3: Solve Momentum Equations"
+    !print *, "Step 3: Solve Momentum Equations"
     call velocity_solve2d
     !print *, ".............."
     !print *, "v_star:", v_star
@@ -70,14 +101,14 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 5: Solve Pressure Equation
-    print *, "Step 4: Solve Pressure Correction"
+    !print *, "Step 4: Solve Pressure Correction"
     call pressure_correct2d
     !print *, ".............."
     !print *, "P_prime:", P_prime
     !print *, ".............."
 
     ! Step 6: Correct Velocities
-    print *, "Step 5: Correct Velocities"
+    !print *, "Step 5: Correct Velocities"
     call velocity_correct2d
     !print *, ".............."
     !print *, "u:", u
@@ -85,29 +116,15 @@ subroutine simpler2d
     !print *, ".............."
 
     ! Step 7: Solve Temperature Equation
-    print *, "Step 6: Solve Temperature Equation"
+    !print *, "Step 6: Solve Temperature Equation"
     call temperature_solve2d
     !print *, ".............."
     !print *, "T:", T
     !print *, ".............."
 
-    ! Step 8: Check Convergence
-    print *, "Step 7: Check Convergence"
-    call convergence2d(i)
-
-    print *, "Iteration:", i
-    print *, "R_u: ", R_u
-    print *, "R_v: ", R_v
-    print *, "................................"
-
     P_star = P
 	  u_star = u
 	  v_star = v
-
-    if ((R_u .le. simpler_tol) .and. (R_v .le. simpler_tol)) then
-      print *, "Simpler completed in: ", i
-      exit
-    end if
 
   end do
 

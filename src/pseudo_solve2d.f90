@@ -1,7 +1,7 @@
 ! pseudo_solve2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-03=5-15 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 ! This subroutine computes the pseudo velocities (u_hat and v_hat) for a 2D
 ! CFD problem.
@@ -21,19 +21,6 @@ subroutine pseudo_solve2d
   integer :: i, j
 
   ! ========================== v_hat ========================== !
-
-  ! Update stiffness coefficients
-  call pseudo_source2d("v")
-
-  ! Print coefficients
-  !print *, "Aw_v:", Aw_v
-  !print *, "Ae_v:", Ae_v
-  !print *, "An_v:", As_v
-  !print *, "As_v:", An_v
-  !print *, "Ap_v:", Ap_v
-  !print *, "b_v:", b_v
-
-  v_hat = 0
 
   ! Calculate nodes
   do j = 1,n
@@ -76,19 +63,6 @@ subroutine pseudo_solve2d
 
   ! ========================== u_hat ========================== !
 
-  ! Update stiffness coefficients
-  call pseudo_source2d("u")
-
-  ! Print coefficients
-  !print *, "Aw_u:", Aw_u
-  !print *, "Ae_u:", Ae_u
-  !print *, "An_u:", As_u
-  !print *, "As_u:", An_u
-  !print *, "Ap_u:", Ap_u
-  !print *, "b_u:", b_u
-
-  u_hat = 0
-  
   ! Calculate nodes
   do i = 1,m
     do j = 1,n-1

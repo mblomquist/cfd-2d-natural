@@ -1,7 +1,7 @@
 ! pressure_solve2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-15 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 ! This subroutine solves the pressure equation for the SIMPLER algorithm
 ! using u_hat and v_hat.
@@ -21,10 +21,10 @@ subroutine pressure_solve2d
     do j = 1,n-1
 
       ! Update coefficients
-	    Ae_p(i,j) = dy*dy/Ap_u(i+1,j)
-	    Aw_p(i,j) = dy*dy/Ap_u(i,j)
-	    An_p(i,j) = dx*dx/Ap_v(i,j+1)
-	    As_p(i,j) = dx*dx/Ap_v(i,j)
+      Ae_p(i,j) = dy/Ap_u(i+1,j)*alpha_v
+	    Aw_p(i,j) = dy/Ap_u(i,j)*alpha_v
+	    An_p(i,j) = dx/Ap_v(i,j+1)*alpha_v
+	    As_p(i,j) = dx/Ap_v(i,j)*alpha_v
 
 	    ! Check west node
       if (i .eq. 1) then
@@ -47,7 +47,7 @@ subroutine pressure_solve2d
       end if
 
 	    ! Ap coefficient
-      Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)-Sp_p(i,j)
+      Ap_p(i,j) = As_p(i,j)+Aw_p(i,j)+Ae_p(i,j)+An_p(i,j)
 
 	    ! Update b values
 	    b_p(i,j) = ((u_hat(i,j)-u_hat(i+1,j))*dy+(v_hat(i,j)-v_hat(i,j+1))*dx)
@@ -56,18 +56,6 @@ subroutine pressure_solve2d
   end do
 
   ! Set reference pressure node (east-north corner)
-  !do i = 1, m-1
-
-  !  Aw_p(i,n-1) = 0
-  !  Ae_p(i,n-1) = 0
-  !  As_p(i,n-1) = 0
-  !  An_p(i,n-1) = 0
-
-  !  Ap_p(i,n-1) = 1
-  !  b_p(i,n-1) = 0 !1.0-1.0*(m-1)/i
-
-  !end do
-
   Aw_p(m-1,n-1) = 0
   Ae_p(m-1,n-1) = 0
   As_p(m-1,n-1) = 0
@@ -87,8 +75,11 @@ subroutine pressure_solve2d
   P = 0
 
   ! Solve pressure equation
-  call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)
-  !call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P, m-1, n-1, solver_tol, maxit)
+  if (solver .eq. 1) then
+    call solver2d_bicgstab2(As_p, Aw_p, Ap_p, Ae_p, An_p, b_p, P, m-1, n-1, solver_tol, maxit)
+  else
+    call solver2d_tdma(Aw_p, Ae_p, As_p, An_p, Ap_p, b_p, P, m-1, n-1, solver_tol, maxit)
+  end if
 
   return
 

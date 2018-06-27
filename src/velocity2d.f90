@@ -26,11 +26,11 @@ subroutine velocity2d
 
   ! South boundary source terms :: none
   Su_u(:, 1) = 0
-  Sp_u(:, 1) = 0 !-2*mu*u0/length*dy/dx
+  Sp_u(:, 1) = -2*dx/dy/Re
 
   ! North boundary source terms :: none
   Su_u(:, n-1) = 0
-  Sp_u(:, n-1) = 0 !-2*mu*u0/length*dy/dx
+  Sp_u(:, n-1) = -2*dx/dy/Re
 
 
   ! ====================== V-Velocity ====================== !
@@ -45,11 +45,11 @@ subroutine velocity2d
 
   ! West boundary source terms :: no slip
   Su_v(1, :) = 0
-  Sp_v(1, :) = 0 !-2*mu*u0/length*dx/dy
+  Sp_v(1, :) = -2*dx/dy/Re
 
   ! East boundary source terms :: no slip
   Su_v(m-1, :) = 0
-  Sp_v(m-1, :) = 0 !-2*mu*u0/length*dx/dy
+  Sp_v(m-1, :) = -2*dy/dx/Re
 
   return
 

@@ -1,7 +1,7 @@
 ! temperature_source2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-06-05 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 ! This subourtine calculates the coefficients used in the solution for
 ! temperature in the SIMPLER method.
@@ -18,14 +18,14 @@ subroutine temperature_source2d
   real(8) :: Fw, Fe, Fs, Fn, Dw, De, Dn, Ds
 
   ! Solve for source coefficients
-  do i = 1,m-1
-    do j = 1,n-1
+  do i = 2,m-2
+    do j = 2,n-2
 
       ! Update convective terms
-      Fw = dy*u(i,j)*dy
-      Fe = dy*u(i+1,j)*dy
-      Fs = dx*v(i,j)*dx
-      Fn = dx*v(i,j+1)*dx
+      Fw = rho*dy*u(i,j)
+      Fe = rho*dy*u(i+1,j)
+      Fs = rho*dx*v(i,j)
+      Fn = rho*dx*v(i,j+1)
 
       ! Update diffusion terms
       Dw = dy/dx/Re/Pr
@@ -39,45 +39,62 @@ subroutine temperature_source2d
 	    As_T(i,j) = Ds*max(0.0,(1-0.1*abs(Fs/Ds))**5)+max(Fs,0.0)
 	    An_T(i,j) = Dn*max(0.0,(1-0.1*abs(Fn/Dn))**5)+max(-Fn,0.0)
 
-      ! Check sourth node
-  	  if (i .eq. 1) then
-  	    Aw_T(i,j) = 0
-	    end if
-
-	    ! Check north node
-	    if (i .eq. m-1) then
-  	    Ae_T(i,j) = 0
-      end if
-
-  	  ! Check sourth node
-  	  if (j .eq. 1) then
-  	    As_T(i,j) = 0
-	    end if
-
-	    ! Check north node
-	    if (j .eq. n-1) then
-  	    An_T(i,j) = 0
-      end if
-
   	  ! Update Ap coefficient
-  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j) !*dx*dy
+  	  Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j)*dx*dy
 
       if (Ap_T(i,j) .eq. 0) then
-        Aw_T(i,j) = Dw
-        Ae_T(i,j) = De
-        As_T(i,j) = Ds
-        An_T(i,j) = Dn
+        Aw_T(i,j) = 0
+        Ae_T(i,j) = 0
+        As_T(i,j) = 0
+        An_T(i,j) = 0
 
-        Ap_T(i,j) = Ae_T(i,j)+Aw_T(i,j)+An_T(i,j)+As_T(i,j)-Sp_T(i,j) !*dx*dy
+        Ap_T(i,j) = 1.0
 
         print *, "False Diffusion (temperature)@:", i,j
       end if
 
   	  ! Update b values
-  	  b_T(i,j) = Su_T(i,j)!*dx*dy
+  	  b_T(i,j) = Su_T(i,j)*dx*dy
 
     end do
   end do
+
+  ! Compute Coefficients - West Wall
+  Aw_T(1,:) = 0
+  Ae_T(1,:) = 0
+  As_T(1,:) = 0
+  An_T(1,:) = 0
+
+  Ap_T(1,:) = Sp_T(1,:)
+  b_T(1,:) = Su_T(1,:)
+
+  ! Compute Coefficients - East Wall
+  Aw_T(m-1,1) = 0
+  Ae_T(m-1,1) = 0
+  As_T(m-1,1) = 0
+  An_T(m-1,1) = 0
+
+  Ap_T(m-1,:) = Sp_T(m-1, 1)
+  b_T(m-1,:) = Su_T(m-1, 1)
+
+  ! Compute Coefficients - North Wall
+  Aw_T(:,n-1) = 0
+  Ae_T(:,n-1) = 0
+  As_T(:,n-1) = 0
+  An_T(:,n-1) = 0
+
+  Ap_T(:,n-1) = Sp_T(:,n-1)
+  b_T(:,n-1) = Su_T(:,n-1)
+
+  ! Compute Coefficients - South Wall
+  Aw_T(:,1) = 0
+  Ae_T(:,1) = 0
+  As_T(:,1) = 0
+  An_T(:,1) = 0
+
+  Ap_T(:,1) = Sp_T(:,1)
+  b_T(:,1) = Su_T(:,1)
+
 
   return
 

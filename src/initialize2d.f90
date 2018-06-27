@@ -1,7 +1,7 @@
 ! initialize2d Subroutine for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-14 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 
 subroutine initialize2d
@@ -10,34 +10,22 @@ subroutine initialize2d
   include "var2d.dec"
 
   ! Read Input File ..........
-  ! ..........................
-  ! ..........................
-
-  ! Define length Scale
-  length = 0.01     ! (m)
-  width = 0.01      ! (m)
-  depth = 1.0         ! (m)
-
-  ! Define velocity scale
-  u0 = 0.01           ! (m/s)
-
-  ! Define temperature sclae
-  T_h = 274.0
-  T_c = 273.0
-
-  delta_T = T_h - T_c
-
-  ! Define media parameters
-  g = 9.81e0
-  rho = 1.28e0
-  mu = 1.73e-5
-  k_const = 2.44e-2
-  Cp = 1.01e3
-  beta = 3.66e-3
+  open(unit = 2, file = "input2d.txt")
+  read(2,*)
+  read(2,*)
+  read(2,*) length, width, depth
+  read(2,*)
+  read(2,*) g, rho, mu, k_const, Cp, beta
+  read(2,*)
+  read(2,*) u0, T_h, T_c
+  read(2,*)
+  read(2,*) itrmax, maxit, solver_tol, simpler_tol, alpha_v, alpha_t, solver
+  close(2)
 
   ! Calculate parameters
   alpha = k_const / Cp / rho
   nu = mu / rho
+  delta_T = T_h - T_c
 
   ! Calculate dimensionless numbers
   Ra = g*beta*delta_T*length**3.0/alpha/nu
@@ -47,17 +35,10 @@ subroutine initialize2d
 
 
   ! Define dimensionless temperature at boundaries
-  T_w = 1
-  T_e = 0
-  T_s = 0
-  T_n = 0
-
-  ! Define solution parameters
-  itrmax = 5
-  maxit = 1e4
-  solver_tol = 1e-9
-  simpler_tol = 1e-4
-  relax = 1.0
+  T_w = (T_c-T_c)/delta_T
+  T_e = (T_c-T_c)/delta_T
+  T_s = (T_h-T_c)/delta_T
+  T_n = (T_c-T_c)/delta_T
 
   ! Calculate geometry properties.
   call geometry2d

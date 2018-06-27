@@ -1,7 +1,7 @@
 ! Variable Declaration file for 2D CFD Problems
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-22 (YYYY-MM-DD)
+! Last Update: 2018-06-27 (YYYY-MM-DD)
 !
 ! This file defines the parameter and variable names used throughout
 ! the main2d function.
@@ -16,8 +16,8 @@
   common length, width, depth, dx, dy, dz
 
 ! Media variables ::
-  real(8) :: Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr, relax
-  common Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr, relax
+  real(8) :: Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr
+  common Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr
 
 ! Pressure :: P
   real(8), dimension(1:m-1,1:n-1) :: P, P_star, P_prime, Sp_p, Su_p
@@ -64,8 +64,8 @@
   common T_w, T_e, T_s, T_n, delta_T, T_h, T_c
 
 ! Convergence variables
-  real(8) :: solver_tol, simpler_tol, R_u, R_u0, R_v, R_v0
-  common solver_tol, simpler_tol, R_u, R_u0, R_v, R_v0
+  real(8) :: solver_tol, simpler_tol, R_e, alpha_v, alpha_t
+  common solver_tol, simpler_tol, R_e, alpha_v, alpha_t
 
-  integer :: itrmax, maxit
-  common itrmax, maxit
+  integer :: itrmax, maxit, solver
+  common itrmax, maxit, solver
