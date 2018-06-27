@@ -35,9 +35,9 @@ subroutine initialize2d
 
 
   ! Define dimensionless temperature at boundaries
-  T_w = (T_c-T_c)/delta_T
+  T_w = (T_h-T_c)/delta_T
   T_e = (T_c-T_c)/delta_T
-  T_s = (T_h-T_c)/delta_T
+  T_s = (T_c-T_c)/delta_T
   T_n = (T_c-T_c)/delta_T
 
   ! Calculate geometry properties.
