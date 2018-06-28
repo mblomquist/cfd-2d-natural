@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy-Gr/Re/Re*(1.0/beta/delta_T-(T(i,j)+T(i,j+1))/2.0)*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy+(beta*rho*delta_T*(T(i,j)+T(i,j+1))/2.0)*dx*dy
 
 	    end do
 	  end do
@@ -155,7 +155,7 @@ subroutine velocity_source2d(direction)
     An_v(:,n) = 0
     Ap_v(:,n) = 1
     b_v(:,n) = 0
-    
+
   end if
 
   return
