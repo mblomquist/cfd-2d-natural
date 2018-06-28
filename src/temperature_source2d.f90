@@ -71,7 +71,7 @@ subroutine temperature_source2d
   ! Compute Coefficients - North Wall
   Aw_T(:,n-1) = 0
   Ae_T(:,n-1) = 0
-  As_T(:,n-1) = 1
+  As_T(:,n-1) = 0
   An_T(:,n-1) = 0
 
   Ap_T(:,n-1) = 1
@@ -81,11 +81,11 @@ subroutine temperature_source2d
   Aw_T(:,1) = 0
   Ae_T(:,1) = 0
   As_T(:,1) = 0
-  An_T(:,1) = 1
+  An_T(:,1) = 0
 
   Ap_T(:,1) = 1
   b_T(:,1) = 0
-  
+
   ! Compute Coefficients - West Wall
   Aw_T(1,:) = 0
   Ae_T(1,:) = 0
