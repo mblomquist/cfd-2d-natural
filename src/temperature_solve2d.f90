@@ -29,7 +29,7 @@ subroutine temperature_solve2d
     do j = 1, n-1
 
       Ap_T(i,j) = Ap_T(i,j)/alpha_t
-      b_T(i,j) = Su_T(i,j)*dx*dy+(1.0-alpha_t)*Ap_T(i,j)*T(i,j)
+      b_T(i,j) = b_T(i,j)+(1.0-alpha_t)*Ap_T(i,j)*T(i,j)
 
     end do
   end do
