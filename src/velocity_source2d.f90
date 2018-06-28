@@ -22,22 +22,6 @@ subroutine velocity_source2d(direction)
   ! u-velocity update loop
   if (direction .eq. "u") then
 
-    ! West Boundary Coefficients :: Wall
-    Aw_u(1,:) = 0
-    Ae_u(1,:) = 0
-    As_u(1,:) = 0
-    An_u(1,:) = 0
-    Ap_u(1,:) = 1
-    b_u(1,:) = 0
-
-    ! East Bounday Coefficients :: Wall
-    Aw_u(m,:) = 0
-    Ae_u(m,:) = 0
-    As_u(m,:) = 0
-    An_u(m,:) = 0
-    Ap_u(m,:) = 1
-    b_u(m,:) = 0
-
     ! Calculate interior coefficients
     do i = 2,m-1
       do j = 1,n-1
@@ -87,26 +71,26 @@ subroutine velocity_source2d(direction)
       end do
     end do
 
+    ! West Boundary Coefficients :: Wall
+    Aw_u(1,:) = 0
+    Ae_u(1,:) = 0
+    As_u(1,:) = 0
+    An_u(1,:) = 0
+    Ap_u(1,:) = 1
+    b_u(1,:) = 0
+
+    ! East Bounday Coefficients :: Wall
+    Aw_u(m,:) = 0
+    Ae_u(m,:) = 0
+    As_u(m,:) = 0
+    An_u(m,:) = 0
+    Ap_u(m,:) = 1
+    b_u(m,:) = 0
+
   end if
 
   ! v-velocity update loop
   if (direction .eq. "v") then
-
-    ! South Boundary :: Wall
-	  Aw_v(:,1) = 0
-	  Ae_v(:,1) = 0
-	  As_v(:,1) = 0
-	  An_v(:,1) = 0
-	  Ap_v(:,1) = 1
-	  b_v(:,1) = 0
-
-	  ! North Boundary :: Wall
-    Aw_v(:,n) = 0
-	  Ae_v(:,n) = 0
-	  As_v(:,n) = 0
-	  An_v(:,n) = 0
-	  Ap_v(:,n) = 1
-	  b_v(:,n) = 0
 
     ! Calculate interior source terms
 	  do j = 2, n-1
@@ -155,6 +139,23 @@ subroutine velocity_source2d(direction)
 
 	    end do
 	  end do
+
+    ! South Boundary :: Wall
+    Aw_v(:,1) = 0
+    Ae_v(:,1) = 0
+    As_v(:,1) = 0
+    An_v(:,1) = 0
+    Ap_v(:,1) = 1
+    b_v(:,1) = 0
+
+    ! North Boundary :: Wall
+    Aw_v(:,n) = 0
+    Ae_v(:,n) = 0
+    As_v(:,n) = 0
+    An_v(:,n) = 0
+    Ap_v(:,n) = 1
+    b_v(:,n) = 0
+    
   end if
 
   return

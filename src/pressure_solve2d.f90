@@ -16,15 +16,21 @@ subroutine pressure_solve2d
   ! Define internal variables
   integer :: i, j
 
+  Aw_p = 0.
+  Ae_p = 0.
+  As_p = 0.
+  An_p = 0.
+  Ap_p = 0.
+
   ! Update coefficients
   do i = 1,m-1
     do j = 1,n-1
 
       ! Update coefficients
-      Ae_p(i,j) = dy/Ap_u(i+1,j)*alpha_v
 	    Aw_p(i,j) = dy/Ap_u(i,j)*alpha_v
-	    An_p(i,j) = dx/Ap_v(i,j+1)*alpha_v
+      Ae_p(i,j) = dy/Ap_u(i+1,j)*alpha_v
 	    As_p(i,j) = dx/Ap_v(i,j)*alpha_v
+      An_p(i,j) = dx/Ap_v(i,j+1)*alpha_v
 
 	    ! Check west node
       if (i .eq. 1) then
