@@ -31,6 +31,7 @@ subroutine initialize2d
   Ra = g*beta*delta_T*length**3.0/alpha/nu
   Pr = nu/alpha
   Gr = Ra/Pr
+  Ga = g*length**3.0/nu**2.0
   Re = u0*length/nu
 
 

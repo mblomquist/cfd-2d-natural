@@ -16,8 +16,8 @@
   common length, width, depth, dx, dy, dz
 
 ! Media variables ::
-  real(8) :: Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr
-  common Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr
+  real(8) :: Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr, Ga
+  common Re, Pr, Ra, rho, mu, k_const, Cp, alpha, beta, u0, g, nu, Gr, Ga
 
 ! Pressure :: P
   real(8), dimension(1:m-1,1:n-1) :: P, P_star, P_prime, Sp_p, Su_p
