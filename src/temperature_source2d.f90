@@ -22,10 +22,10 @@ subroutine temperature_source2d
     do j = 2,n-2
 
       ! Update convective terms
-      Fw = rho*dy*u(i,j)
-      Fe = rho*dy*u(i+1,j)
-      Fs = rho*dx*v(i,j)
-      Fn = rho*dx*v(i,j+1)
+      Fw = rho*dy*u(i,j)/2.
+      Fe = rho*dy*u(i+1,j)/2.
+      Fs = rho*dx*v(i,j)/2.
+      Fn = rho*dx*v(i,j+1)/2.
 
       ! Update diffusion terms
       Dw = dy/dx/Re/Pr
