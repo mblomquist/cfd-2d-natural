@@ -31,7 +31,7 @@ program main2d
   print *, 'Galilei Number:', Ga
   print *, 'Reynolds Number', Re
   print *, 'Gr/Re2:', Gr/Re/Re
-  print *, 'Ga/Re2', Ga/Re/Re
+  print *, '1/beta/delta_T', 1./beta/delta_T
   print *, 'delta_T:', delta_T
   print *, 'length:', length
   print *, 'u0:', u0
