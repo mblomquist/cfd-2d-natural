@@ -117,7 +117,7 @@ subroutine simpler2d
 
     ! Step 7: Solve Temperature Equation
     !print *, "Step 6: Solve Temperature Equation"
-    call temperature_solve2d
+    ! call temperature_solve2d
     !print *, ".............."
     !print *, "T:", T
     !print *, ".............."
