@@ -22,10 +22,10 @@ subroutine temperature_source2d
     do j = 2,n-2
 
       ! Update convective terms
-      Fw = rho*dy*u(i,j)
-      Fe = rho*dy*u(i+1,j)
-      Fs = rho*dx*v(i,j)
-      Fn = rho*dx*v(i,j+1)
+      Fw = dy*u(i,j)
+      Fe = dy*u(i+1,j)
+      Fs = dx*v(i,j)
+      Fn = dx*v(i,j+1)
 
       ! Update diffusion terms
       Dw = dy/dx/Re/Pr
@@ -59,15 +59,6 @@ subroutine temperature_source2d
     end do
   end do
 
-  ! Compute Coefficients - East Wall
-  Aw_T(m-1,1) = 0
-  Ae_T(m-1,1) = 0
-  As_T(m-1,1) = 0
-  An_T(m-1,1) = 0
-
-  Ap_T(m-1,:) = 1
-  b_T(m-1,:) = 0
-
   ! Compute Coefficients - North Wall
   Aw_T(:,n-1) = 0
   Ae_T(:,n-1) = 0
@@ -85,6 +76,15 @@ subroutine temperature_source2d
 
   Ap_T(:,1) = 1
   b_T(:,1) = 0
+
+  ! Compute Coefficients - East Wall
+  Aw_T(m-1,:) = 0
+  Ae_T(m-1,:) = 0
+  As_T(m-1,:) = 0
+  An_T(m-1,:) = 0
+
+  Ap_T(m-1,:) = 1
+  b_T(m-1,:) = 0
 
   ! Compute Coefficients - West Wall
   Aw_T(1,:) = 0
