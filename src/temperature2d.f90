@@ -21,12 +21,12 @@ subroutine temperature2d
   Sp_T(:, n-1) = -2/Re/Pr
 
   ! West boundary source terms :: Wall
-  Su_T(1, :) = 2/Re/Pr*T_w
-  Sp_T(1, :) = -2/Re/Pr
+  !Su_T(1, :) = 2/Re/Pr*T_w
+  !Sp_T(1, :) = -2/Re/Pr
 
   ! East boundary source terms :: Wall
-  Su_T(m-1, :) = 2/Re/Pr*T_e
-  Sp_T(m-1, :) = -2/Re/Pr
+  !Su_T(m-1, :) = 2/Re/Pr*T_e
+  !Sp_T(m-1, :) = -2/Re/Pr
 
   ! South boundary source terms :: Wall
   Su_T(:, 1) = 2/Re/Pr*T_s

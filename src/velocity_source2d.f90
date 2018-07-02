@@ -71,16 +71,16 @@ subroutine velocity_source2d(direction)
       end do
     end do
 
-    ! West Boundary Coefficients :: Wall
+    ! West Boundary Coefficients :: Syemmetry
     Aw_u(1,:) = 0
-    Ae_u(1,:) = 0
+    Ae_u(1,:) = 1
     As_u(1,:) = 0
     An_u(1,:) = 0
     Ap_u(1,:) = 1
     b_u(1,:) = 0
 
-    ! East Bounday Coefficients :: Wall
-    Aw_u(m,:) = 0
+    ! East Bounday Coefficients :: Syemmetry
+    Aw_u(m,:) = 1
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0
@@ -94,7 +94,7 @@ subroutine velocity_source2d(direction)
 
     ! Calculate interior source terms
 	  do j = 2, n-1
-	    do i = 1,m-1
+	    do i = 2,m-2
 
 	      ! Update convection terms
 		    Fw = rho*dy*(u_star(i,j-1)+u_star(i,j))/2
@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy-1.0*dx*dy+Gr/Re/Re*((T(i,j)+T(i,j+1))/2.0)*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy-1.0*dx*dy-Gr/Re/Re/2*dx*dy+Gr/Re/Re*((T(i,j)+T(i,j+1))/2.0)*dx*dy
 
         ! gravity force :: /beta/delta_T
 
@@ -157,6 +157,22 @@ subroutine velocity_source2d(direction)
     An_v(:,n) = 0
     Ap_v(:,n) = 1
     b_v(:,n) = 0
+
+    ! West Boundary Coefficients :: Syemmetry
+    Aw_v(1,:) = 0
+    Ae_v(1,:) = 1
+    As_v(1,:) = 0
+    An_v(1,:) = 0
+    Ap_v(1,:) = 1
+    b_v(1,:) = 0
+
+    ! East Bounday Coefficients :: Syemmetry
+    Aw_v(m-1,:) = 1
+    Ae_v(m-1,:) = 0
+    As_v(m-1,:) = 0
+    An_v(m-1,:) = 0
+    Ap_v(m-1,:) = 1
+    b_v(m-1,:) = 0
 
   end if
 

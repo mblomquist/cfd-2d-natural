@@ -19,8 +19,8 @@ subroutine velocity_correct2d
   end do
 
   ! Correct wall values
-  u(1, :) = 0
-  u(m, :) = 0
+  u(1, :) = u(2, :)
+  u(m, :) = u(m-1, :)
 
   ! Correct velocity values
   do i = 1,m-1
@@ -32,6 +32,8 @@ subroutine velocity_correct2d
   ! Correct wall values
   v(:, 1) = 0
   v(:, n) = 0
+  v(1, :) = v(2, :)
+  v(m-1, :) = v(m-2, :) 
 
   return
 
