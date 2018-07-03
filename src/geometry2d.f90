@@ -14,7 +14,7 @@ subroutine geometry2d
   ! Calculate non-dimensional quantities for SIMPLER
   dx = length/m
   dy = width/n
-  dz = 1
+  dz = 1.0
 
   return
 
