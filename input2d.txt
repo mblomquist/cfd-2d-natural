@@ -6,4 +6,4 @@
 ! input conditions :: T_h, T_c
 273.0000001, 273.0
 ! solution parameters :: itrmax, maxit, solver_tol, simpler_tol, alpha_v, alpha_t, solver
-1000, 1e2, 1.0e-4, 1.0e-6, 0.85, 0.95, 1
+5000, 1e2, 1.0e-4, 1.0e-6, 0.35, 0.99, 1
