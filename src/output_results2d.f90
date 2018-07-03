@@ -80,14 +80,11 @@ subroutine output_results2d
   close(4)
 
   open(unit=5, file="output/terminal_data.dat")
-  write (5, '("Grid size: ", 5I, 1X, 5I, /)', advance="no"), m, n
+  write (5, '("Grid size: ", 5I, 1X, 5I, /)'), m, n
   write (5, '("Rayleigh Number: ", E15.4, /)', advance="no"), Ra
   write (5, '("Prandtl Number: ", E15.4, /)', advance="no"), Pr
-  write (5, '("Grashoff Number: ", E15.4, /)', advance="no"), Gr
-  write (5, '("Reynolds Number: ", E15.4, /)', advance="no"), Re
   write (5, '("delta_T: ", E15.4, /)', advance="no"), delta_T
-  write (5, '("R_u: ", E15.4, /)', advance="no"), R_u
-  write (5, '("R_v: ", E15.4, /)', advance="no"), R_v
+  write (5, '("SIMPLER Algorithm Duration:", E15.4, /)', advance="no"), end_time-start_time
   close(5)
 
 
