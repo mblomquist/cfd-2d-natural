@@ -17,7 +17,7 @@ subroutine initialize2d
   read(2,*)
   read(2,*) g, rho, mu, k_const, Cp, beta
   read(2,*)
-  read(2,*) u0, T_h, T_c
+  read(2,*) T_h, T_c
   read(2,*)
   read(2,*) itrmax, maxit, solver_tol, simpler_tol, alpha_v, alpha_t, solver
   close(2)
@@ -27,13 +27,12 @@ subroutine initialize2d
   nu = mu / rho
   delta_T = T_h - T_c
 
+  ! Calculate Characteristic Velocity
+  u0 = (g*beta*delta_T*L)**(0.5)
+
   ! Calculate dimensionless numbers
   Ra = g*beta*delta_T*length**3.0/alpha/nu
   Pr = nu/alpha
-  Gr = Ra/Pr
-  Ga = g*length**3.0/nu**2.0
-  Re = u0*length/nu
-
 
   ! Define dimensionless temperature at boundaries
   T_w = (T_h-T_c)/delta_T
