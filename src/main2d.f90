@@ -30,8 +30,6 @@ program main2d
   print *, 'u0:', u0
   print *, 'Rayleigh Number: ', Ra
   print *, 'Prandtl Number: ', Pr
-  print *, 'Body Force', 1./beta/delta_T*dx*dy
-  print *, 'Ra/Body Force', Ra/(1./beta/delta_T*dx*dy)
   print *, ''
 
   call cpu_time(start_time)
