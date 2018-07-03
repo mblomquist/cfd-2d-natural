@@ -27,9 +27,12 @@ subroutine velocity_solve2d
   end do
 
   ! Solve u-velocity equation
-  call solver2d_bicgstab2(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
-  !call solver2d_tdma(Aw_u, Ae_u, As_u, An_u, Ap_u, b_u, u_star, m, n-1, solver_tol, maxit)
-
+  if (solver .eq. 1) then
+    call solver2d_bicgstab2(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
+  else
+    call solver2d_tdma(Aw_u, Ae_u, As_u, An_u, Ap_u, b_u, u_star, m, n-1, solver_tol, maxit)
+  end if
+  
   ! Update source terms :: v
   do i = 2, m-2
     do j = 2, n-1
