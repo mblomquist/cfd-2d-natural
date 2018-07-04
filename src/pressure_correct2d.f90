@@ -26,14 +26,14 @@ subroutine pressure_correct2d
     end do
   end do
 
-  ! Set reference pressure node (east-north corner)
-  Aw_p(m-1,n-1) = 0
-  Ae_p(m-1,n-1) = 0
-  As_p(m-1,n-1) = 0
-  An_p(m-1,n-1) = 0
+  ! Set reference pressure node (east-south corner)
+  Aw_p(m-1,1) = 0
+  Ae_p(m-1,1) = 0
+  As_p(m-1,1) = 0
+  An_p(m-1,1) = 0
 
-  Ap_p(m-1,n-1) = 1
-  b_p(m-1,n-1) = 0
+  Ap_p(m-1,1) = 1
+  b_p(m-1,1) = 0
 
   ! Print coefficients
   !print *, "b_p:", b_p
