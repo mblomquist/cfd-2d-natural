@@ -21,7 +21,7 @@ subroutine convergence2d(itr)
     do j = 2, n-2
 
       if (R_e .le. b_p(i,j)) then
-        R_e = b_p(i,j)
+        R_e = abs(b_p(i,j))
       end if
 
     end do

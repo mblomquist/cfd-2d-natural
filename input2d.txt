@@ -4,6 +4,6 @@
 ! media :: g, rho, mu, k, Cp, beta
 9.81e0, 9.97e2, 1.07e-3, 6.40e-1, 4.19e3, 6.90e-5
 ! input conditions :: T_h, T_c
-273.0000342, 273.0
+273.0342, 273.0
 ! solution parameters :: itrmax, maxit, solver_tol, simpler_tol, alpha_v, alpha_t, solver
 1000, 1e4, 1.0e-6, 1.0e-8, 0.75, 0.75, 1
