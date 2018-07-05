@@ -33,10 +33,10 @@ subroutine velocity_source2d(direction)
 		    Fn = rho*dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/dx/(Pr/Ra)**(0.5)
-        De = dy/dx/(Pr/Ra)**(0.5)
-        Ds = dx/dy/(Pr/Ra)**(0.5)
-        Dn = dx/dy/(Pr/Ra)**(0.5)
+        Dw = dy/dx*(Pr/Ra)**(0.5)
+        De = dy/dx*(Pr/Ra)**(0.5)
+        Ds = dx/dy*(Pr/Ra)**(0.5)
+        Dn = dx/dy*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -103,10 +103,10 @@ subroutine velocity_source2d(direction)
 		    Fn = rho*dx*(v_star(i,j)+v_star(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/dx/(Pr/Ra)**(0.5)
-        De = dy/dx/(Pr/Ra)**(0.5)
-        Ds = dx/dy/(Pr/Ra)**(0.5)
-        Dn = dx/dy/(Pr/Ra)**(0.5)
+        Dw = dy/dx*(Pr/Ra)**(0.5)
+        De = dy/dx*(Pr/Ra)**(0.5)
+        Ds = dx/dy*(Pr/Ra)**(0.5)
+        Dn = dx/dy*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
