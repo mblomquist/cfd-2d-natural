@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy+(((T(i,j)+T(i,j-1))/2.0))*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy+(((T(i,j)+T(i,j-1))/2.0)-0.1)*dx*dy
 
         ! gravity force :: -1.0/beta/delta_T
 	    end do
