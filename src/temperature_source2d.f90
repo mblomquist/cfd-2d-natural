@@ -19,7 +19,7 @@ subroutine temperature_source2d
 
   ! Solve for source coefficients
   do i = 2,m-2
-    do j = 2,n-2
+    do j = 1,n-1
 
       ! Update convective terms
       Fw = rho*dy*u(i,j)
