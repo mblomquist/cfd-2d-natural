@@ -17,8 +17,8 @@ subroutine convergence2d(itr)
 
   R_e = 0.0
 
-  do i = 1, m-1
-    do j = 1, n-1
+  do i = 2, m-2
+    do j = 2, n-2
 
       if (R_e .le. b_p(i,j)) then
         R_e = b_p(i,j)
