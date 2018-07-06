@@ -33,10 +33,10 @@ subroutine velocity_source2d(direction)
 		    Fn = dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/dx*(Pr/Ra)**(0.5)
-        De = dy/dx*(Pr/Ra)**(0.5)
-        Ds = dx/dy*(Pr/Ra)**(0.5)
-        Dn = dx/dy*(Pr/Ra)**(0.5)
+        Dw = dy/dx*Pr*(Pr/Ra)**(0.5)
+        De = dy/dx*Pr*(Pr/Ra)**(0.5)
+        Ds = dx/dy*Pr*(Pr/Ra)**(0.5)
+        Dn = dx/dy*Pr*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -66,7 +66,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)*dx*dy+(((T(i,j)+T(i-1,j))/2.0))*dx*dy
+		    b_u(i,j) = Su_u(i,j)*dx*dy+Pr*(((T(i,j)+T(i-1,j))/2.0))*dx*dy
 
       end do
     end do
@@ -103,10 +103,10 @@ subroutine velocity_source2d(direction)
 		    Fn = dx*(v_star(i,j)+v_star(i,j+1))/2
 
         ! Update diffusion terms
-        Dw = dy/dx*(Pr/Ra)**(0.5)
-        De = dy/dx*(Pr/Ra)**(0.5)
-        Ds = dx/dy*(Pr/Ra)**(0.5)
-        Dn = dx/dy*(Pr/Ra)**(0.5)
+        Dw = dy/dx*Pr*(Pr/Ra)**(0.5)
+        De = dy/dx*Pr*(Pr/Ra)**(0.5)
+        Ds = dx/dy*Pr*(Pr/Ra)**(0.5)
+        Dn = dx/dy*Pr*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy+(((T(i,j)+T(i,j-1))/2.0))*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy+Pr*(((T(i,j)+T(i,j-1))/2.0))*dx*dy
 
         ! gravity force :: -1.0/beta/delta_T
 	    end do
