@@ -73,14 +73,14 @@ subroutine velocity_source2d(direction)
 
     ! West Boundary Coefficients :: Wall
     Aw_u(1,:) = 0
-    Ae_u(1,:) = 0
+    Ae_u(1,:) = 1
     As_u(1,:) = 0
     An_u(1,:) = 0
     Ap_u(1,:) = 1
     b_u(1,:) = 0
 
     ! East Bounday Coefficients :: Wall
-    Aw_u(m,:) = 0
+    Aw_u(m,:) = 1
     Ae_u(m,:) = 0
     As_u(m,:) = 0
     An_u(m,:) = 0
@@ -94,7 +94,7 @@ subroutine velocity_source2d(direction)
 
     ! Calculate interior source terms
 	  do j = 2, n-1
-	    do i = 1,m-1
+	    do i = 2,m-2
 
 	      ! Update convection terms
 		    Fw = dy*(u_star(i,j-1)+u_star(i,j))/2
@@ -139,6 +139,22 @@ subroutine velocity_source2d(direction)
 
 	    end do
 	  end do
+
+    ! West Boundary :: Wall
+    Aw_v(1,:) = 0
+    Ae_v(1,:) = 1
+    As_v(1,:) = 0
+    An_v(1,:) = 0
+    Ap_v(1,:) = 1
+    b_v(1,:) = 0
+
+    ! East Boundary :: Wall
+    Aw_v(m-1,:) = 1
+    Ae_v(m-1,:) = 0
+    As_v(m-1,:) = 0
+    An_v(m-1,:) = 0
+    Ap_v(m-1,:) = 1
+    b_v(m-1,:) = 0
 
     ! South Boundary :: Wall
     Aw_v(:,1) = 0

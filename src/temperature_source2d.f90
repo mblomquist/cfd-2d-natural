@@ -19,7 +19,7 @@ subroutine temperature_source2d
 
   ! Solve for source coefficients
   do i = 2,m-2
-    do j = 1,n-1
+    do j = 2,n-2
 
       ! Update convective terms
       Fw = dy*u(i,j)
@@ -28,10 +28,10 @@ subroutine temperature_source2d
       Fn = dx*v(i,j+1)
 
       ! Update diffusion terms
-      Dw = dy/dx*Pr/(Ra)**(0.5)
-      De = dy/dx*Pr/(Ra)**(0.5)
-      Ds = dx/dy*Pr/(Ra)**(0.5)
-      Dn = dx/dy*Pr/(Ra)**(0.5)
+      Dw = dy/dx*(Ra/Pr)**(0.5)
+      De = dy/dx*(Ra/Pr)**(0.5)
+      Ds = dx/dy*(Ra/Pr)**(0.5)
+      Dn = dx/dy*(Ra/Pr)**(0.5)
 
 	    ! Compute Coefficients - Power Law Differening Scheme
 	    Aw_T(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -62,7 +62,7 @@ subroutine temperature_source2d
   ! Compute Coefficients - North Wall
   Aw_T(:,n-1) = 0
   Ae_T(:,n-1) = 0
-  As_T(:,n-1) = 1
+  As_T(:,n-1) = 0
   An_T(:,n-1) = 0
 
   Ap_T(:,n-1) = 1
@@ -72,13 +72,13 @@ subroutine temperature_source2d
   Aw_T(:,1) = 0
   Ae_T(:,1) = 0
   As_T(:,1) = 0
-  An_T(:,1) = 1
+  An_T(:,1) = 0
 
   Ap_T(:,1) = 1
-  b_T(:,1) = 0
+  b_T(:,1) = 1
 
   ! Compute Coefficients - East Wall
-  Aw_T(m-1,:) = 0
+  Aw_T(m-1,:) = 1
   Ae_T(m-1,:) = 0
   As_T(m-1,:) = 0
   An_T(m-1,:) = 0
@@ -88,12 +88,12 @@ subroutine temperature_source2d
 
   ! Compute Coefficients - West Wall
   Aw_T(1,:) = 0
-  Ae_T(1,:) = 0
+  Ae_T(1,:) = 1
   As_T(1,:) = 0
   An_T(1,:) = 0
 
   Ap_T(1,:) = 1
-  b_T(1,:) = 1
+  b_T(1,:) = 0
 
   return
 

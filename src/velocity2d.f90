@@ -26,8 +26,8 @@ subroutine velocity2d
 
   ! South boundary source terms :: none
   !Su_u(:, 1) = 0
-  Sp_u(:, 1) = -2*dx/dy/Ra**(0.5)
-  Sp_u(:, n-1) = -2*dx/dy/Ra**(0.5)
+  !Sp_u(:, 1) = -2*dx/dy/Ra**(0.5)
+  !Sp_u(:, n-1) = -2*dx/dy/Ra**(0.5)
 
   !do j = 1,n-1
   !  Sp_u(:, j) = -dx/Ra**(0.5)/(dy/2.0+(j-1.0)*dy)-dx/Ra**(0.5)/(dy/2.0+(n-1.0-j)*dy)
@@ -46,9 +46,9 @@ subroutine velocity2d
   Su_v = 0
   Sp_v = 0
 
-  Sp_v(1, :) = -2*dy/dx/Ra**(0.5)
-  Sp_v(m-1, :) = -2*dy/dx/Ra**(0.5)
-  
+  !Sp_v(1, :) = -2*dy/dx/Ra**(0.5)
+  !Sp_v(m-1, :) = -2*dy/dx/Ra**(0.5)
+
   ! West boundary source terms :: no slip
   !Su_v(1, :) = 0
   !do i = 1,m-1
