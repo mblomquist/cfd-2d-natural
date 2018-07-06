@@ -85,7 +85,9 @@ subroutine simpler2d
     call convergence2d(i)
 
     print *, "Iteration:", i
-    print *, "Maximum Error: ", R_e
+    print *, "Relative Error: ", R_e
+    !print *, "Maximum Error: ", e_max_new
+    !print *, "Previous Maximum Error:", e_max_old
 
     if (R_e .le. simpler_tol) then
       print *, "Simpler completed in: ", i
