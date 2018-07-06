@@ -14,6 +14,7 @@ subroutine convergence2d(itr)
 
   ! Define internal variables
   integer :: i, j, itr
+  real(8) :: e_temp
 
   R_e = 0.0
 
