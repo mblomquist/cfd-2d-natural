@@ -66,7 +66,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_u(i,j) = Su_u(i,j)*dx*dy+Pr*(((T(i,j)+T(i-1,j))/2.0))*dx*dy
+		    b_u(i,j) = Su_u(i,j)*dx*dy
 
       end do
     end do
@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy !+Pr*(((T(i,j)+T(i,j-1))/2.0))*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy+Pr*(((T(i,j)+T(i,j-1))/2.0))*dx*dy
 
 	    end do
 	  end do
