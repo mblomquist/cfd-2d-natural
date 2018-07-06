@@ -142,19 +142,19 @@ subroutine velocity_source2d(direction)
 
     ! West Boundary :: Wall
     Aw_v(1,:) = 0
-    Ae_v(1,:) = 1
+    Ae_v(1,:) = 0
     As_v(1,:) = 0
     An_v(1,:) = 0
     Ap_v(1,:) = 1
-    b_v(1,:) = 0
+    b_v(1,:) = -1
 
     ! East Boundary :: Wall
-    Aw_v(m-1,:) = 1
+    Aw_v(m-1,:) = 0
     Ae_v(m-1,:) = 0
     As_v(m-1,:) = 0
     An_v(m-1,:) = 0
     Ap_v(m-1,:) = 1
-    b_v(m-1,:) = 0
+    b_v(m-1,:) = 1
 
     ! South Boundary :: Wall
     Aw_v(:,1) = 0
