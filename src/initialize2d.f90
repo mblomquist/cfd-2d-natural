@@ -34,6 +34,15 @@ subroutine initialize2d
   Ra = g*beta*delta_T*length**3.0/alpha/nu
   Pr = nu/alpha
 
+  ! Set errors
+  R_e = 1.
+  e_1 = 1.
+  e_2 = 1.
+  e_3 = 1.
+  e_4 = 1.
+  e_5 = 1.
+  solved = 0
+
   ! Define dimensionless temperature at boundaries
   T_w = (T_h-T_c)/delta_T
   T_e = (T_c-T_c)/delta_T

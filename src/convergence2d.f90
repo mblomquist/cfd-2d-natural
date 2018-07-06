@@ -17,23 +17,25 @@ subroutine convergence2d(itr)
 
   R_e = 0.0
 
+  e_5 = e_4
+  e_4 = e_3
+  e_3 = e_2
+  e_2 = e_1
+
   do i = 2, m-2
     do j = 2, n-2
 
       if (R_e .le. b_p(i,j)) then
-        e_max_new = abs(b_p(i,j))
+        e_1 = e_1+abs(b_p(i,j))
       end if
 
     end do
   end do
 
-  if (itr .eq. 1) then
-    e_max_old = 1
-  end if
+  e_1 = e_1/((m-3.0)*(n-3.0))
 
-  R_e = abs((e_max_new-e_max_old)/e_max_old)
 
-  e_max_old = e_max_new
+  R_e = abs((e_1-(e_2+e_3+e_4+e_5)/4.0)/((e_2+e_3+e_4+e_5)/4.0))
 
   return
 

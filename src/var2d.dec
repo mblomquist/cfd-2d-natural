@@ -64,8 +64,8 @@
   common T_w, T_e, T_s, T_n, delta_T, T_h, T_c
 
 ! Convergence variables
-  real(8) :: solver_tol, simpler_tol, R_e, alpha_v, alpha_t, e_max_old, e_max_new
-  common solver_tol, simpler_tol, R_e, alpha_v, alpha_t, e_max_old, e_max_new
+  real(8) :: solver_tol, simpler_tol, R_e, alpha_v, alpha_t, e_1, e_2, e_3, e_4, e_5
+  common solver_tol, simpler_tol, R_e, alpha_v, alpha_t, e_1, e_2, e_3, e_4, e_5
 
-  integer :: itrmax, maxit, solver
-  common itrmax, maxit, solver
+  integer :: itrmax, maxit, solver, solved
+  common itrmax, maxit, solver, solved
