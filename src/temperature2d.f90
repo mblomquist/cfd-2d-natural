@@ -36,8 +36,8 @@ subroutine temperature2d
   Sp_T(:, 1) = -2/Re/Pr
 
   ! Set Initial Temperature
-  do i = 1,m-1
-    T(i,:) = 1.0/i
+  do i = 1,n-1
+    T(:,i) = 1.0/i
   end do
 
   return
