@@ -9,6 +9,9 @@ subroutine temperature2d
   ! Pull in standard variable header
   include "var2d.dec"
 
+  ! Internal variables
+  integer :: i
+
   ! Initialize Temperature Field
   T = 0
 
@@ -31,6 +34,11 @@ subroutine temperature2d
   ! South boundary source terms :: Wall
   Su_T(:, 1) = 2/Re/Pr*T_s
   Sp_T(:, 1) = -2/Re/Pr
+
+  ! Set Initial Temperature
+  do i = 1,m-1
+    T(i,:) = 1.0/i
+  end do
 
   return
 

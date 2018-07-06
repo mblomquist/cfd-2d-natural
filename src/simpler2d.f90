@@ -84,19 +84,21 @@ subroutine simpler2d
     print *, "Step 7: Check Convergence"
     call convergence2d(i)
 
+    if (i .eq. 1) then
+      R_e = 1.0
+      R_t = 1.0
+    end if
+
     print *, "Iteration:", i
-    print *, "Solved:", solved
-    print *, "Relative Error: ", R_e
+    print *, "Relative Momentum Error: ", R_e
+    print *, "Relative Energy Error:", R_t
     !print *, "Maximum Error: ", e_max_new
     !print *, "Previous Maximum Error:", e_max_old
 
-    if (R_e .le. simpler_tol) then
-      solved = solved + 1
+    if ((R_e .le. simpler_tol) .and. (R_t .le. simpler_tol)) then
 
-      if (solved .eq. 500) then
-        print *, "Simpler completed in: ", i
-        exit
-      end if
+      print *, "Simpler completed in: ", i
+      exit
 
     end if
 
