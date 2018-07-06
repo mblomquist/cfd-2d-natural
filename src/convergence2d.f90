@@ -21,11 +21,19 @@ subroutine convergence2d(itr)
     do j = 2, n-2
 
       if (R_e .le. b_p(i,j)) then
-        R_e = abs(b_p(i,j))
+        e_max_new = abs(b_p(i,j))
       end if
 
     end do
   end do
+
+  if (itr .eq. 1) then
+    e_max_old = 1
+  end if
+
+  R_e = abs((e_max_new-e_max_old)/e_max_old)
+
+  e_max_old = e_max_new
 
   return
 
