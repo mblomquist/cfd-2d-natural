@@ -27,16 +27,16 @@ subroutine velocity_source2d(direction)
       do j = 1,n-1
 
         ! Update convection terms
-		    Fw = dy*(u_star(i,j)+u_star(i-1,j))/2
-		    Fe = dy*(u_star(i+1,j)+u_star(i,j))/2
-		    Fs = dx*(v_star(i,j)+v_star(i-1,j))/2
-		    Fn = dx*(v_star(i,j+1)+v_star(i-1,j+1))/2
+		    Fw = dy*(u_star(i,j)+u_star(i-1,j))/2/Pr
+		    Fe = dy*(u_star(i+1,j)+u_star(i,j))/2/Pr
+		    Fs = dx*(v_star(i,j)+v_star(i-1,j))/2/Pr
+		    Fn = dx*(v_star(i,j+1)+v_star(i-1,j+1))/2/Pr
 
         ! Update diffusion terms
-        Dw = dy/dx*Pr*(Pr/Ra)**(0.5)
-        De = dy/dx*Pr*(Pr/Ra)**(0.5)
-        Ds = dx/dy*Pr*(Pr/Ra)**(0.5)
-        Dn = dx/dy*Pr*(Pr/Ra)**(0.5)
+        Dw = dy/dx !*Pr*(Pr/Ra)**(0.5)
+        De = dy/dx !*Pr*(Pr/Ra)**(0.5)
+        Ds = dx/dy !*Pr*(Pr/Ra)**(0.5)
+        Dn = dx/dy !*Pr*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_u(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -97,16 +97,16 @@ subroutine velocity_source2d(direction)
 	    do i = 1,m-1
 
 	      ! Update convection terms
-		    Fw = dy*(u_star(i,j-1)+u_star(i,j))/2
-		    Fe = dy*(u_star(i+1,j-1)+u_star(i+1,j))/2
-		    Fs = dx*(v_star(i,j-1)+v_star(i,j))/2
-		    Fn = dx*(v_star(i,j)+v_star(i,j+1))/2
+		    Fw = dy*(u_star(i,j-1)+u_star(i,j))/2/Pr
+		    Fe = dy*(u_star(i+1,j-1)+u_star(i+1,j))/2/Pr
+		    Fs = dx*(v_star(i,j-1)+v_star(i,j))/2/Pr
+		    Fn = dx*(v_star(i,j)+v_star(i,j+1))/2/Pr
 
         ! Update diffusion terms
-        Dw = dy/dx*Pr*(Pr/Ra)**(0.5)
-        De = dy/dx*Pr*(Pr/Ra)**(0.5)
-        Ds = dx/dy*Pr*(Pr/Ra)**(0.5)
-        Dn = dx/dy*Pr*(Pr/Ra)**(0.5)
+        Dw = dy/dx !*Pr*(Pr/Ra)**(0.5)
+        De = dy/dx !*Pr*(Pr/Ra)**(0.5)
+        Ds = dx/dy !*Pr*(Pr/Ra)**(0.5)
+        Dn = dx/dy !*Pr*(Pr/Ra)**(0.5)
 
 		    ! Compute Coefficients - Power Law Differening Scheme
 		    Aw_v(i,j) = Dw*max(0.0,(1-0.1*abs(Fw/Dw))**5)+max(Fw,0.0)
@@ -135,7 +135,7 @@ subroutine velocity_source2d(direction)
         end if
 
 		    ! Update b values
-		    b_v(i,j) = Su_v(i,j)*dx*dy+Pr*(((T(i,j)+T(i,j-1))/2.0))*dx*dy
+		    b_v(i,j) = Su_v(i,j)*dx*dy+Ra*(((T(i,j)+T(i,j-1))/2.0))*dx*dy
 
 	    end do
 	  end do
