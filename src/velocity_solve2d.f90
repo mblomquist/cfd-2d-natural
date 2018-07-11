@@ -21,7 +21,7 @@ subroutine velocity_solve2d
     do j = 2,n-1
 
       Ap_u(i,j) = Ap_u(i,j)/alpha_v
-      b_u(i,j) = b_v(i,j)+dy*(P_star(i-1,j)-P_star(i,j))+(1.0-alpha_v)*Ap_u(i,j)*u_hat(i,j)
+      b_u(i,j) = b_u(i,j)+dy*(P_star(i-1,j)-P_star(i,j))+(1.0-alpha_v)*Ap_u(i,j)*u_hat(i,j)
 
     end do
   end do
@@ -32,7 +32,7 @@ subroutine velocity_solve2d
   else
     call solver2d_tdma(Aw_u, Ae_u, As_u, An_u, Ap_u, b_u, u_star, m, n-1, solver_tol, maxit)
   end if
-  
+
   ! Update source terms :: v
   do i = 2, m-2
     do j = 2, n-1
