@@ -38,7 +38,7 @@ subroutine velocity_solve2d
     do j = 2, n-1
 
       Ap_v(i,j) = Ap_v(i,j)/alpha_v
-      b_v(i,j) = b_v(i,j)+dx*(P_star(i,j-1)-P_star(i,j))+(1.0-alpha_v)*Ap_u(i,j)*v_hat(i,j)
+      b_v(i,j) = b_v(i,j)+dx*(P_star(i,j-1)-P_star(i,j))+(1.0-alpha_v)*Ap_v(i,j)*v_hat(i,j)
 
     end do
   end do
