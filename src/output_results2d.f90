@@ -35,6 +35,13 @@ subroutine output_results2d
   write (5, '("Prandtl Number: ", E15.4, /)', advance="no"), Pr
   write (5, '("delta_T: ", E15.4, /)', advance="no"), delta_T
   write (5, '("SIMPLER Algorithm Duration:", E15.4, /)', advance="no"), end_time-start_time
+  write (5, *), "res_vec(R_e), res_vec(R_t)"
+  do i = 1, 100000
+
+    write (5,*), res_vec(i,1), res_vec(i,2)
+
+  end do
+
   close(5)
 
 

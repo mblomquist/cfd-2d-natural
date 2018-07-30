@@ -95,6 +95,9 @@ subroutine simpler2d
     !print *, "Maximum Error: ", e_max_new
     !print *, "Previous Maximum Error:", e_max_old
 
+    res_vec(i,1) = R_e
+    res_vec(i,2) = R_t
+
     if ((R_e .le. simpler_tol) .and. (R_t .le. simpler_tol)) then
 
       print *, "Simpler completed in: ", i

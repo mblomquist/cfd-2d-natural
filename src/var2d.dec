@@ -69,3 +69,6 @@
 
   integer :: itrmax, maxit, solver, solved
   common itrmax, maxit, solver, solved
+
+  real(8), dimension(100000,2) :: res_vec
+  common res_vec
