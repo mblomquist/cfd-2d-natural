@@ -1,12 +1,12 @@
-! solver2d_tdma
+! solver3d_tdma
 !
 ! Written by Matt Blomquist
-! Last Update: 2018-05-15 (YYYY-MM-DD)
+! Last Update: 2018-07-18 (YYYY-MM-DD)
 !
-! This program solves a two-dimensional discretization problem utilizing a line-by-line
+! This program solves a three-dimensional discretization problem utilizing a line-by-line
 ! TDMA (tri-diagonal matrix algorithm).
 !
-subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
+subroutine solver2d_tdma(As, Aw, Ap, Ae, An, b, phi, m, n, tol, maxit)
 
   integer, intent(in) :: m, n, maxit
   real(8), dimension(m,n), intent(in) :: Aw, Ae, As, An, Ap, b
@@ -73,67 +73,69 @@ subroutine solver2d_tdma(Aw, Ae, As, An, Ap, b, phi, m, n, tol, maxit)
     ! Check Residual
     r = 0
 
-    do j = 1, n
-
-      if (j .eq. 1) then
-        do i = 1, m
-
-          if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)+b(i,j))
-          elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+An(i,j)*phi(i,j+1)+b(i,j))
-          else
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+An(i,j)*phi(i,j+1)+b(i,j))
-          end if
-
-        end do
-      elseif (j .eq. n) then
-        do i = 1, m
-
-          if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+b(i,j))
-          elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+b(i,j))
-          else
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+b(i,j))
-          end if
-
-        end do
-      else
-        do i = 1, m
-
-          if (i .eq. 1) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
-          elseif (i .eq. m) then
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
-          else
-            r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
-          end if
-
-        end do
-      end if
-
-    end do
-
-    r_sum = 0
-
-    do j = 1, n
-      do i = 1, m
-        r_sum = r_sum + abs(r(i,j))
+    do j = 2, n-1
+      do i = 2, m-1
+        r(i,j) = Ap(i,j)*phi(i,j) - (Aw(i,j)*phi(i-1,j)+Ae(i,j)*phi(i+1,j)+As(i,j)*phi(i,j-1)+An(i,j)*phi(i,j+1)+b(i,j))
       end do
     end do
 
-    !print *, "r_sum, itr:", r_sum, k
+  	r_sum = 0.
 
-    if (r_sum < tol) then
-      !print *, "TDMA Compelete."
+  	do i = 2,m-1
+  	  do j = 2,n-1
+  		    r_sum = r_sum + (r(i,j))**2.0
+  	  end do
+  	end do
+
+    r_sum = r_sum**(0.5)
+
+  	if (r_sum .le. tol) then
+  	  !print *, "TDMA Compelete."
       !print *, "r_sum:", r_sum
       !print *, "itrs:", k
-      return
-    end if
+        return
+    else
+      !print *, "r_sum:", r_sum
+      !print *, "itrs:", k
+  	end if
 
   end do
 
   return
 
 end subroutine solver2d_tdma
+
+subroutine solver1d_tdma(a, b, c, d, phi, n)
+
+  ! Define input / output variables
+  integer, intent(in) :: n
+  real(8), intent(in) :: a(n), b(n), c(n), d(n)
+  real(8), intent(out) :: phi(n)
+
+  ! Define internal variables
+  real(8), dimension(n) :: P, Q
+
+  integer :: i
+
+  ! Start forward-substitution
+  P(1) = b(1)/a(1)
+  Q(1) = d(1)/a(1)
+
+  do i = 2, n, 1
+    P(i) = b(i)/(a(i)-c(i)*P(i-1))
+    Q(i) = (d(i)-c(i)*Q(i-1))/(a(i)-c(i)*P(i-1))
+
+  end do
+
+  phi(n) = Q(n)
+
+  ! Start backward-substitution
+  do i = n-1, 1, -1
+
+    phi(i) = Q(i)-P(i)*phi(i+1)
+
+  end do
+
+  return
+
+end subroutine solver1d_tdma

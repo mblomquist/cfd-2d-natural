@@ -14,7 +14,7 @@ subroutine velocity_solve2d
   include "var2d.dec"
 
   ! Define internal variables
-  integer :: i, j
+  integer :: i, j, fault
 
   ! Update source terms :: u
   do i = 2,m-1
@@ -27,10 +27,24 @@ subroutine velocity_solve2d
   end do
 
   ! Solve u-velocity equation
-  if (solver .eq. 1) then
+  if (solver .eq. 0) then
+    call solver2d_bicgstab(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
+  elseif (solver .eq. 1) then
     call solver2d_bicgstab2(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
+  elseif (solver .eq. 2) then
+    fault = 0
+    do i = 3,maxit
+      if (fault .eq. 0) then
+        call solver2d_gmres(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, i, fault)
+        if (fault .eq. 0) then
+          print *, "Restarting GMRES."
+        end if
+      end if
+    end do
+  elseif (solver .eq. 3) then
+    call solver2d_bicg(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
   else
-    call solver2d_tdma(Aw_u, Ae_u, As_u, An_u, Ap_u, b_u, u_star, m, n-1, solver_tol, maxit)
+    call solver2d_tdma(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, maxit)
   end if
 
   ! Update source terms :: v
@@ -44,10 +58,24 @@ subroutine velocity_solve2d
   end do
 
   ! Solve v-velocity equation
-  if (solver .eq. 1) then
+  if (solver .eq. 0) then
+    call solver2d_bicgstab(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
+  elseif (solver .eq. 1) then
     call solver2d_bicgstab2(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
+  elseif (solver .eq. 2) then
+    fault = 0
+    do i = 3,maxit
+      if (fault .eq. 0) then
+        call solver2d_gmres(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, i, fault)
+        if (fault .eq. 0) then
+          print *, "Restarting GMRES."
+        end if
+      end if
+    end do
+  elseif (solver .eq. 3) then
+    call solver2d_bicg(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
   else
-    call solver2d_tdma(Aw_v, Ae_v, As_v, An_v, Ap_v, b_v, v_star, m-1, n, solver_tol, maxit)
+    call solver2d_tdma(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, maxit)
   end if
 
   return

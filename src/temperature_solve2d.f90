@@ -11,7 +11,7 @@ subroutine temperature_solve2d
   include "var2d.dec"
 
   ! Define internal variables
-  integer :: i, j
+  integer :: i, j, fault
 
   ! Update source terms
   call temperature_source2d
@@ -35,10 +35,24 @@ subroutine temperature_solve2d
   end do
 
   ! Solve velocity Equations
-  if (solver .eq. "b") then
-    call solver2d_bicgstab2(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, simpler_tol, maxit)
+  if (solver .eq. 0) then
+    call solver2d_bicgstab(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
+  elseif (solver .eq. 1) then
+    call solver2d_bicgstab2(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
+  elseif (solver .eq. 2) then
+    fault = 0
+    do i = 3,maxit
+      if (fault .eq. 0) then
+        call solver2d_gmres(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, i, fault)
+        if (fault .eq. 0) then
+          print *, "Restarting GMRES."
+        end if
+      end if
+    end do
+  elseif (solver .eq. 3) then
+    call solver2d_bicg(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
   else
-    call solver2d_tdma(Aw_T, Ae_T, As_T, An_T, Ap_T, b_T, T, m-1, n-1, simpler_tol, maxit)
+    call solver2d_tdma(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, maxit)
   end if
 
   return
