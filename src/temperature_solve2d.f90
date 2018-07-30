@@ -45,7 +45,7 @@ subroutine temperature_solve2d
       if (fault .eq. 0) then
         call solver2d_gmres(As_T, Aw_T, Ap_T, Ae_T, An_T, b_T, T, m-1, n-1, solver_tol, i, fault)
         if (fault .eq. 0) then
-          print *, "Restarting GMRES."
+          !print *, "Restarting GMRES."
         end if
       end if
     end do

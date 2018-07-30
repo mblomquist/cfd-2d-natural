@@ -37,7 +37,7 @@ subroutine velocity_solve2d
       if (fault .eq. 0) then
         call solver2d_gmres(As_u, Aw_u, Ap_u, Ae_u, An_u, b_u, u_star, m, n-1, solver_tol, i, fault)
         if (fault .eq. 0) then
-          print *, "Restarting GMRES."
+          !print *, "Restarting GMRES."
         end if
       end if
     end do
@@ -68,7 +68,7 @@ subroutine velocity_solve2d
       if (fault .eq. 0) then
         call solver2d_gmres(As_v, Aw_v, Ap_v, Ae_v, An_v, b_v, v_star, m-1, n, solver_tol, i, fault)
         if (fault .eq. 0) then
-          print *, "Restarting GMRES."
+          !print *, "Restarting GMRES."
         end if
       end if
     end do
